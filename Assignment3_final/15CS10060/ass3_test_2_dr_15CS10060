@@ -1,0 +1,2369 @@
+  
+ RULE:	type_specifiers 	->	  VOID
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+ RULE:	type_specifiers 	->	 MATRIX 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	parameter_declaration 	->	 declaration_specifiers declarator
+ RULE:	parameter_list 	->	 parameter_declaration
+  RULE:	type_specifiers 	->	 MATRIX 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	parameter_declaration 	->	 declaration_specifiers declarator
+ RULE:	parameter_list 	->	 parameter_list, parameter_declaration
+  RULE:	type_specifiers 	->	 INT 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	parameter_declaration 	->	 declaration_specifiers declarator
+ RULE:	parameter_list 	->	 parameter_list, parameter_declaration
+  RULE:	type_specifiers 	->	 INT 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	parameter_declaration 	->	 declaration_specifiers declarator
+ RULE:	parameter_list 	->	 parameter_list, parameter_declaration
+  RULE:	type_specifiers 	->	 INT 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	parameter_declaration 	->	 declaration_specifiers declarator
+ RULE:	parameter_list 	->	 parameter_list, parameter_declaration
+ RULE:	parameter_type_list 	->	 parameter_list
+ RULE:	direct_declarator 	->	 direct_declarator(parameter_type_list)
+
+ RULE:	declarator 	->	 direct_declarator
+
+     RULE:	type_specifiers 	->	 INT 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+  RULE:	declarator 	->	 direct_declarator
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	init_declarator 	->	 declarator = initializer
+ RULE:	init_declarator_list 	->	 init_declarator
+  RULE:	direct_declarator 	->	 identifier
+  RULE:	declarator 	->	 direct_declarator
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	init_declarator 	->	 declarator = initializer
+ RULE:	init_declarator_list 	->	 init_declarator_list, init_declarator
+  RULE:	direct_declarator 	->	 identifier
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	init_declarator 	->	 declarator
+ RULE:	init_declarator_list 	->	 init_declarator_list, init_declarator
+  RULE:	direct_declarator 	->	 identifier
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	init_declarator 	->	 declarator
+ RULE:	init_declarator_list 	->	 init_declarator_list, init_declarator
+ RULE:	declaration 	->	 declaration_specifiers init_declarator_list ; 
+ RULE:	block_item 	->	 declaration
+ RULE:	block_item_list 	->	 block_item
+
+ 
+     RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	assignment_operator 	->	 = 
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	assignment_expression 	->	 unary_expression assignment_operator assignment_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 relational_expression < shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	postfix_expression 	->	 postfix_expression ++
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+
+    
+         RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	assignment_operator 	->	 = 
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	assignment_expression 	->	 unary_expression assignment_operator assignment_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 relational_expression < shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	postfix_expression 	->	 postfix_expression ++
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+
+        
+             RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 equality_expression != relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 equality_expression != relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 logical_and_expression && inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+
+            
+                RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression [ expression ]
+RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	postfix_expression 	->	 postfix_expression ++
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression [ expression ]
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	assignment_operator 	->	 = 
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression [ expression ]
+RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression [ expression ]
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	assignment_expression 	->	 unary_expression assignment_operator assignment_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	expression_statement 	->	 expression; RULE:	statement 	->	 expression_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item
+
+ 
+                 RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 additive_expression - multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 equality_expression == relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+
+                
+                     RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	assignment_operator 	->	 = 
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	assignment_expression 	->	 unary_expression assignment_operator assignment_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	expression_statement 	->	 expression; RULE:	statement 	->	 expression_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item
+
+                    RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	postfix_expression 	->	 postfix_expression ++
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	expression_statement 	->	 expression; RULE:	statement 	->	 expression_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+                 RULE:	compound_statement 	->	 { block_item_list } 
+ RULE:	statement 	->	 compound_statement
+
+             RULE:	selection_statement 	->	 if(expression) statement
+ RULE:	statement 	->	 selection_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item_list block_item
+ RULE:	compound_statement 	->	 { block_item_list } 
+ RULE:	statement 	->	 compound_statement
+
+         RULE:	selection_statement 	->	 if(expression) statement
+ RULE:	statement 	->	 selection_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item
+ RULE:	compound_statement 	->	 { block_item_list } 
+ RULE:	statement 	->	 compound_statement
+ RULE:	iteration_statement 	->	 for(expression;expression;expression)
+ RULE:	statement 	->	 iteration_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item
+
+     RULE:	compound_statement 	->	 { block_item_list } 
+ RULE:	statement 	->	 compound_statement
+ RULE:	iteration_statement 	->	 for(expression;expression;expression)
+ RULE:	statement 	->	 iteration_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+ RULE:	compound_statement 	->	 { block_item_list } 
+ RULE:	function_definition 	->	 declaration_specifiers declarator compound_statement
+ RULE:	external_decalaration 	->	 function_definition
+ RULE:	translation_unit 	->	 external_decalaration
+
+ 
+
+ RULE:	type_specifiers 	->	 FLOAT 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+ RULE:	type_specifiers 	->	 MATRIX 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	parameter_declaration 	->	 declaration_specifiers declarator
+ RULE:	parameter_list 	->	 parameter_declaration
+  RULE:	type_specifiers 	->	 INT 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	parameter_declaration 	->	 declaration_specifiers declarator
+ RULE:	parameter_list 	->	 parameter_list, parameter_declaration
+ RULE:	parameter_type_list 	->	 parameter_list
+ RULE:	direct_declarator 	->	 direct_declarator(parameter_type_list)
+
+ RULE:	declarator 	->	 direct_declarator
+
+     RULE:	type_specifiers 	->	 FLOAT 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+  RULE:	declarator 	->	 direct_declarator
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	init_declarator 	->	 declarator = initializer
+ RULE:	init_declarator_list 	->	 init_declarator
+ RULE:	declaration 	->	 declaration_specifiers init_declarator_list ; 
+ RULE:	block_item 	->	 declaration
+ RULE:	block_item_list 	->	 block_item
+  
+     RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 equality_expression == relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+
+         RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression [ expression ]
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression [ expression ]
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	jump_statement 	->	 return expression;
+ RULE:	statement 	->	 jump_statement
+
+ 
+     RULE:	selection_statement 	->	 if(expression) statement
+ RULE:	statement 	->	 selection_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item_list block_item
+ RULE:	type_specifiers 	->	 MATRIX 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	direct_declarator 	->	 direct_declarator[assignment_expression]
+RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	direct_declarator 	->	 direct_declarator[assignment_expression]
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	init_declarator 	->	 declarator
+ RULE:	init_declarator_list 	->	 init_declarator
+ RULE:	declaration 	->	 declaration_specifiers init_declarator_list ; 
+ RULE:	block_item 	->	 declaration
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+ 
+     RULE:	type_specifiers 	->	 INT 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+  RULE:	declarator 	->	 direct_declarator
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	init_declarator 	->	 declarator = initializer
+ RULE:	init_declarator_list 	->	 init_declarator
+ RULE:	declaration 	->	 declaration_specifiers init_declarator_list ; 
+ RULE:	block_item 	->	 declaration
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+
+     RULE:	type_specifiers 	->	 INT 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	init_declarator 	->	 declarator
+ RULE:	init_declarator_list 	->	 init_declarator
+ RULE:	declaration 	->	 declaration_specifiers init_declarator_list ; 
+ RULE:	block_item 	->	 declaration
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+     RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	assignment_operator 	->	 = 
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	assignment_expression 	->	 unary_expression assignment_operator assignment_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 relational_expression < shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	postfix_expression 	->	 postfix_expression ++
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+
+    
+        RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	argument_expression_list 	->	 assignment_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	argument_expression_list 	->	 argument_expression_list , assignment_expression
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	argument_expression_list 	->	 argument_expression_list , assignment_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	argument_expression_list 	->	 argument_expression_list , assignment_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	argument_expression_list 	->	 argument_expression_list , assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression ( argument_expression_list_opt )
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	expression_statement 	->	 expression; RULE:	statement 	->	 expression_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item
+
+         RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	assignment_operator 	->	 += 
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression [ expression ]
+RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression [ expression ]
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 multiplicative_expression * cast_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	argument_expression_list 	->	 assignment_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 additive_expression - multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	argument_expression_list 	->	 argument_expression_list , assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression ( argument_expression_list_opt )
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 multiplicative_expression * cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	assignment_expression 	->	 unary_expression assignment_operator assignment_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	expression_statement 	->	 expression; RULE:	statement 	->	 expression_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+
+         RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	assignment_operator 	->	 = 
+  RULE:	unary_operator 	->	 - 
+RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	unary_expression 	->	 unary_operator cast_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	assignment_expression 	->	 unary_expression assignment_operator assignment_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	expression_statement 	->	 expression; RULE:	statement 	->	 expression_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+     RULE:	compound_statement 	->	 { block_item_list } 
+ RULE:	statement 	->	 compound_statement
+ RULE:	iteration_statement 	->	 for(expression;expression;expression)
+ RULE:	statement 	->	 iteration_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+     RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	jump_statement 	->	 return expression;
+ RULE:	statement 	->	 jump_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+ RULE:	compound_statement 	->	 { block_item_list } 
+ RULE:	function_definition 	->	 declaration_specifiers declarator compound_statement
+ RULE:	external_decalaration 	->	 function_definition
+ RULE:	translation_unit 	->	 translation_unit external_decalaration
+
+ 
+
+ RULE:	type_specifiers 	->	  VOID
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+ RULE:	type_specifiers 	->	 MATRIX 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	parameter_declaration 	->	 declaration_specifiers declarator
+ RULE:	parameter_list 	->	 parameter_declaration
+  RULE:	type_specifiers 	->	 INT 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	parameter_declaration 	->	 declaration_specifiers declarator
+ RULE:	parameter_list 	->	 parameter_list, parameter_declaration
+  RULE:	type_specifiers 	->	 INT 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	parameter_declaration 	->	 declaration_specifiers declarator
+ RULE:	parameter_list 	->	 parameter_list, parameter_declaration
+ RULE:	parameter_type_list 	->	 parameter_list
+ RULE:	direct_declarator 	->	 direct_declarator(parameter_type_list)
+
+ RULE:	declarator 	->	 direct_declarator
+
+     RULE:	type_specifiers 	->	 INT 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	init_declarator 	->	 declarator
+ RULE:	init_declarator_list 	->	 init_declarator
+  RULE:	direct_declarator 	->	 identifier
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	init_declarator 	->	 declarator
+ RULE:	init_declarator_list 	->	 init_declarator_list, init_declarator
+ RULE:	declaration 	->	 declaration_specifiers init_declarator_list ; 
+ RULE:	block_item 	->	 declaration
+ RULE:	block_item_list 	->	 block_item
+
+     RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	assignment_operator 	->	 = 
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	assignment_expression 	->	 unary_expression assignment_operator assignment_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 relational_expression < shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	postfix_expression 	->	 postfix_expression ++
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+
+    
+         RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	assignment_operator 	->	 = 
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	assignment_expression 	->	 unary_expression assignment_operator assignment_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 relational_expression < shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	postfix_expression 	->	 postfix_expression ++
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+
+            RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression [ expression ]
+RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression [ expression ]
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	argument_expression_list 	->	 assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression ( argument_expression_list_opt )
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	expression_statement 	->	 expression; RULE:	statement 	->	 expression_statement
+ RULE:	iteration_statement 	->	 for(expression;expression;expression)
+ RULE:	statement 	->	 iteration_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item
+
+        RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+RULE : primary_expression 	->	 string_literal
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	argument_expression_list 	->	 assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression ( argument_expression_list_opt )
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	expression_statement 	->	 expression; RULE:	statement 	->	 expression_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+     RULE:	compound_statement 	->	 { block_item_list } 
+ RULE:	statement 	->	 compound_statement
+ RULE:	iteration_statement 	->	 for(expression;expression;expression)
+ RULE:	statement 	->	 iteration_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+ RULE:	compound_statement 	->	 { block_item_list } 
+ RULE:	function_definition 	->	 declaration_specifiers declarator compound_statement
+ RULE:	external_decalaration 	->	 function_definition
+ RULE:	translation_unit 	->	 translation_unit external_decalaration
+
+ 
+ RULE:	type_specifiers 	->	 INT 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+ RULE:	direct_declarator 	->	 direct_declarator()
+
+ RULE:	declarator 	->	 direct_declarator
+
+     RULE:	type_specifiers 	->	 MATRIX 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	direct_declarator 	->	 direct_declarator[assignment_expression]
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	direct_declarator 	->	 direct_declarator[assignment_expression]
+  RULE:	declarator 	->	 direct_declarator
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+  RULE:	unary_operator 	->	 - 
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	unary_expression 	->	 unary_operator cast_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE:	initializer_row_list 	->	 initializer_row
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE:	initializer_row_list 	->	 initializer_row_list ; initializer_row 
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+  RULE:	unary_operator 	->	 - 
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	unary_expression 	->	 unary_operator cast_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE:	initializer_row_list 	->	 initializer_row_list ; initializer_row 
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE:	initializer_row_list 	->	 initializer_row_list ; initializer_row 
+ RULE:	initializer 	->	 { initializer_row_list } 
+ RULE:	init_declarator 	->	 declarator = initializer
+ RULE:	init_declarator_list 	->	 init_declarator
+ RULE:	declaration 	->	 declaration_specifiers init_declarator_list ; 
+ RULE:	block_item 	->	 declaration
+ RULE:	block_item_list 	->	 block_item
+
+     RULE:	type_specifiers 	->	 MATRIX 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	direct_declarator 	->	 direct_declarator[assignment_expression]
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	direct_declarator 	->	 direct_declarator[assignment_expression]
+  RULE:	declarator 	->	 direct_declarator
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+  RULE:	unary_operator 	->	 - 
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	unary_expression 	->	 unary_operator cast_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE:	initializer_row_list 	->	 initializer_row
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE:	initializer_row_list 	->	 initializer_row_list ; initializer_row 
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+  RULE:	unary_operator 	->	 - 
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	unary_expression 	->	 unary_operator cast_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE:	initializer_row_list 	->	 initializer_row_list ; initializer_row 
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	initializer 	->	 assignment_expression 
+ RULE:	initializer_row 	->	 initializer_row, initializer
+ RULE:	initializer_row_list 	->	 initializer_row_list ; initializer_row 
+ RULE:	initializer 	->	 { initializer_row_list } 
+ RULE:	init_declarator 	->	 declarator = initializer
+ RULE:	init_declarator_list 	->	 init_declarator
+ RULE:	declaration 	->	 declaration_specifiers init_declarator_list ; 
+ RULE:	block_item 	->	 declaration
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+
+     RULE:	type_specifiers 	->	 MATRIX 
+  RULE:	declaration_specifiers_opt 	->	 empty
+ RULE:	declaration_specifiers 	->	 type_specifiers declaration_specifiers_opt
+ RULE:	direct_declarator 	->	 identifier
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	direct_declarator 	->	 direct_declarator[assignment_expression]
+RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	direct_declarator 	->	 direct_declarator[assignment_expression]
+ RULE:	declarator 	->	 direct_declarator
+ RULE:	init_declarator 	->	 declarator
+ RULE:	init_declarator_list 	->	 init_declarator
+ RULE:	declaration 	->	 declaration_specifiers init_declarator_list ; 
+ RULE:	block_item 	->	 declaration
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+
+     RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	assignment_operator 	->	 = 
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 multiplicative_expression * cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	assignment_expression 	->	 unary_expression assignment_operator assignment_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	expression_statement 	->	 expression; RULE:	statement 	->	 expression_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+
+     RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	assignment_operator 	->	 = 
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 additive_expression + multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	assignment_expression 	->	 unary_expression assignment_operator assignment_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	expression_statement 	->	 expression; RULE:	statement 	->	 expression_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+
+     RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	assignment_operator 	->	 = 
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+  RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	postfix_expression 	->	 postfix_expression .' RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 additive_expression - multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	assignment_expression 	->	 unary_expression assignment_operator assignment_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	expression_statement 	->	 expression; RULE:	statement 	->	 expression_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+
+    RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+RULE : primary_expression 	->	 string_literal
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	argument_expression_list 	->	 assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression ( argument_expression_list_opt )
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	expression_statement 	->	 expression; RULE:	statement 	->	 expression_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+    RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+RULE : primary_expression 	->		 identifier
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	argument_expression_list 	->	 assignment_expression
+ RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	argument_expression_list 	->	 argument_expression_list , assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression ( argument_expression_list_opt )
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	argument_expression_list 	->	 assignment_expression
+ RULE:	postfix_expression 	->	 postfix_expression ( argument_expression_list_opt )
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	expression_statement 	->	 expression; RULE:	statement 	->	 expression_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+     RULE : primary_expression 	->		 constant
+RULE:	 postfix_expression 	->	primary_expression
+ RULE:	unary_expression 	->	 postfix_expression
+ RULE:	cast_expression 	->	 unary_expression
+ RULE:	multiplicative_expression 	->	 cast_expression
+ RULE:	additive_expression 	->	 multiplicative_expression
+ RULE:	shift_expression 	->	 additive_expression
+ RULE:	relational_expression 	->	 shift_expression
+ RULE:	equality_expression 	->	 relational_expression
+ RULE:	and_expression 	->	 equality_expression
+ RULE:	exclusive_or_expression 	->	 and_expression
+ RULE:	inclusive_or_expression 	->	 exclusive_or_expression
+ RULE:	logical_and_expression 	->	 inclusive_or_expression
+ RULE:	logical_or_expression 	->	 logical_and_expression
+ RULE:	conditional_expression 	->	 logical_or_expression
+ RULE:	assignment_expression 	->	 conditional_expression
+ RULE:	expression 	->	 assignment_expression
+ RULE:	jump_statement 	->	 return expression;
+ RULE:	statement 	->	 jump_statement
+ RULE:	block_item 	->	 statement
+ RULE:	block_item_list 	->	 block_item_list block_item
+
+ RULE:	compound_statement 	->	 { block_item_list } 
+ RULE:	function_definition 	->	 declaration_specifiers declarator compound_statement
+ RULE:	external_decalaration 	->	 function_definition
+ RULE:	translation_unit 	->	 translation_unit external_decalaration
