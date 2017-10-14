@@ -2,11 +2,11 @@ class a
 {
 	int acs;
 	char b;
+	a(int x) {acs = x;}
 };
 
 int main()
 {
-	a x;
-	x.b  ='x';
-	a y = x;
+	int a = 5;
+	cout <<a().b;
 }

@@ -76,7 +76,7 @@ public:
 		int offset = 0;
 		symbol_table_entry * lookup(string identifier_name); //
 		string gen_temp(data_type t); // generates temp, inserts into table and returns back the pointer to the symbol table entry
-		symbol_table_entry * update(string name_of_identifier, data_type t, init_value i, int sz, int off, symbol_table *nes);
+		symbol_table_entry * update(string name_of_identifier, data_type t, init_value i, int sz, symbol_table *nes);
 		 // to be completed
 		void print(); // prints the table
 
@@ -185,6 +185,7 @@ class symbol_table_entry
 		int size;
 		int offset;
 		symbol_table *nested_table;
+
 
 };
 

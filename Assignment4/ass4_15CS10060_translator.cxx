@@ -39,13 +39,13 @@ int size_of_type(data_type t)
 
 }
 
-symbol_table_entry * symbol_table::update(string name_of_identifier, data_type t, init_value i, int sz, int off, symbol_table *nes)
+symbol_table_entry * symbol_table::update(string name_of_identifier, data_type t, init_value i, int sz, symbol_table *nes)
 {
 	symbol_table_entry *tmp =this -> lookup(name_of_identifier);
 	tmp -> type = t;
 	tmp -> initial_value = i;
-	tmp -> size = sz;
-	//tmp -> offset = off;
+	if(t != MATRIX_ )tmp -> size = size_of_type(t);
+	else tmp->size = sz;
 	tmp -> nested_table = nes;
 
 	return tmp;

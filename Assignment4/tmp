@@ -1,8 +1,4 @@
 int main()
 {
-	int a, b, c, d;
-	char x, y, z;
-	int k =7, b =7;
-	
-
+	int a = 5;
 }

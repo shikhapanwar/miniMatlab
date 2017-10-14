@@ -103,7 +103,7 @@ primary_expression
 																			$$ = new expr_attr;
 																			string t = *($1);
 																			symbol_table_entry *s = curr_symbol_table->lookup(t);
-																			$$->addr = s;
+																			$$->name= t;
 																			printf("RULE : primary_expression \t->\t\t identifier\n");
 																			cout <<$$->addr->name;
 																		}
@@ -115,9 +115,10 @@ primary_expression
 																			string tmp = curr_symbol_table -> gen_temp(INT_);
 																			init_value tmp_init;
 																			tmp_init.init_int = $1;
-																			$$ -> addr = curr_symbol_table->lookup(tmp);
-																			$$ ->addr->initial_value = tmp_init;
-																			$$ ->addr -> type = INT_ ;
+																			symbol_table_entry *ptr = curr_symbol_table->lookup(tmp);
+																			ptr->initial_value = tmp_init;
+																			ptr-> type = INT_ ;
+																			$$->name= tmp;
 
 																			quad * q = Q_arr -> emit(tmp, to_string($1), OP_COPY);
 																			printf("RULE : primary_expression \t->\t\t constant\n");
@@ -128,10 +129,8 @@ primary_expression
 																			$$ = new expr_attr;
 																			string tmp = curr_symbol_table -> gen_temp(DOUBLE_);
 																			init_value tmp_init;
-																			tmp_init.init_double = $1;
-
-
-																			$$->addr = curr_symbol_table->update(tmp, DOUBLE_, tmp_init, 8, 0, NULL); // set offset
+																			tmp_init.float = $1;
+																			symbol_table_entry *ptr = curr_symbol_table->update(tmp, DOUBLE_, tmp_init, 0, NULL); // set offset
 
 																			quad * q = Q_arr -> emit(tmp, to_string($1), OP_COPY);
 																			printf("RULE : primary_expression \t->\t\t constant\n");
@@ -142,7 +141,7 @@ primary_expression
 																			string tmp = curr_symbol_table -> gen_temp(CHAR_);
 																			init_value tmp_init;
 																			tmp_init.init_char = $1;
-																			$$->addr = curr_symbol_table->update(tmp, CHAR_,tmp_init, 1, 0, NULL); // set offset
+																			symbol_table_entry *ptr = curr_symbol_table->update(tmp, CHAR_,tmp_init, 0, NULL); // set offset
 
 																			quad * q = Q_arr -> emit(tmp, to_string($1), OP_COPY);
 
@@ -152,7 +151,7 @@ primary_expression
 																			string tmp = curr_symbol_table -> gen_temp(INT_);
 																			init_value tmp_init;
 																			tmp_init.init_int = $1;
-																			$$->addr = curr_symbol_table->update(tmp, INT_, tmp_init, 4, 0, NULL); //  TO BE DONE set offset
+																			$$->addr = curr_symbol_table->update(tmp, INT_, tmp_init, 0, NULL); //  TO BE DONE set offset
 
 																			quad * q = Q_arr -> emit(tmp, to_string($1), OP_COPY);
 
@@ -1403,7 +1402,7 @@ init_declarator
 		| declarator ASSIGN initializer 									{//done
 																				 $$ = $1;
 																				// to be done typecheck														
-																				Q_arr->emit($1->addr->name, $3->addr->name, OP_COPY);
+																				Q_arr->emit($1->name, $3->name, OP_COPY);
 																				$1-> addr -> initial_value = $1 -> addr -> initial_value;
 																				printf(" RULE:\tinit_declarator \t->\t declarator = initializer\n");
 
@@ -1437,7 +1436,10 @@ declarator
 																		$$ = $1;
 																		cout <<"here loc ="<<$$<<endl;
 																			 printf(" RULE:\tdeclarator \t->\t direct_declarator\n");}
-		| pointer direct_declarator 									{//done																													$$ = $2; $$ -> addr ->type = PTR_;							
+		| pointer direct_declarator 									{//done	
+																			$$ = $2;
+																			symbol_table_entry *ptr = curr_symbol_table->lookup($2->name);
+																			if(ptr != NULL)ptr->type = PTR_;							
 																			printf(" RULE:\tdeclarator \t->\t pointer_opt direct_declarator\n");
 																		}
 		;
@@ -1449,7 +1451,7 @@ direct_declarator
 																	$$ = new expr_attr;
 																	$$ ->addr = curr_symbol_table->lookup((*$1));
 																	$$->name = (*$1);
-																	cout <<$$->addr->name<<endl;
+																	//cout <<$$->addr->name<<endl;
 																	cout << type_string( $$ -> addr -> type)<<endl;
 																	//$$->addr->type = UNKNOWN_; // default type
 																	cout <<"here loc ="<<$$<<endl;

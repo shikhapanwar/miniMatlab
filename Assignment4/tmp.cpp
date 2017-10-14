@@ -1,14 +1,15 @@
+#include<iostream>
+using namespace std;
 class a
 {
-public:
-	
 	int acs;
 	char b;
+	a(int x) {acs = x;}
 };
 
+int print(int x) {	}
 int main()
 {
-	a x;
-	x.acs =53;
-	a y = x;
+	int a = 5;
+	print(a(1).b);
 }
