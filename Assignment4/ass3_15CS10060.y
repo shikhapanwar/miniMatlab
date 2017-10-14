@@ -1331,12 +1331,9 @@ declaration
 																	              	{
 																	              		ptr = curr_symbol_table->lookup(it->name);
 
-																	              	cout << type_string( it -> addr->type)<<endl; 
 
-																	              		if(ptr->type == UNKNOWN_)
-																	              		cout<<"matched"<<endl;
 																						if (ptr->type == UNKNOWN_)
-																						{	cout<<"matched2"<<endl;										cout <<  it -> addr->name <<endl;					
+																						{
 																							ptr->type = $1.type;
 																							ptr->offset = curr_symbol_table -> offset;
 																							curr_symbol_table -> offset += size_of_type($1.type);
@@ -1365,11 +1362,7 @@ init_declarator_list
 		cout << "currtable, GT "<<curr_symbol_table<<"\t"<<GT<<endl;
 		int i;
 
-		for(i = 0; i < curr_symbol_table->table.size(); i++)
-		{
-			cout << &(GT->table[i]) <<"\t" <<GT->table[i].name<<endl;
-			
-		}
+		
 		 
 																				$$ = new declar_list;
 																				cout <<"$$ ="<< $$<<endl;
@@ -1382,11 +1375,7 @@ cout <<"0th elem is " <<($$->vec).begin()->addr	<<endl;
 		cout << "currtable, GT "<<curr_symbol_table<<"\t"<<GT<<endl;
 		//print symbol table
 		int i;
-		for(i = 0; i < curr_symbol_table->table.size(); i++)
-		{
-			cout << &(GT->table[i]) <<"\t" <<GT->table[i].name<<endl;
-
-		}
+		
 																				cout <<"$1 = "<<$1 <<endl;cout <<"0th elem is " <<($1->vec).begin()->addr	<<endl;
 
 																					$$ = $1;
@@ -1395,20 +1384,9 @@ cout <<"0th elem is " <<($$->vec).begin()->addr	<<endl;
 																					($$->vec).push_back(*($3));
       																			  cout <<"Pushing "<<($$->vec)[($$->vec).size()-1].addr->name<<endl<<endl<<endl;
 
-																	              	vector<expr_attr>::iterator it;
 																	              	
-																	              	for(it = ($1->vec).begin() ; it != ($1->vec).end(); ++it )
-																	              	{cout << type_string( it -> addr->type)<<endl; 
-																						if (it-> addr->type == UNKNOWN_)
-																						{	cout<<"matched2"<<endl;										cout <<  it -> addr->name <<endl;
-																						}
-																						else
-																						{
-																							cout<<"check"<<endl;
-																							//cout <<  it -> addr->name <<endl;
-																						}
-																						cout <<"0th elem is " <<($1->vec).begin()->addr	<<endl;
-																	              	}
+																	              	
+																	              	
 
 
 
