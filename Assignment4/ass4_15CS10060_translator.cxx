@@ -11,10 +11,32 @@ symbol_table_entry * symbol_table::lookup(string identifier_name)
 
 	}
 	tmp.name = identifier_name;
-	tmp.offset;
-	this->offset; // to be done
+	tmp .type = UNKNOWN_;
+	init_value x;
+	x.init_int = 0;
+	tmp.initial_value = x;
+	tmp.offset = this->offset; ;
+	tmp.nested_table = NULL;
+	 // to be done
 	table.push_back(tmp);
 	return &table[i] ;
+}
+
+int size_of_type(data_type t)
+{
+	switch(t)
+	{
+		case VOID_ : return SIZE_OF_VOID; break;
+		case CHAR_ : return SIZE_OF_CHAR; break;
+		case INT_ : return SIZE_OF_INT; break;
+		case DOUBLE_ : return SIZE_OF_DOUBLE; break;
+		case PTR_ : return SIZE_OF_POINTER; break;
+		case MATRIX_ : return 0; break; // to be doe allot size
+		case FUNCTION_ : return SIZE_OF_FUNCTION; break;
+		case BOOL_ : return SIZE_OF_BOOL; break;
+		case UNKNOWN_ : return SIZE_OF_UNKNOWN; break;
+	}
+
 }
 
 symbol_table_entry * symbol_table::update(string name_of_identifier, data_type t, init_value i, int sz, int off, symbol_table *nes)
@@ -40,15 +62,15 @@ string  symbol_table::gen_temp(data_type t)
 	tmp.nested_table = NULL; // to be done, will not work for 
 	switch(t)
 	{
-		case VOID_ : tmp.size = 0; break;
-		case CHAR_ : tmp.size = 1; break;
-		case INT_ : tmp.size = 4; break;
-		case DOUBLE_ : tmp.size = 8; break;
-		case PTR_ : tmp.size = 4; break;
+		case VOID_ : tmp.size = SIZE_OF_VOID; break;
+		case CHAR_ : tmp.size = SIZE_OF_CHAR; break;
+		case INT_ : tmp.size = SIZE_OF_INT; break;
+		case DOUBLE_ : tmp.size = SIZE_OF_DOUBLE; break;
+		case PTR_ : tmp.size = SIZE_OF_POINTER; break;
 		case MATRIX_ : tmp.size = 0; break; // to be doe allot size
-		case FUNCTION_ : tmp.size = 0; break;
-		case BOOL_ : tmp.size = 0; break;
-		case UNKNOWN_ : tmp.size = 4; break;
+		case FUNCTION_ : tmp.size = SIZE_OF_FUNCTION; break;
+		case BOOL_ : tmp.size = SIZE_OF_BOOL; break;
+		case UNKNOWN_ : tmp.size = SIZE_OF_UNKNOWN; break;
 
 	}
 
@@ -59,6 +81,23 @@ string  symbol_table::gen_temp(data_type t)
 
 }
 
+string type_string(data_type t)
+{
+	switch(t)
+	{
+
+		case VOID_ : return "VOID";
+		case CHAR_: return "CHAR";
+		case INT_: return "INT";
+		case DOUBLE_: return "DOUBLE_";
+		case PTR_: return "Pointer";
+		case MATRIX_: return "MATRIX";
+		case FUNCTION_: return "FUNCTION";
+		case BOOL_: return "BOOL";
+		case UNKNOWN_ : return "UNKNOWN";
+		default : cout <<"t = " <<t ;return "NONE";
+	}
+}
 
 void symbol_table :: print()
 {
@@ -66,7 +105,7 @@ void symbol_table :: print()
 	cout <<"name\ttype\tinitial_val\tsize\toffset\tnestedTable"<<endl;
 	for (i = 0; i < table.size(); ++i)
 	{
-		cout << table[i].name <<"\t"<<table[i].type<<"\t";
+		cout << table[i].name <<"\t"<<type_string(table[i].type)<<"\t";
 		//table[i].initial_value<<"\t"<<
 		switch(table[i].type)
 		{
@@ -93,6 +132,7 @@ void symbol_table :: print()
 											}
 											break;
 										}
+			default: cout << 0;
 
 
 		}

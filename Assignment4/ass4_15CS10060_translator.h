@@ -8,12 +8,15 @@ using namespace std;
 #define SIZE_OF_INT 4
 #define SIZE_OF_DOUBLE 8
 #define SIZE_OF_BOOL 1
+#define SIZE_OF_POINTER 4
+#define SIZE_OF_FUNCTION 0
+#define SIZE_OF_UNKNOWN 0
 
 class symbol_table;
 struct matrix;
 enum data_type
 {
-	VOID_,
+	VOID_ = 1,
 	CHAR_,
 	INT_,
 	DOUBLE_,
@@ -238,6 +241,7 @@ struct declar // type_specifiers  declaration_specifiers
 struct expr_attr //direct_declarator initializer declarator
 {
 	symbol_table_entry *addr;
+	string name;
 	list<int> truelist, falselist, nextlist;
 	int instr;
 };
@@ -253,8 +257,8 @@ struct func_param_list
 };
 
 
-
-
+string type_string(data_type t);
+int size_of_type(data_type t);
 string op_code_string(op_code operat);
 
 bool typeCheck(expr_attr * e1, expr_attr * e2, bool isAssignment);
