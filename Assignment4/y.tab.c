@@ -567,24 +567,24 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    84,    84,    92,   102,   110,   127,   139,   149,   159,
-     170,   176,   179,   192,   234,   239,   242,   243,   251,   274,
-     278,   297,   310,   311,   322,   331,   365,   366,   367,   368,
-     372,   378,   383,   468,   573,   663,   665,   767,   874,   875,
-     979,  1084,  1087,  1098,  1106,  1115,  1125,  1126,  1136,  1148,
-    1151,  1184,  1185,  1201,  1202,  1214,  1215,  1236,  1237,  1257,
-    1258,  1282,  1283,  1293,  1294,  1295,  1296,  1297,  1298,  1299,
-    1300,  1301,  1302,  1303,  1307,  1310,  1314,  1318,  1323,  1348,
-    1355,  1356,  1360,  1373,  1398,  1402,  1413,  1419,  1423,  1424,
-    1425,  1426,  1427,  1428,  1429,  1430,  1431,  1435,  1439,  1448,
-    1459,  1460,  1461,  1464,  1467,  1470,  1476,  1479,  1483,  1489,
-    1491,  1495,  1496,  1500,  1501,  1505,  1506,  1510,  1511,  1515,
-    1516,  1517,  1518,  1522,  1526,  1527,  1531,  1532,  1536,  1537,
-    1538,  1539,  1540,  1541,  1545,  1546,  1547,  1551,  1552,  1556,
-    1557,  1561,  1562,  1566,  1567,  1570,  1571,  1572,  1576,  1577,
-    1578,  1579,  1580,  1581,  1582,  1583,  1584,  1585,  1586,  1587,
-    1588,  1589,  1592,  1593,  1594,  1595,  1596,  1600,  1601,  1605,
-    1606,  1610,  1611,  1615,  1616
+       0,    84,    84,    92,   102,   109,   125,   138,   149,   159,
+     171,   177,   181,   194,   234,   239,   242,   243,   250,   272,
+     276,   294,   307,   308,   319,   328,   363,   364,   365,   366,
+     370,   376,   381,   467,   572,   662,   664,   766,   872,   873,
+     977,  1082,  1085,  1097,  1110,  1123,  1138,  1139,  1152,  1167,
+    1170,  1203,  1204,  1220,  1221,  1233,  1234,  1255,  1256,  1277,
+    1278,  1302,  1303,  1313,  1314,  1315,  1316,  1317,  1318,  1319,
+    1320,  1321,  1322,  1323,  1327,  1330,  1334,  1338,  1343,  1368,
+    1375,  1376,  1380,  1391,  1415,  1419,  1430,  1436,  1440,  1441,
+    1442,  1443,  1444,  1445,  1446,  1447,  1448,  1452,  1456,  1465,
+    1476,  1477,  1478,  1481,  1484,  1487,  1493,  1496,  1500,  1506,
+    1508,  1512,  1513,  1517,  1518,  1522,  1523,  1527,  1528,  1532,
+    1533,  1534,  1535,  1539,  1543,  1544,  1548,  1549,  1553,  1554,
+    1555,  1556,  1557,  1558,  1562,  1563,  1564,  1568,  1569,  1573,
+    1574,  1578,  1579,  1583,  1584,  1587,  1588,  1589,  1593,  1594,
+    1595,  1596,  1597,  1598,  1599,  1600,  1601,  1602,  1603,  1604,
+    1605,  1606,  1609,  1610,  1611,  1612,  1613,  1617,  1618,  1622,
+    1623,  1627,  1628,  1632,  1633
 };
 #endif
 
@@ -1717,13 +1717,12 @@ yyreduce:
 																			symbol_table_entry *s = curr_symbol_table->lookup(t);
 																			(yyval.expr)->name= t;
 																			printf("RULE : primary_expression \t->\t\t identifier\n");
-																			cout <<(yyval.expr)->addr->name;
 																		}
-#line 1723 "y.tab.c" /* yacc.c:1646  */
+#line 1722 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 112 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 111 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
  																			cout <<"b"<<endl;
  																			(yyval.expr) = new expr_attr;
@@ -1737,39 +1736,40 @@ yyreduce:
 
 																			quad * q = Q_arr -> emit(tmp, to_string((yyvsp[0].int_val)), OP_COPY);
 																			printf("RULE : primary_expression \t->\t\t constant\n");
-																			cout <<(yyval.expr)->addr->name;
 																		}
-#line 1743 "y.tab.c" /* yacc.c:1646  */
+#line 1741 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 128 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 126 "ass3_15CS10060.y" /* yacc.c:1646  */
     {cout <<"c"<<endl;
 																			(yyval.expr) = new expr_attr;
 																			string tmp = curr_symbol_table -> gen_temp(DOUBLE_);
 																			init_value tmp_init;
-																			tmp_init.float = (yyvsp[0].float_val);
+																			tmp_init.init_double = (yyvsp[0].float_val);
 																			symbol_table_entry *ptr = curr_symbol_table->update(tmp, DOUBLE_, tmp_init, 0, NULL); // set offset
+																			(yyval.expr)->name = tmp;
+
 
 																			quad * q = Q_arr -> emit(tmp, to_string((yyvsp[0].float_val)), OP_COPY);
 																			printf("RULE : primary_expression \t->\t\t constant\n");
-																			cout <<(yyval.expr)->addr->name;
 																			}
-#line 1759 "y.tab.c" /* yacc.c:1646  */
+#line 1758 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 139 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 138 "ass3_15CS10060.y" /* yacc.c:1646  */
     {cout <<"d"<<endl;
 																			(yyval.expr) = new expr_attr;
 																			string tmp = curr_symbol_table -> gen_temp(CHAR_);
 																			init_value tmp_init;
 																			tmp_init.init_char = (yyvsp[0].char_val);
 																			symbol_table_entry *ptr = curr_symbol_table->update(tmp, CHAR_,tmp_init, 0, NULL); // set offset
+																			(yyval.expr)->name = tmp;
 
 																			quad * q = Q_arr -> emit(tmp, to_string((yyvsp[0].char_val)), OP_COPY);
 
-																			printf("RULE : primary_expression \t->\t\t constant\n");cout <<(yyval.expr)->addr->name;}
+																			printf("RULE : primary_expression \t->\t\t constant\n");}
 #line 1774 "y.tab.c" /* yacc.c:1646  */
     break;
 
@@ -1784,7 +1784,7 @@ yyreduce:
 
 																			quad * q = Q_arr -> emit(tmp, to_string((yyvsp[0].int_val)), OP_COPY);
 
-																			printf("RULE : primary_expression \t->\t\t constant\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
+																			printf("RULE : primary_expression \t->\t\t constant\n");}
 #line 1789 "y.tab.c" /* yacc.c:1646  */
     break;
 
@@ -1794,6 +1794,7 @@ yyreduce:
 																			
 																			(yyval.expr) = new expr_attr;
 																			string tmp = curr_symbol_table -> gen_temp(PTR_);
+																			(yyval.expr)->name = tmp;
 																			(yyval.expr)->addr = curr_symbol_table->lookup(tmp); //  TO BE DONE set offset // TBD, STRING HANDLING!
 																			(yyval.expr)->addr->type = PTR_;
 
@@ -1801,26 +1802,27 @@ yyreduce:
 
 
 																			printf("RULE : primary_expression \t->\t string_literal\n");}
-#line 1805 "y.tab.c" /* yacc.c:1646  */
+#line 1806 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 170 "ass3_15CS10060.y" /* yacc.c:1646  */
-    {printf("primary_expression -\t->\t (expression)\n");cout<<endl <<(yyval.expr)->addr->name<<endl;
+#line 171 "ass3_15CS10060.y" /* yacc.c:1646  */
+    {printf("primary_expression -\t->\t (expression)\n");
 																			
 																			}
-#line 1813 "y.tab.c" /* yacc.c:1646  */
+#line 1814 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 176 "ass3_15CS10060.y" /* yacc.c:1646  */
-    {	
-																				(yyval.expr) = (yyvsp[0].expr); printf("RULE:\t postfix_expression \t->\tprimary_expression\n");cout<<endl <<(yyvsp[0].expr)->addr->name<<endl;}
-#line 1820 "y.tab.c" /* yacc.c:1646  */
+#line 177 "ass3_15CS10060.y" /* yacc.c:1646  */
+    {	cout <<"check"<<endl; cout << (yyvsp[0].expr)->name<<endl;
+
+																				(yyval.expr) = (yyvsp[0].expr); printf("RULE:\t postfix_expression \t->\tprimary_expression\n");}
+#line 1822 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 179 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 181 "ass3_15CS10060.y" /* yacc.c:1646  */
     {// to be done
 
 																				/* 
@@ -1831,13 +1833,13 @@ yyreduce:
 																				Q_arr->emit($$->addr, );
 																				*/
 
-																				/* to be done*/printf(" RULE:\tpostfix_expression \t->\t postfix_expression [ expression ]\n");cout<<endl <<(yyval.expr)->addr->name<<endl;
+																				/* to be done*/printf(" RULE:\tpostfix_expression \t->\t postfix_expression [ expression ]\n");
 																		}
-#line 1837 "y.tab.c" /* yacc.c:1646  */
+#line 1839 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 192 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 194 "ass3_15CS10060.y" /* yacc.c:1646  */
     {	
 
 			      /*  string f = $1->loc;
@@ -1856,9 +1858,8 @@ yyreduce:
 
 cout <<"CHECK1"<<endl;		*/	
 																	        (yyval.expr) = (yyvsp[-3].expr);
-																	        cout <<string((yyvsp[-3].expr) -> addr->name);
 																	        cout <<"CHECK1"<<endl;
-																	        symbol_table *f_symbol = GT->lookup( (yyvsp[-3].expr)->addr->name)->nested_table;
+																	        symbol_table *f_symbol = GT->lookup( (yyvsp[-3].expr)->name)->nested_table;
 
 																	        func_param_list *flist = ((yyvsp[-1].f_param_list));
 																	        int i;
@@ -1872,11 +1873,10 @@ cout <<"CHECK1"<<endl;		*/
 																	        }
 																	        cout <<"CHECK1"<<endl;	
 																	        string s = to_string(c);																        cout <<"CHECK2"<<endl;	
-																	        cout <<(yyvsp[-3].expr)-> addr->name<<endl;
 																	        cout<<"sf"<<endl;
-																	        	Q_arr->emit((yyvsp[-3].expr)-> addr->name,s,"", OP_CALL);
+																	        	Q_arr->emit((yyvsp[-3].expr)->name,s,"", OP_CALL);
 																	        		cout <<"CHECK3"<<endl;	
-																	        	printf(" RULE:\tpostfix_expression \t->\t postfix_expression ( argument_expression_list_opt )\n");cout<<endl <<(yyval.expr)->addr->name<<endl;
+																	        	printf(" RULE:\tpostfix_expression \t->\t postfix_expression ( argument_expression_list_opt )\n");
 																	      }
 #line 1882 "y.tab.c" /* yacc.c:1646  */
     break;
@@ -1885,9 +1885,9 @@ cout <<"CHECK1"<<endl;		*/
 #line 234 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																			(yyval.expr) = (yyvsp[-2].expr);
-																			Q_arr->emit((yyvsp[-2].expr)-> addr->name,0,"", OP_CALL);
+																			Q_arr->emit((yyvsp[-2].expr)->name,0,"", OP_CALL);
 
-																		printf(" RULE:\tpostfix_expression \t->\t postfix_expression ( )\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
+																		printf(" RULE:\tpostfix_expression \t->\t postfix_expression ( )\n");}
 #line 1892 "y.tab.c" /* yacc.c:1646  */
     break;
 
@@ -1895,13 +1895,13 @@ cout <<"CHECK1"<<endl;		*/
 #line 239 "ass3_15CS10060.y" /* yacc.c:1646  */
     {(yyval.expr) =(yyvsp[-2].expr);
 																			//not supported
-																			printf(" RULE:\tpostfix_expression \t->\t postfix_expression . identifier\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
+																			printf(" RULE:\tpostfix_expression \t->\t postfix_expression . identifier\n");}
 #line 1900 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
 #line 242 "ass3_15CS10060.y" /* yacc.c:1646  */
-    {(yyval.expr) = (yyvsp[-2].expr);printf(" RULE:\tpostfix_expression \t->\t postfix_expression -> identifier\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
+    {(yyval.expr) = (yyvsp[-2].expr);printf(" RULE:\tpostfix_expression \t->\t postfix_expression -> identifier\n");}
 #line 1906 "y.tab.c" /* yacc.c:1646  */
     break;
 
@@ -1910,22 +1910,20 @@ cout <<"CHECK1"<<endl;		*/
     {
 																				 (yyval.expr) = new expr_attr;
 
-																		        //string s = $1->addr;
-																		        symbol_table_entry * f = curr_symbol_table->lookup((yyvsp[-1].expr)->addr->name);
-																		        (yyval.expr)->addr = curr_symbol_table-> lookup(curr_symbol_table->gen_temp(f->type));														      
+																		        symbol_table_entry * f = curr_symbol_table->lookup((yyvsp[-1].expr)->name);
+																		        (yyval.expr)->name = curr_symbol_table->gen_temp(f->type);														      
 
-																		        printf(" RULE:\tpostfix_expression \t->\t postfix_expression ++\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 1919 "y.tab.c" /* yacc.c:1646  */
+																		        printf(" RULE:\tpostfix_expression \t->\t postfix_expression ++\n");}
+#line 1918 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 251 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 250 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																				 (yyval.expr) = new expr_attr;
 
-																		        //string s = $1->addr;
-																		        symbol_table_entry * f = curr_symbol_table->lookup((yyvsp[-1].expr)->addr->name);
-																		        (yyval.expr)->addr = curr_symbol_table-> lookup(curr_symbol_table->gen_temp(f->type));
+																		        symbol_table_entry * f = curr_symbol_table->lookup((yyvsp[-1].expr)->name);
+																		        (yyval.expr)->name =curr_symbol_table->gen_temp(f->type);
 																		        /*
 																		        if(f->type.array_type.compare("array") == 0)
 																		        {
@@ -1938,22 +1936,22 @@ cout <<"CHECK1"<<endl;		*/
 																		        */
 																		        //else check once again
 																		        //{
-																		            Q_arr->emit( (yyval.expr)->addr->name, (yyvsp[-1].expr)->addr->name, "", OP_COPY);
-																		            Q_arr->emit((yyvsp[-1].expr)->addr->name, (yyvsp[-1].expr)->addr->name, "1", OP_MINUS);
+																		            Q_arr->emit( (yyval.expr)->name, (yyvsp[-1].expr)->name, "", OP_COPY);
+																		            Q_arr->emit((yyvsp[-1].expr)->name, (yyvsp[-1].expr)->name, "1", OP_MINUS);
 
 																		        //}   //corrected
-																		        printf(" RULE:\tpostfix_expression \t->\t postfix_expression --\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 1947 "y.tab.c" /* yacc.c:1646  */
+																		        printf(" RULE:\tpostfix_expression \t->\t postfix_expression --\n");}
+#line 1945 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 274 "ass3_15CS10060.y" /* yacc.c:1646  */
-    {(yyval.expr) = (yyvsp[-1].expr); printf(" RULE:\tpostfix_expression \t->\t postfix_expression .'");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 1953 "y.tab.c" /* yacc.c:1646  */
+#line 272 "ass3_15CS10060.y" /* yacc.c:1646  */
+    {(yyval.expr) = (yyvsp[-1].expr); printf(" RULE:\tpostfix_expression \t->\t postfix_expression .'");}
+#line 1951 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 278 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 276 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 			/*func_param *f = new func_param;
         f->param_name = $1->addr->name;
@@ -1964,91 +1962,91 @@ cout <<"CHECK1"<<endl;		*/
 																				$$ = new func_param_list;
 																				func_param f;
 																				cout <<"a"<<endl;
-																				cout <<$1->addr<<endl;
-																				f.name = ($1->addr) -> name;
-																				f.type  = ($1->addr) -> type;
+																				f.name = ($1) -> name;
+																				f.type  = curr_symbol_table->lookup(($1) -> name)->type;
 																				cout <<"b"<<endl;
 																				($$->vec).push_back(f);*/
 
 																				printf(" RULE:\targument_expression_list \t->\t assignment_expression\n");
 																		}
-#line 1976 "y.tab.c" /* yacc.c:1646  */
+#line 1973 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 297 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 294 "ass3_15CS10060.y" /* yacc.c:1646  */
     {//done
 																					
 																			(yyval.f_param_list) = (yyvsp[-2].f_param_list) ;
 																			func_param f;
-																			f.name = ((yyvsp[0].expr)->addr) -> name;
-																			f.type  = ((yyvsp[0].expr)->addr) -> type;
+																			f.name = ((yyvsp[0].expr)) -> name;
+																			f.type  = curr_symbol_table->lookup(((yyvsp[0].expr)) -> name)->type;
 																			((yyval.f_param_list)->vec).push_back(f);
 																			
 																			printf(" RULE:\targument_expression_list \t->\t argument_expression_list , assignment_expression\n");
 																		}
-#line 1991 "y.tab.c" /* yacc.c:1646  */
+#line 1988 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 310 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 307 "ass3_15CS10060.y" /* yacc.c:1646  */
     {(yyval.expr) = (yyvsp[0].expr); printf(" RULE:\tunary_expression \t->\t postfix_expression\n");}
-#line 1997 "y.tab.c" /* yacc.c:1646  */
+#line 1994 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 311 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 308 "ass3_15CS10060.y" /* yacc.c:1646  */
     {//Done
 																				(yyval.expr) = new expr_attr;
 																				string tmp = curr_symbol_table -> gen_temp((yyvsp[0].expr)->addr->type);
 																				init_value tmp_init;
 																			
-																				(yyval.expr)->addr = curr_symbol_table->update(tmp, (yyvsp[0].expr)->addr->type, tmp_init, 0, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
+																				(yyval.expr)->addr = curr_symbol_table->update(tmp, (yyvsp[0].expr)->addr->type, tmp_init, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
 																				quad *q = Q_arr -> emit(tmp, (yyvsp[0].expr)->addr->name, OP_UNARY_PLUS);
 
 
-																				printf(" RULE:\tunary_expression \t->\t ++ unary_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2012 "y.tab.c" /* yacc.c:1646  */
+																				printf(" RULE:\tunary_expression \t->\t ++ unary_expression\n");}
+#line 2009 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 322 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 319 "ass3_15CS10060.y" /* yacc.c:1646  */
     {//done
 																				(yyval.expr) = new expr_attr;
 																				string tmp = curr_symbol_table -> gen_temp((yyvsp[0].expr)->addr->type);
 																				init_value tmp_init;
 																			
-																				(yyval.expr)->addr = curr_symbol_table->update(tmp, (yyvsp[0].expr)->addr->type, tmp_init, 0, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
+																				(yyval.expr)->addr = curr_symbol_table->update(tmp, (yyvsp[0].expr)->addr->type, tmp_init, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
 																				quad *q = Q_arr -> emit(tmp, (yyvsp[0].expr)->addr->name, OP_UNARY_MINUS);
-																				printf(" RULE:\tunary_expression \t->\t -- unary_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2025 "y.tab.c" /* yacc.c:1646  */
+																				printf(" RULE:\tunary_expression \t->\t -- unary_expression\n");}
+#line 2022 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 331 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 328 "ass3_15CS10060.y" /* yacc.c:1646  */
     {//done
 																				(yyval.expr) = new expr_attr;
 																				string tmp = curr_symbol_table -> gen_temp((yyvsp[0].expr)->addr->type);
-																				init_value tmp_init;							
+																				init_value tmp_init;
+																				(yyval.expr)->name = tmp;							
 
 																				switch((yyvsp[-1].char_val))
 																				{
 																					case '&': 
 																					{
-																						(yyval.expr)->addr = curr_symbol_table->update(tmp, PTR_, tmp_init, 0, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
-																						Q_arr ->emit(tmp, (yyvsp[0].expr)->addr->name,OP_REFERENCE);
+																						(yyval.expr)->addr = curr_symbol_table->update(tmp, PTR_, tmp_init, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
+																						Q_arr ->emit(tmp, (yyvsp[0].expr)->name,OP_REFERENCE);
 																						break;
 																					}
 																					case '*': 
 																					{
-																						(yyval.expr)->addr = curr_symbol_table->update(tmp, UNKNOWN_, tmp_init, 0, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
-																						Q_arr ->emit(tmp, (yyvsp[0].expr)->addr->name,OP_DEREFERENCE);
+																						(yyval.expr)->addr = curr_symbol_table->update(tmp, UNKNOWN_, tmp_init, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
+																						Q_arr ->emit(tmp, (yyvsp[0].expr)->name,OP_DEREFERENCE);
 																						break;
 																					}
 																					case '-': 
 																					{
-																						(yyval.expr)->addr = curr_symbol_table->update(tmp, (yyvsp[0].expr)->addr-> type, tmp_init, 0, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
-																						Q_arr ->emit(tmp, (yyvsp[0].expr)->addr->name,OP_UNARY_MINUS);
+																						(yyval.expr)->addr = curr_symbol_table->update(tmp, (yyvsp[0].expr)->addr-> type, tmp_init, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
+																						Q_arr ->emit(tmp, (yyvsp[0].expr)->name,OP_UNARY_MINUS);
 																						break;
 																					}
 																					default :
@@ -2056,58 +2054,58 @@ cout <<"CHECK1"<<endl;		*/
 
 
 																				}
-																			printf(" RULE:\tunary_expression \t->\t unary_operator cast_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2061 "y.tab.c" /* yacc.c:1646  */
+																			printf(" RULE:\tunary_expression \t->\t unary_operator cast_expression\n");}
+#line 2059 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 365 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 363 "ass3_15CS10060.y" /* yacc.c:1646  */
     { (yyval.char_val) = '&';printf(" RULE:\tunary_operator \t->\t & \n");}
-#line 2067 "y.tab.c" /* yacc.c:1646  */
+#line 2065 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 366 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 364 "ass3_15CS10060.y" /* yacc.c:1646  */
     { (yyval.char_val) = '*'; printf(" RULE:\tunary_operator \t->\t * \n");}
-#line 2073 "y.tab.c" /* yacc.c:1646  */
+#line 2071 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 367 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 365 "ass3_15CS10060.y" /* yacc.c:1646  */
     {(yyval.char_val) = '+';printf(" RULE:\tunary_operator \t->\t + \n");}
-#line 2079 "y.tab.c" /* yacc.c:1646  */
+#line 2077 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 368 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 366 "ass3_15CS10060.y" /* yacc.c:1646  */
     {(yyval.char_val) = '-'; printf(" RULE:\tunary_operator \t->\t - \n");}
-#line 2085 "y.tab.c" /* yacc.c:1646  */
+#line 2083 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 372 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 370 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																			(yyval.expr) = (yyvsp[0].expr);
-																			printf(" RULE:\tcast_expression \t->\t unary_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2093 "y.tab.c" /* yacc.c:1646  */
+																			printf(" RULE:\tcast_expression \t->\t unary_expression\n");}
+#line 2091 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 378 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 376 "ass3_15CS10060.y" /* yacc.c:1646  */
     {	
 
 																/*to be done, doubt  what are cast expression for ?*/
 																				(yyval.expr) = (yyvsp[0].expr);
-																				printf(" RULE:\tmultiplicative_expression \t->\t cast_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2103 "y.tab.c" /* yacc.c:1646  */
+																				printf(" RULE:\tmultiplicative_expression \t->\t cast_expression\n");}
+#line 2101 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 383 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 381 "ass3_15CS10060.y" /* yacc.c:1646  */
     {																															   (yyval.expr) = new expr_attr;
 												        data_type type1, type2, type;
-												        type1 = curr_symbol_table->lookup((yyvsp[-2].expr)->addr->name)->type;
-												        type2 = curr_symbol_table->lookup((yyvsp[0].expr)->addr->name)->type;
+												        type1 = curr_symbol_table->lookup((yyvsp[-2].expr)->name)->type;
+												        type2 = curr_symbol_table->lookup((yyvsp[0].expr)->name)->type;
 												        	//done
 												        int flag = 0;
 												        if(type1 == type2)
@@ -2183,26 +2181,27 @@ cout <<"CHECK1"<<endl;		*/
 												            
 												        }
 												        
-												        (yyval.expr)->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(type));
-												        Q_arr->emit((yyval.expr)->addr->name, (yyvsp[-2].expr)->addr->name, (yyvsp[0].expr)->addr->name, OP_MULT);
+												        (yyval.expr)->name = curr_symbol_table->gen_temp(type);
 
-													printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression * cast_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2191 "y.tab.c" /* yacc.c:1646  */
+												        Q_arr->emit((yyval.expr)->name, (yyvsp[-2].expr)->name, (yyvsp[0].expr)->name, OP_MULT);
+
+													printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression * cast_expression\n");}
+#line 2190 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 468 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 467 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																				 (yyval.expr) = new expr_attr;
 												        data_type type1, type2, type;
-												        type1 = curr_symbol_table->lookup((yyvsp[-2].expr)->addr->name)->type;
-												        type2 = curr_symbol_table->lookup((yyvsp[0].expr)->addr->name)->type;
+												        type1 = curr_symbol_table->lookup((yyvsp[-2].expr)->name)->type;
+												        type2 = curr_symbol_table->lookup((yyvsp[0].expr)->name)->type;
 												   
 												   /* //array
 												   if(type2.array_type.compare("array") == 0)
 												        {
 												            string temp = curr_sym->gentemp(type2);
-												            Q_arr.emit(ARRAY_ACCESS, temp, $3->addr->name, *($3->inner));
+												            Q_arr.emit(ARRAY_ACCESS, temp, $3->name, *($3->inner));
 												            $3->addr->name = temp;
 												            $3->type.array_type = ""; //check
 												        }
@@ -2290,22 +2289,22 @@ cout <<"CHECK1"<<endl;		*/
 												            
 												        }
 												        
-												        (yyval.expr)->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(type));
-												        Q_arr->emit((yyval.expr)->addr->name, (yyvsp[-2].expr)->addr->name, (yyvsp[0].expr)->addr->name, OP_DIVIDE);
+												        (yyval.expr)->name = curr_symbol_table->gen_temp(type);
+												        Q_arr->emit((yyval.expr)->name, (yyvsp[-2].expr)->name, (yyvsp[0].expr)->name, OP_DIVIDE);
 
 
-printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression / cast_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2299 "y.tab.c" /* yacc.c:1646  */
+printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression / cast_expression\n");}
+#line 2298 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 573 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 572 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 
 																				 (yyval.expr) = new expr_attr;
 												        data_type type1, type2, type;
-												        type1 = curr_symbol_table->lookup((yyvsp[-2].expr)->addr->name)->type;
-												        type2 = curr_symbol_table->lookup((yyvsp[0].expr)->addr->name)->type;							   
+												        type1 = curr_symbol_table->lookup((yyvsp[-2].expr)->name)->type;
+												        type2 = curr_symbol_table->lookup((yyvsp[0].expr)->name)->type;							   
 												   
 												        	//done
 												        int flag = 0;
@@ -2382,27 +2381,27 @@ printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression / cas
 												            
 												        }
 												        
-												        (yyval.expr)->addr= curr_symbol_table->lookup(curr_symbol_table->gen_temp(type));
-												        Q_arr->emit((yyval.expr)->addr->name, (yyvsp[-2].expr)->addr->name, (yyvsp[0].expr)->addr->name, OP_MODULO);
+												        (yyval.expr)->name= curr_symbol_table->gen_temp(type);
+												        Q_arr->emit((yyval.expr)->name, (yyvsp[-2].expr)->name, (yyvsp[0].expr)->name, OP_MODULO);
 
 
-printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression %% cast_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2391 "y.tab.c" /* yacc.c:1646  */
+printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression %% cast_expression\n");}
+#line 2390 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 663 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 662 "ass3_15CS10060.y" /* yacc.c:1646  */
     {(yyval.expr) = (yyvsp[0].expr);printf(" RULE:\tadditive_expression \t->\t multiplicative_expression\n");}
-#line 2397 "y.tab.c" /* yacc.c:1646  */
+#line 2396 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 665 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 664 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																			 (yyval.expr) = new expr_attr;
 												        data_type type1, type2, type;
-												        type1 = curr_symbol_table->lookup((yyvsp[-2].expr)->addr->name)->type;
-												        type2 = curr_symbol_table->lookup((yyvsp[0].expr)->addr->name)->type;
+												        type1 = curr_symbol_table->lookup((yyvsp[-2].expr)->name)->type;
+												        type2 = curr_symbol_table->lookup((yyvsp[0].expr)->name)->type;
 												   
 												   /* //array
 												   if(type2.array_type.compare("array") == 0)
@@ -2496,22 +2495,22 @@ printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression %% ca
 												            
 												        }
 												        
-												        (yyval.expr)->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(type));
-												        Q_arr->emit((yyval.expr)->addr->name, (yyvsp[-2].expr)->addr->name, (yyvsp[0].expr)->addr->name, OP_PLUS);
+												        (yyval.expr)->name = (curr_symbol_table->gen_temp(type));
+												        Q_arr->emit((yyval.expr)->name, (yyvsp[-2].expr)->name, (yyvsp[0].expr)->name, OP_PLUS);
 
-printf(" RULE:\tadditive_expression \t->\t additive_expression + multiplicative_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2504 "y.tab.c" /* yacc.c:1646  */
+printf(" RULE:\tadditive_expression \t->\t additive_expression + multiplicative_expression\n");}
+#line 2503 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 767 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 766 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																				printf(" RULE:\tadditive_expression \t->\t additive_expression - multiplicative_expression\n");
 
 																				 (yyval.expr) = new expr_attr;
 												        data_type type1, type2, type;
-												        type1 = curr_symbol_table->lookup((yyvsp[-2].expr)->addr->name)->type;
-												        type2 = curr_symbol_table->lookup((yyvsp[0].expr)->addr->name)->type;
+												        type1 = curr_symbol_table->lookup((yyvsp[-2].expr)->name)->type;
+												        type2 = curr_symbol_table->lookup((yyvsp[0].expr)->name)->type;
 												   
 												   /* //array
 												   if(type2.array_type.compare("array") == 0)
@@ -2605,26 +2604,25 @@ printf(" RULE:\tadditive_expression \t->\t additive_expression + multiplicative_
 												            
 												        }
 												        
-												        (yyval.expr)->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(type));
-												        Q_arr->emit((yyval.expr)->addr->name, (yyvsp[-2].expr)->addr->name, (yyvsp[0].expr)->addr->name, OP_MINUS);
-cout<<endl <<"rulent written"<<(yyval.expr)->addr->name<<endl;
+												        (yyval.expr)->name = (curr_symbol_table->gen_temp(type));
+												        Q_arr->emit((yyval.expr)->name, (yyvsp[-2].expr)->name, (yyvsp[0].expr)->name, OP_MINUS);
 														}
-#line 2613 "y.tab.c" /* yacc.c:1646  */
+#line 2611 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 874 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 872 "ass3_15CS10060.y" /* yacc.c:1646  */
     {(yyval.expr)= (yyvsp[0].expr);printf(" RULE:\tshift_expression \t->\t additive_expression\n");}
-#line 2619 "y.tab.c" /* yacc.c:1646  */
+#line 2617 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 875 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 873 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																					 (yyval.expr) = new expr_attr;
 												        data_type type1, type2, type;
-												        type1 = curr_symbol_table->lookup((yyvsp[-2].expr)->addr->name)->type;
-												        type2 = curr_symbol_table->lookup((yyvsp[0].expr)->addr->name)->type;
+												        type1 = curr_symbol_table->lookup((yyvsp[-2].expr)->name)->type;
+												        type2 = curr_symbol_table->lookup((yyvsp[0].expr)->name)->type;
 												   
 												   /* //array
 												   if(type2.array_type.compare("array") == 0)
@@ -2718,22 +2716,22 @@ cout<<endl <<"rulent written"<<(yyval.expr)->addr->name<<endl;
 												            
 												        }
 												        
-												        (yyval.expr)->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(type));
-												        Q_arr->emit((yyval.expr)->addr->name, (yyvsp[-2].expr)->addr->name, (yyvsp[0].expr)->addr->name, OP_SHIFT_LEFT);
+												        (yyval.expr)->name = (curr_symbol_table->gen_temp(type));
+												        Q_arr->emit((yyval.expr)->name, (yyvsp[-2].expr)->name, (yyvsp[0].expr)->name, OP_SHIFT_LEFT);
 
 
 																					//not supported
-																					printf(" RULE:\tshift_expression \t->\t shift_expression << additive_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2728 "y.tab.c" /* yacc.c:1646  */
+																					printf(" RULE:\tshift_expression \t->\t shift_expression << additive_expression\n");}
+#line 2726 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 979 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 977 "ass3_15CS10060.y" /* yacc.c:1646  */
     {//done
 																					 (yyval.expr) = new expr_attr;
 												        data_type type1, type2, type;
-												        type1 = curr_symbol_table->lookup((yyvsp[-2].expr)->addr->name)->type;
-												        type2 = curr_symbol_table->lookup((yyvsp[0].expr)->addr->name)->type;
+												        type1 = curr_symbol_table->lookup((yyvsp[-2].expr)->name)->type;
+												        type2 = curr_symbol_table->lookup((yyvsp[0].expr)->name)->type;
 												   
 												   /* //array
 												   if(type2.array_type.compare("array") == 0)
@@ -2827,120 +2825,141 @@ cout<<endl <<"rulent written"<<(yyval.expr)->addr->name<<endl;
 												            
 												        }
 												        
-												        (yyval.expr)->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(type));
-												        Q_arr->emit((yyval.expr)->addr->name, (yyvsp[-2].expr)->addr->name, (yyvsp[0].expr)->addr->name, OP_SHIFT_RIGHT);
+												        (yyval.expr)->name = (curr_symbol_table->gen_temp(type));
+												        Q_arr->emit((yyval.expr)->name, (yyvsp[-2].expr)->name, (yyvsp[0].expr)->name, OP_SHIFT_RIGHT);
 
-																				printf(" RULE:\tshift_expression \t->\t shift_expression >> additive_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2835 "y.tab.c" /* yacc.c:1646  */
+																				printf(" RULE:\tshift_expression \t->\t shift_expression >> additive_expression\n");}
+#line 2833 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 1084 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1082 "ass3_15CS10060.y" /* yacc.c:1646  */
     {(yyval.expr) =(yyvsp[0].expr);
 
-																				printf(" RULE:\trelational_expression \t->\t shift_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2843 "y.tab.c" /* yacc.c:1646  */
+																				printf(" RULE:\trelational_expression \t->\t shift_expression\n");}
+#line 2841 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 1087 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1085 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 
 																				(yyval.expr) = new expr_attr;
-																		        (yyval.expr)->addr->type = BOOL_;
 																		        (yyval.expr)->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp((yyval.expr)->addr->type));
+																		        (yyval.expr)->name = (yyval.expr)->addr->name;
+																		        (yyval.expr)->addr->type = BOOL_;
 																		        (yyval.expr)->truelist = makelist(Q_arr->index);
 																		        (yyval.expr)->falselist = makelist(Q_arr->index + 1);
-																		        Q_arr -> emit("", (yyvsp[-2].expr)->addr->name, (yyvsp[0].expr)->addr->name, OP_IF_LESS);
+																		        Q_arr -> emit("", (yyvsp[-2].expr)->name, (yyvsp[0].expr)->name, OP_IF_LESS);
 																		        Q_arr-> emit("","","", OP_GOTO);
 
-																			printf(" RULE:\trelational_expression \t->\t relational_expression < shift_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2859 "y.tab.c" /* yacc.c:1646  */
+																			printf(" RULE:\trelational_expression \t->\t relational_expression < shift_expression\n");}
+#line 2858 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 1098 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1097 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
+
 																				(yyval.expr) = new expr_attr;
-																		        (yyval.expr)->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp((yyvsp[-2].expr)->addr->type));
+																		        (yyval.expr)->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(BOOL_));
+																		        (yyval.expr)->name = (yyval.expr)->addr->name;
+																		        (yyval.expr)->addr->type = BOOL_;
 																		        (yyval.expr)->truelist = makelist(Q_arr->index);
 																		        (yyval.expr)->falselist = makelist(Q_arr->index + 1);
-																		        Q_arr -> emit("", (yyvsp[-2].expr)->addr->name, (yyvsp[0].expr)->addr->name, OP_IF_GREATER);
-																		        Q_arr->emit("","","",OP_GOTO);
-																		        printf(" RULE:\trelational_expression \t->\t relational_expression > shift_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2872 "y.tab.c" /* yacc.c:1646  */
+																		        Q_arr -> emit("", (yyvsp[-2].expr)->name, (yyvsp[0].expr)->name, OP_IF_GREATER);
+																		        Q_arr-> emit("","","", OP_GOTO);
+
+
+																		        printf(" RULE:\trelational_expression \t->\t relational_expression > shift_expression\n");}
+#line 2876 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 1106 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1110 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 
 																				(yyval.expr) = new expr_attr;
-																		        (yyval.expr)->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp((yyvsp[-2].expr)->addr->type));
+																		        (yyval.expr)->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(BOOL_));
+																		        (yyval.expr)->name = (yyval.expr)->addr->name;
+																		        (yyval.expr)->addr->type = BOOL_;
 																		        (yyval.expr)->truelist = makelist(Q_arr->index);
 																		        (yyval.expr)->falselist = makelist(Q_arr->index + 1);
-																		        Q_arr -> emit("", (yyvsp[-2].expr)->addr->name, (yyvsp[0].expr)->addr->name, OP_IF_LESS_EQUAL);
+																		        Q_arr -> emit("", (yyvsp[-2].expr)->name, (yyvsp[0].expr)->name, OP_IF_LESS_EQUAL);
 																		        Q_arr-> emit("","","", OP_GOTO);
-																		        printf(" RULE:\trelational_expression \t->\t relational_expression <= shift_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2886 "y.tab.c" /* yacc.c:1646  */
+
+																				
+																		        printf(" RULE:\trelational_expression \t->\t relational_expression <= shift_expression\n");}
+#line 2894 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 1115 "ass3_15CS10060.y" /* yacc.c:1646  */
-    {	(yyval.expr) = new expr_attr;
-																		        (yyval.expr)->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp((yyvsp[-2].expr)->addr->type));
+#line 1123 "ass3_15CS10060.y" /* yacc.c:1646  */
+    {	
+
+																				(yyval.expr) = new expr_attr;
+																		        (yyval.expr)->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(BOOL_));
+																		        (yyval.expr)->name = (yyval.expr)->addr->name;
+																		        (yyval.expr)->addr->type = BOOL_;
 																		        (yyval.expr)->truelist = makelist(Q_arr->index);
 																		        (yyval.expr)->falselist = makelist(Q_arr->index + 1);
-																		        Q_arr -> emit("", (yyvsp[-2].expr)->addr->name, (yyvsp[0].expr)->addr->name, OP_IF_GREATER_EQUAL);
+																		        Q_arr -> emit("", (yyvsp[-2].expr)->name, (yyvsp[0].expr)->name, OP_IF_GREATER_EQUAL);
 																		        Q_arr-> emit("","","", OP_GOTO);
-																				printf(" RULE:\trelational_expression \t->\t relational_expression >= shift_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2898 "y.tab.c" /* yacc.c:1646  */
+
+																				printf(" RULE:\trelational_expression \t->\t relational_expression >= shift_expression\n");}
+#line 2911 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 1125 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1138 "ass3_15CS10060.y" /* yacc.c:1646  */
     {	(yyval.expr)=(yyvsp[0].expr);printf(" RULE:\tequality_expression \t->\t relational_expression\n");}
-#line 2904 "y.tab.c" /* yacc.c:1646  */
+#line 2917 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 1126 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1139 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																				(yyval.expr) = new expr_attr;
 																		        (yyval.expr)->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(BOOL_));
+																		        (yyval.expr)->name = (yyval.expr)->addr->name;
+																		        (yyval.expr)->addr->type = BOOL_;
 																		        (yyval.expr)->truelist = makelist(Q_arr->index);
 																		        (yyval.expr)->falselist = makelist(Q_arr->index + 1);
-																		        Q_arr -> emit("", (yyvsp[-2].expr)->addr->name, (yyvsp[0].expr)->addr->name, OP_IF_IS_EQUAL);
+																		        Q_arr -> emit("", (yyvsp[-2].expr)->name, (yyvsp[0].expr)->name, OP_IF_IS_EQUAL);
 																		        Q_arr-> emit("","","", OP_GOTO);
 
-																		       	printf(" RULE:\tequality_expression \t->\t equality_expression == relational_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2918 "y.tab.c" /* yacc.c:1646  */
+
+																		       	printf(" RULE:\tequality_expression \t->\t equality_expression == relational_expression\n");}
+#line 2934 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 1136 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1152 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																				(yyval.expr) = new expr_attr;
 																		        (yyval.expr)->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(BOOL_));
+																		        (yyval.expr)->name = (yyval.expr)->addr->name;
+																		        (yyval.expr)->addr->type = BOOL_;
 																		        (yyval.expr)->truelist = makelist(Q_arr->index);
 																		        (yyval.expr)->falselist = makelist(Q_arr->index + 1);
-																		        Q_arr -> emit("", (yyvsp[-2].expr)->addr->name, (yyvsp[0].expr)->addr->name, OP_IF_NOT_EQUAL);
+																		        Q_arr -> emit("", (yyvsp[-2].expr)->name, (yyvsp[0].expr)->name, OP_IF_NOT_EQUAL);
 																		        Q_arr-> emit("","","", OP_GOTO);
-																		        
-																		        printf(" RULE:\tequality_expression \t->\t equality_expression != relational_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2932 "y.tab.c" /* yacc.c:1646  */
+
+
+																		        printf(" RULE:\tequality_expression \t->\t equality_expression != relational_expression\n");}
+#line 2951 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 1148 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1167 "ass3_15CS10060.y" /* yacc.c:1646  */
     {(yyval.expr)=(yyvsp[0].expr);
 
-        																		printf(" RULE:\tand_expression \t->\t equality_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 2940 "y.tab.c" /* yacc.c:1646  */
+        																		printf(" RULE:\tand_expression \t->\t equality_expression\n");}
+#line 2959 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 1151 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1170 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																																										/*
 																		       /*
@@ -2969,19 +2988,19 @@ cout<<endl <<"rulent written"<<(yyval.expr)->addr->name<<endl;
 																		        $$->addr = curr_symbol_table->lookup( curr_symbol_table->gen_temp(t));
 																		        Q_arr->emit($$->loc, $1->addr->name, $3->name, OP_LOGICAL_AND);printf(" RULE:\tand_expression \t->\t and_expression & equality_expression\n");
 																		        */
-cout<<endl <<(yyval.expr)->addr->name<<endl;
+
 																		        }
-#line 2975 "y.tab.c" /* yacc.c:1646  */
+#line 2994 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 1184 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1203 "ass3_15CS10060.y" /* yacc.c:1646  */
     {(yyval.expr) =(yyvsp[0].expr);printf(" RULE:\texclusive_or_expression \t->\t and_expression\n");}
-#line 2981 "y.tab.c" /* yacc.c:1646  */
+#line 3000 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 1185 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1204 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																				/*
 																				$$ = new expr_attr;
@@ -2993,19 +3012,19 @@ cout<<endl <<(yyval.expr)->addr->name<<endl;
 																		        Q_arr.emit($$->loc, $1->addr->name, $3->name, OP_XOR);
 																		        */
 
-																		        printf(" RULE:\texclusive_or_expression \t->\t exclusive_or_expression ^ and_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;
+																		        printf(" RULE:\texclusive_or_expression \t->\t exclusive_or_expression ^ and_expression\n");
 																		       }
-#line 2999 "y.tab.c" /* yacc.c:1646  */
+#line 3018 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 1201 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1220 "ass3_15CS10060.y" /* yacc.c:1646  */
     {(yyval.expr) = (yyvsp[0].expr);printf(" RULE:\tinclusive_or_expression \t->\t exclusive_or_expression\n");}
-#line 3005 "y.tab.c" /* yacc.c:1646  */
+#line 3024 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 1202 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1221 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																				 (yyval.expr) = new expr_attr;
 																		        symbol_table_entry *f = curr_symbol_table->lookup((yyvsp[-2].expr)->addr->name);//check
@@ -3014,18 +3033,18 @@ cout<<endl <<(yyval.expr)->addr->name<<endl;
 																		        (yyval.expr)->addr = curr_symbol_table -> lookup(curr_symbol_table->gen_temp(t));
 																		        Q_arr->emit((yyval.expr)->addr->name, (yyvsp[-2].expr)->addr->name, (yyvsp[0].expr)->addr->name, OP_OR);
 
-																		        printf(" RULE:\tinclusive_or_expression \t->\t inclusive_or | exclusive_or_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 3019 "y.tab.c" /* yacc.c:1646  */
+																		        printf(" RULE:\tinclusive_or_expression \t->\t inclusive_or | exclusive_or_expression\n");}
+#line 3038 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 1214 "ass3_15CS10060.y" /* yacc.c:1646  */
-    {(yyval.expr) =(yyvsp[0].expr); cout << (yyval.expr)->addr->name<<endl;printf(" RULE:\tlogical_and_expression \t->\t inclusive_or_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 3025 "y.tab.c" /* yacc.c:1646  */
+#line 1233 "ass3_15CS10060.y" /* yacc.c:1646  */
+    {(yyval.expr) =(yyvsp[0].expr);printf(" RULE:\tlogical_and_expression \t->\t inclusive_or_expression\n");}
+#line 3044 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 1215 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1234 "ass3_15CS10060.y" /* yacc.c:1646  */
     {//DONE
 																					data_type type;
 																			        type = BOOL_;
@@ -3042,24 +3061,25 @@ cout<<endl <<(yyval.expr)->addr->name<<endl;
 																			        (yyval.expr)->truelist = merge((yyvsp[-5].expr)->truelist, (yyvsp[-1].expr)->truelist);
 																			        (yyval.expr)->falselist = (yyvsp[-1].expr)->falselist;
 
-printf(" RULE:\tlogical_and_expression \t->\t logical_and_expression && inclusive_or_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;
+printf(" RULE:\tlogical_and_expression \t->\t logical_and_expression && inclusive_or_expression\n");
 																			}
-#line 3048 "y.tab.c" /* yacc.c:1646  */
+#line 3067 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 1236 "ass3_15CS10060.y" /* yacc.c:1646  */
-    {(yyval.expr) =(yyvsp[0].expr);printf(" RULE:\tlogical_or_expression \t->\t logical_and_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 3054 "y.tab.c" /* yacc.c:1646  */
+#line 1255 "ass3_15CS10060.y" /* yacc.c:1646  */
+    {(yyval.expr) =(yyvsp[0].expr);printf(" RULE:\tlogical_or_expression \t->\t logical_and_expression\n");}
+#line 3073 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 1237 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1256 "ass3_15CS10060.y" /* yacc.c:1646  */
     {//done
 																						data_type type;
 																			        type = BOOL_;
 																			        (yyval.expr) = new expr_attr;
 																			        (yyval.expr)->addr = curr_symbol_table -> lookup( curr_symbol_table->gen_temp(type));
+																			        (yyval.expr)->name = (yyval.expr)->addr->name;
 																			        //check
 																			         Q_arr->backpatch((yyvsp[-4].expr)->nextlist, Q_arr->index);
 																			        Q_arr->convInt2Bool((yyvsp[-5].expr));
@@ -3071,30 +3091,30 @@ printf(" RULE:\tlogical_and_expression \t->\t logical_and_expression && inclusiv
 																			        (yyval.expr)->truelist = merge((yyvsp[-5].expr)->truelist, (yyvsp[-1].expr)->truelist);
 																			        (yyval.expr)->falselist = (yyvsp[-1].expr)->falselist;
 
-        printf(" RULE:\tlogical_or_expression \t->\t logical_or_expression || logical_and_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 3076 "y.tab.c" /* yacc.c:1646  */
+        printf(" RULE:\tlogical_or_expression \t->\t logical_or_expression || logical_and_expression\n");}
+#line 3096 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 1257 "ass3_15CS10060.y" /* yacc.c:1646  */
-    {(yyval.expr)=(yyvsp[0].expr);printf(" RULE:\tconditional_expression \t->\t logical_or_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 3082 "y.tab.c" /* yacc.c:1646  */
+#line 1277 "ass3_15CS10060.y" /* yacc.c:1646  */
+    {(yyval.expr)=(yyvsp[0].expr);printf(" RULE:\tconditional_expression \t->\t logical_or_expression\n");}
+#line 3102 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 1258 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1278 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 
 																		        (yyval.expr) = new expr_attr;
 																		        list<int> I;
 																		        data_type type;
 																		        type = (yyvsp[-4].expr)->addr->type;
-																		        (yyval.expr)->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(type));
+																		        (yyval.expr)->name = (curr_symbol_table->gen_temp(type));
 																		        Q_arr->emit((yyval.expr)->addr->name, (yyvsp[0].expr)->addr->name,"", OP_COPY);
 																		        I = makelist(Q_arr->index);
 																		        Q_arr->emit("","","",OP_GOTO);
 																		        Q_arr->backpatch((yyvsp[-3].expr)->nextlist, Q_arr->index);
-																		        Q_arr->emit( (yyval.expr)->addr->name, (yyvsp[-4].expr)->addr->name, "", OP_COPY);
+																		        Q_arr->emit( (yyval.expr)->name, (yyvsp[-4].expr)->name, "", OP_COPY);
 																		        I = merge(I, makelist(Q_arr->index));
 																		        Q_arr->emit("", "", "", OP_GOTO);
 																		        Q_arr -> backpatch((yyvsp[-7].expr)->nextlist, Q_arr -> index);
@@ -3103,126 +3123,126 @@ printf(" RULE:\tlogical_and_expression \t->\t logical_and_expression && inclusiv
 																		        Q_arr -> backpatch((yyvsp[-8].expr)->falselist, (yyvsp[-1].expr)->instr);
 																		        Q_arr -> backpatch(I, Q_arr -> index);
 
-        printf(" RULE:\tconditional_expression \t->\t logical_or_expression ? expression : conditional_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 3108 "y.tab.c" /* yacc.c:1646  */
+        printf(" RULE:\tconditional_expression \t->\t logical_or_expression ? expression : conditional_expression\n");}
+#line 3128 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 1282 "ass3_15CS10060.y" /* yacc.c:1646  */
-    {(yyval.expr) = (yyvsp[0].expr);printf(" RULE:\tassignment_expression \t->\t conditional_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 3114 "y.tab.c" /* yacc.c:1646  */
+#line 1302 "ass3_15CS10060.y" /* yacc.c:1646  */
+    {(yyval.expr) = (yyvsp[0].expr);printf(" RULE:\tassignment_expression \t->\t conditional_expression\n");}
+#line 3134 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 1283 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1303 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 
-																        Q_arr->emit((yyvsp[-2].expr)->addr->name, (yyvsp[0].expr)->addr->name, "", OP_COPY);
+																        Q_arr->emit((yyvsp[-2].expr)->name, (yyvsp[0].expr)->name, "", OP_COPY);
 																        (yyval.expr) = (yyvsp[-2].expr);
 
 
-        printf(" RULE:\tassignment_expression \t->\t unary_expression assignment_operator assignment_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
-#line 3126 "y.tab.c" /* yacc.c:1646  */
+        printf(" RULE:\tassignment_expression \t->\t unary_expression assignment_operator assignment_expression\n");}
+#line 3146 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 1293 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1313 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tassignment_operator \t->\t = \n");}
-#line 3132 "y.tab.c" /* yacc.c:1646  */
+#line 3152 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 1294 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1314 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tassignment_operator \t->\t *= \n");}
-#line 3138 "y.tab.c" /* yacc.c:1646  */
+#line 3158 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 1295 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1315 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tassignment_operator \t->\t /= \n");}
-#line 3144 "y.tab.c" /* yacc.c:1646  */
+#line 3164 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 1296 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1316 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tassignment_operator \t->\t %%= \n");}
-#line 3150 "y.tab.c" /* yacc.c:1646  */
+#line 3170 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 1297 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1317 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tassignment_operator \t->\t += \n");}
-#line 3156 "y.tab.c" /* yacc.c:1646  */
+#line 3176 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 1298 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1318 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tassignment_operator \t->\t -= \n");}
-#line 3162 "y.tab.c" /* yacc.c:1646  */
+#line 3182 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 1299 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1319 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tassignment_operator \t->\t <<= \n");}
-#line 3168 "y.tab.c" /* yacc.c:1646  */
+#line 3188 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 1300 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1320 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tassignment_operator \t->\t >>= \n");}
-#line 3174 "y.tab.c" /* yacc.c:1646  */
+#line 3194 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 1301 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1321 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tassignment_operator \t->\t &=  \n");}
-#line 3180 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 72:
-#line 1302 "ass3_15CS10060.y" /* yacc.c:1646  */
-    {printf(" RULE:\tassignment_operator \t->\t ^= \n");}
-#line 3186 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 73:
-#line 1303 "ass3_15CS10060.y" /* yacc.c:1646  */
-    {printf(" RULE:\tassignment_operator \t->\t |=  \n");}
-#line 3192 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 74:
-#line 1307 "ass3_15CS10060.y" /* yacc.c:1646  */
-    { (yyval.expr) = (yyvsp[0].expr);
-
-		printf(" RULE:\texpression \t->\t assignment_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
 #line 3200 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 75:
-#line 1310 "ass3_15CS10060.y" /* yacc.c:1646  */
-    {(yyval.expr) = (yyvsp[-2].expr);printf(" RULE:\texpression \t->\t expression, assignment_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
+  case 72:
+#line 1322 "ass3_15CS10060.y" /* yacc.c:1646  */
+    {printf(" RULE:\tassignment_operator \t->\t ^= \n");}
 #line 3206 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 76:
-#line 1314 "ass3_15CS10060.y" /* yacc.c:1646  */
-    {(yyval.expr) = (yyvsp[0].expr);printf(" RULE:\tconstant_expression \t->\t conditional_expression\n");cout<<endl <<(yyval.expr)->addr->name<<endl;}
+  case 73:
+#line 1323 "ass3_15CS10060.y" /* yacc.c:1646  */
+    {printf(" RULE:\tassignment_operator \t->\t |=  \n");}
 #line 3212 "y.tab.c" /* yacc.c:1646  */
     break;
 
+  case 74:
+#line 1327 "ass3_15CS10060.y" /* yacc.c:1646  */
+    { (yyval.expr) = (yyvsp[0].expr);
+
+		printf(" RULE:\texpression \t->\t assignment_expression\n");}
+#line 3220 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 75:
+#line 1330 "ass3_15CS10060.y" /* yacc.c:1646  */
+    {(yyval.expr) = (yyvsp[-2].expr);printf(" RULE:\texpression \t->\t expression, assignment_expression\n");}
+#line 3226 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 76:
+#line 1334 "ass3_15CS10060.y" /* yacc.c:1646  */
+    {(yyval.expr) = (yyvsp[0].expr);printf(" RULE:\tconstant_expression \t->\t conditional_expression\n");}
+#line 3232 "y.tab.c" /* yacc.c:1646  */
+    break;
+
   case 77:
-#line 1318 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1338 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																					// not supported
 																					// consider only 1 declaration specifier
 																					// TO BE DONE PERHAPS FOR function
 																				printf(" RULE:\tdeclaration \t->\t declaration_specifiers ;\n");}
-#line 3222 "y.tab.c" /* yacc.c:1646  */
+#line 3242 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 78:
-#line 1323 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1343 "ass3_15CS10060.y" /* yacc.c:1646  */
     {         															
 																	              	//done
 																	              	(yyval.dec_list) = (yyvsp[-1].dec_list);
@@ -3245,63 +3265,60 @@ printf(" RULE:\tlogical_and_expression \t->\t logical_and_expression && inclusiv
 																	              	delete (yyvsp[-1].dec_list);
 																					printf(" RULE:\tdeclaration \t->\t declaration_specifiers init_declarator_list ; \n");
 																			}
-#line 3249 "y.tab.c" /* yacc.c:1646  */
+#line 3269 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 79:
-#line 1348 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1368 "ass3_15CS10060.y" /* yacc.c:1646  */
     {//done
 																				(yyval.declara) = (yyvsp[-1].declara);
 
 																				printf(" RULE:\tdeclaration_specifiers \t->\t type_specifiers declaration_specifiers_opt\n");}
-#line 3258 "y.tab.c" /* yacc.c:1646  */
+#line 3278 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 80:
-#line 1355 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1375 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tdeclaration_specifiers_opt \t->\t empty\n");}
-#line 3264 "y.tab.c" /* yacc.c:1646  */
+#line 3284 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 81:
-#line 1356 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1376 "ass3_15CS10060.y" /* yacc.c:1646  */
     {// not supported
 																				printf(" RULE:\tdeclaration_specifiers_opt \t->\t declaration_specifiers\n");}
-#line 3271 "y.tab.c" /* yacc.c:1646  */
+#line 3291 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 82:
-#line 1360 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1380 "ass3_15CS10060.y" /* yacc.c:1646  */
     {//done
-		cout << "currtable, GT "<<curr_symbol_table<<"\t"<<GT<<endl;
 		int i;
 
 		
 		 
 																				(yyval.dec_list) = new declar_list;
-																				cout <<"$$ ="<< (yyval.dec_list)<<endl;
 																				((yyval.dec_list)->vec).push_back(*((yyvsp[0].expr)));
 cout <<"0th elem is " <<((yyval.dec_list)->vec).begin()->addr	<<endl;
 																				cout <<"Pushing "<<((yyval.dec_list)->vec)[((yyval.dec_list)->vec).size()-1].addr->name<<endl<<endl<<endl;
 
 																				printf(" RULE:\tinit_declarator_list \t->\t init_declarator\n");}
-#line 3289 "y.tab.c" /* yacc.c:1646  */
+#line 3307 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 83:
-#line 1373 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1391 "ass3_15CS10060.y" /* yacc.c:1646  */
     {//done
-		cout << "currtable, GT "<<curr_symbol_table<<"\t"<<GT<<endl;
 		//print symbol table
 		int i;
 		
-																				cout <<"$1 = "<<(yyvsp[-2].dec_list) <<endl;cout <<"0th elem is " <<((yyvsp[-2].dec_list)->vec).begin()->addr	<<endl;
+																				//cout <<"$1 = "<<$1 <<endl;cout <<"0th elem is " <<($1->vec).begin()->addr	<<endl;
 
 																					(yyval.dec_list) = (yyvsp[-2].dec_list);
-																					cout <<"0th elem is " <<((yyvsp[-2].dec_list)->vec).begin()->addr	<<endl;
-																					cout <<"$$ = "<<(yyval.dec_list)<<endl;
+																					//cout <<"0th elem is " <<($1->vec).begin()->addr	<<endl;
+																					//cout <<"$$ = "<<$$<<endl;
 																					((yyval.dec_list)->vec).push_back(*((yyvsp[0].expr)));
-      																			  cout <<"Pushing "<<((yyval.dec_list)->vec)[((yyval.dec_list)->vec).size()-1].addr->name<<endl<<endl<<endl;
+      																			  //cout <<"Pushing "<<($$->vec)[($$->vec).size()-1].addr->name<<endl<<endl<<endl;
 
 																	              	
 																	              	
@@ -3312,20 +3329,20 @@ cout <<"0th elem is " <<((yyval.dec_list)->vec).begin()->addr	<<endl;
 																				  
 
 																				printf(" RULE:\tinit_declarator_list \t->\t init_declarator_list, init_declarator\n");}
-#line 3316 "y.tab.c" /* yacc.c:1646  */
+#line 3333 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 84:
-#line 1398 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1415 "ass3_15CS10060.y" /* yacc.c:1646  */
     {//done
 																				(yyval.expr) = (yyvsp[0].expr);
-																				cout <<"here loc ="<<(yyval.expr)<<endl;
+																				//cout <<"here loc ="<<$$<<endl;
 																				printf(" RULE:\tinit_declarator \t->\t declarator\n");}
-#line 3325 "y.tab.c" /* yacc.c:1646  */
+#line 3342 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 85:
-#line 1402 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1419 "ass3_15CS10060.y" /* yacc.c:1646  */
     {//done
 																				 (yyval.expr) = (yyvsp[-2].expr);
 																				// to be done typecheck														
@@ -3334,105 +3351,105 @@ cout <<"0th elem is " <<((yyval.dec_list)->vec).begin()->addr	<<endl;
 																				printf(" RULE:\tinit_declarator \t->\t declarator = initializer\n");
 
 																				}
-#line 3338 "y.tab.c" /* yacc.c:1646  */
+#line 3355 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 86:
-#line 1413 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1430 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 											//done
 											(yyval.declara).type = VOID_;
 											(yyval.declara).width = SIZE_OF_VOID;
 											printf(" RULE:\ttype_specifiers \t->\t  VOID\n");
 										}
-#line 3349 "y.tab.c" /* yacc.c:1646  */
+#line 3366 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 87:
-#line 1419 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1436 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 											(yyval.declara).type = CHAR_;
 											(yyval.declara).width = SIZE_OF_CHAR;
 										printf(" RULE:\ttype_specifiers \t->\t CHAR \n");}
-#line 3358 "y.tab.c" /* yacc.c:1646  */
+#line 3375 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 88:
-#line 1423 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1440 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\ttype_specifiers \t->\t SHORT \n");}
-#line 3364 "y.tab.c" /* yacc.c:1646  */
+#line 3381 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 89:
-#line 1424 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1441 "ass3_15CS10060.y" /* yacc.c:1646  */
     { (yyval.declara).type = INT_; (yyval.declara).width = SIZE_OF_INT; printf(" RULE:\ttype_specifiers \t->\t INT \n");}
-#line 3370 "y.tab.c" /* yacc.c:1646  */
+#line 3387 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 90:
-#line 1425 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1442 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\ttype_specifiers \t->\t LONG \n");}
-#line 3376 "y.tab.c" /* yacc.c:1646  */
+#line 3393 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 91:
-#line 1426 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1443 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\ttype_specifiers \t->\t FLOAT \n");}
-#line 3382 "y.tab.c" /* yacc.c:1646  */
+#line 3399 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 92:
-#line 1427 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1444 "ass3_15CS10060.y" /* yacc.c:1646  */
     { (yyval.declara).type = DOUBLE_; (yyval.declara).width = SIZE_OF_DOUBLE;  printf(" RULE:\ttype_specifiers \t->\t DOUBLE \n");}
-#line 3388 "y.tab.c" /* yacc.c:1646  */
+#line 3405 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 93:
-#line 1428 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1445 "ass3_15CS10060.y" /* yacc.c:1646  */
     {(yyval.declara).type = MATRIX_;/*to be done*/ (yyval.declara).type = MATRIX_;   printf(" RULE:\ttype_specifiers \t->\t MATRIX \n");}
-#line 3394 "y.tab.c" /* yacc.c:1646  */
+#line 3411 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 94:
-#line 1429 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1446 "ass3_15CS10060.y" /* yacc.c:1646  */
     { printf(" RULE:\ttype_specifiers \t->\t SIGNED  \n");}
-#line 3400 "y.tab.c" /* yacc.c:1646  */
+#line 3417 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 95:
-#line 1430 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1447 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\ttype_specifiers \t->\t UNSIGNED \n");}
-#line 3406 "y.tab.c" /* yacc.c:1646  */
+#line 3423 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 96:
-#line 1431 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1448 "ass3_15CS10060.y" /* yacc.c:1646  */
     {(yyval.declara).type = BOOL_; (yyval.declara).width = SIZE_OF_BOOL; printf(" RULE:\ttype_specifiers \t->\t BOOL  \n");}
-#line 3412 "y.tab.c" /* yacc.c:1646  */
+#line 3429 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 97:
-#line 1435 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1452 "ass3_15CS10060.y" /* yacc.c:1646  */
     {//done
 																		(yyval.expr) = (yyvsp[0].expr);
-																		cout <<"here loc ="<<(yyval.expr)<<endl;
+																		//cout <<"here loc ="<<$$<<endl;
 																			 printf(" RULE:\tdeclarator \t->\t direct_declarator\n");}
-#line 3421 "y.tab.c" /* yacc.c:1646  */
+#line 3438 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 98:
-#line 1439 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1456 "ass3_15CS10060.y" /* yacc.c:1646  */
     {//done	
 																			(yyval.expr) = (yyvsp[0].expr);
 																			symbol_table_entry *ptr = curr_symbol_table->lookup((yyvsp[0].expr)->name);
 																			if(ptr != NULL)ptr->type = PTR_;							
 																			printf(" RULE:\tdeclarator \t->\t pointer_opt direct_declarator\n");
 																		}
-#line 3432 "y.tab.c" /* yacc.c:1646  */
+#line 3449 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 99:
-#line 1448 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1465 "ass3_15CS10060.y" /* yacc.c:1646  */
     {//done
 
 																	
@@ -3444,474 +3461,474 @@ cout <<"0th elem is " <<((yyval.dec_list)->vec).begin()->addr	<<endl;
 																	//$$->addr->type = UNKNOWN_; // default type
 																	cout <<"here loc ="<<(yyval.expr)<<endl;
 																	printf(" RULE:\tdirect_declarator \t->\t identifier\n");}
-#line 3448 "y.tab.c" /* yacc.c:1646  */
+#line 3465 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 100:
-#line 1459 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1476 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tdirect_declarator \t->\t (declarator)");}
-#line 3454 "y.tab.c" /* yacc.c:1646  */
+#line 3471 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 101:
-#line 1460 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1477 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tdirect_declarator \t->\t direct_declarator[]");}
-#line 3460 "y.tab.c" /* yacc.c:1646  */
+#line 3477 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 102:
-#line 1461 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1478 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																	// to be done for matrix
 																	printf(" RULE:\tdirect_declarator \t->\t direct_declarator[assignment_expression]\n");}
-#line 3468 "y.tab.c" /* yacc.c:1646  */
+#line 3485 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 103:
-#line 1464 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1481 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																	// to be done for function
 																	printf(" RULE:\tdirect_declarator \t->\t direct_declarator(parameter_type_list)\n");}
-#line 3476 "y.tab.c" /* yacc.c:1646  */
+#line 3493 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 104:
-#line 1467 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1484 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																		// to be done for function
 																		printf(" RULE:\tdirect_declarator \t->\t direct_declarator()\n");}
-#line 3484 "y.tab.c" /* yacc.c:1646  */
+#line 3501 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 105:
-#line 1470 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1487 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																	// to be done for function
 																	printf(" RULE:\tdirect_declarator \t->\t direct_declarator(identifier_list)\n");}
-#line 3492 "y.tab.c" /* yacc.c:1646  */
+#line 3509 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 106:
-#line 1476 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1493 "ass3_15CS10060.y" /* yacc.c:1646  */
     {
 																				// to be done - pointer
 																				printf(" RULE:\tpointer \t->\t *\n");}
-#line 3500 "y.tab.c" /* yacc.c:1646  */
+#line 3517 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 107:
-#line 1479 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1496 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tpointer \t->\t * pointer\n");}
-#line 3506 "y.tab.c" /* yacc.c:1646  */
+#line 3523 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 108:
-#line 1483 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1500 "ass3_15CS10060.y" /* yacc.c:1646  */
     {// to be done for function
 																		printf(" RULE:\tparameter_type_list \t->\t parameter_list\n");
 																	}
-#line 3514 "y.tab.c" /* yacc.c:1646  */
+#line 3531 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 109:
-#line 1489 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1506 "ass3_15CS10060.y" /* yacc.c:1646  */
     {// to be done for function;
 																		printf(" RULE:\tparameter_list \t->\t parameter_declaration\n");}
-#line 3521 "y.tab.c" /* yacc.c:1646  */
+#line 3538 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 110:
-#line 1491 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1508 "ass3_15CS10060.y" /* yacc.c:1646  */
     {/*to be done*/printf(" RULE:\tparameter_list \t->\t parameter_list, parameter_declaration\n");}
-#line 3527 "y.tab.c" /* yacc.c:1646  */
+#line 3544 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 111:
-#line 1495 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1512 "ass3_15CS10060.y" /* yacc.c:1646  */
     {/*to be done*/printf(" RULE:\tparameter_declaration \t->\t declaration_specifiers declarator\n");}
-#line 3533 "y.tab.c" /* yacc.c:1646  */
+#line 3550 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 112:
-#line 1496 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1513 "ass3_15CS10060.y" /* yacc.c:1646  */
     {/*to be done*/printf(" RULE:\tparameter_declaration \t->\t declaration_specifiers\n");}
-#line 3539 "y.tab.c" /* yacc.c:1646  */
+#line 3556 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 113:
-#line 1500 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1517 "ass3_15CS10060.y" /* yacc.c:1646  */
     {/*to be done*/printf(" RULE:\tidentifier_list \t->\t identifier\n");}
-#line 3545 "y.tab.c" /* yacc.c:1646  */
+#line 3562 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 114:
-#line 1501 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1518 "ass3_15CS10060.y" /* yacc.c:1646  */
     {/*to be done*/printf(" RULE:\tidentifier_list \t->\t identifier_list, identifier\n");}
-#line 3551 "y.tab.c" /* yacc.c:1646  */
+#line 3568 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 115:
-#line 1505 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1522 "ass3_15CS10060.y" /* yacc.c:1646  */
     {(yyval.expr) = (yyvsp[0].expr); printf(" RULE:\tinitializer \t->\t assignment_expression \n");}
-#line 3557 "y.tab.c" /* yacc.c:1646  */
+#line 3574 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 116:
-#line 1506 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1523 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tinitializer \t->\t { initializer_row_list } \n");}
-#line 3563 "y.tab.c" /* yacc.c:1646  */
+#line 3580 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 117:
-#line 1510 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1527 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tinitializer_row_list \t->\t initializer_row\n");}
-#line 3569 "y.tab.c" /* yacc.c:1646  */
+#line 3586 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 118:
-#line 1511 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1528 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tinitializer_row_list \t->\t initializer_row_list ; initializer_row \n");}
-#line 3575 "y.tab.c" /* yacc.c:1646  */
+#line 3592 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 119:
-#line 1515 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1532 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tinitializer_row \t->\t initializer\n");}
-#line 3581 "y.tab.c" /* yacc.c:1646  */
+#line 3598 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 120:
-#line 1516 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1533 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tinitializer_row \t->\t designation initializer\n");}
-#line 3587 "y.tab.c" /* yacc.c:1646  */
+#line 3604 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 121:
-#line 1517 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1534 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tinitializer_row \t->\t initializer_row, initializer\n");}
-#line 3593 "y.tab.c" /* yacc.c:1646  */
+#line 3610 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 122:
-#line 1518 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1535 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tinitializer_row \t->\t initializer_row, designation initializer\n");}
-#line 3599 "y.tab.c" /* yacc.c:1646  */
+#line 3616 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 123:
-#line 1522 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1539 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tdesignation \t->\t designator_list = \n");}
-#line 3605 "y.tab.c" /* yacc.c:1646  */
+#line 3622 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 124:
-#line 1526 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1543 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tdesignator_list \t->\t designator\n");}
-#line 3611 "y.tab.c" /* yacc.c:1646  */
+#line 3628 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 125:
-#line 1527 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1544 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tdesignator_list \t->\t designator_list designator\n");}
-#line 3617 "y.tab.c" /* yacc.c:1646  */
+#line 3634 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 126:
-#line 1531 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1548 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tdesignator \t->\t [ constant_expression ] \n");}
-#line 3623 "y.tab.c" /* yacc.c:1646  */
+#line 3640 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 127:
-#line 1532 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1549 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tdesignator \t->\t .identifier\n");}
-#line 3629 "y.tab.c" /* yacc.c:1646  */
+#line 3646 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 128:
-#line 1536 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1553 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tstatement \t->\t labeled_statement\n");}
-#line 3635 "y.tab.c" /* yacc.c:1646  */
+#line 3652 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 129:
-#line 1537 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1554 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tstatement \t->\t compound_statement\n");}
-#line 3641 "y.tab.c" /* yacc.c:1646  */
+#line 3658 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 130:
-#line 1538 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1555 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tstatement \t->\t expression_statement\n");}
-#line 3647 "y.tab.c" /* yacc.c:1646  */
+#line 3664 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 131:
-#line 1539 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1556 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tstatement \t->\t selection_statement\n");}
-#line 3653 "y.tab.c" /* yacc.c:1646  */
+#line 3670 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 132:
-#line 1540 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1557 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tstatement \t->\t iteration_statement\n");}
-#line 3659 "y.tab.c" /* yacc.c:1646  */
+#line 3676 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 133:
-#line 1541 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1558 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tstatement \t->\t jump_statement\n");}
-#line 3665 "y.tab.c" /* yacc.c:1646  */
+#line 3682 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 134:
-#line 1545 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1562 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tlabeled_statement \t->\t identifier : statement\n");}
-#line 3671 "y.tab.c" /* yacc.c:1646  */
+#line 3688 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 135:
-#line 1546 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1563 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tlabeled_statement \t->\t case constant_expression : statement\n");}
-#line 3677 "y.tab.c" /* yacc.c:1646  */
+#line 3694 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 136:
-#line 1547 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1564 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tlabeled_statement \t->\t default : statement\n");}
-#line 3683 "y.tab.c" /* yacc.c:1646  */
+#line 3700 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 137:
-#line 1551 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1568 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tcompound_statement \t->\t {}\n");}
-#line 3689 "y.tab.c" /* yacc.c:1646  */
+#line 3706 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 138:
-#line 1552 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1569 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tcompound_statement \t->\t { block_item_list } \n");}
-#line 3695 "y.tab.c" /* yacc.c:1646  */
+#line 3712 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 139:
-#line 1556 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1573 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tblock_item_list \t->\t block_item\n");}
-#line 3701 "y.tab.c" /* yacc.c:1646  */
+#line 3718 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 140:
-#line 1557 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1574 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tblock_item_list \t->\t block_item_list block_item\n");}
-#line 3707 "y.tab.c" /* yacc.c:1646  */
+#line 3724 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 141:
-#line 1561 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1578 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tblock_item \t->\t declaration\n");}
-#line 3713 "y.tab.c" /* yacc.c:1646  */
+#line 3730 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 142:
-#line 1562 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1579 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tblock_item \t->\t statement\n");}
-#line 3719 "y.tab.c" /* yacc.c:1646  */
+#line 3736 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 143:
-#line 1566 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1583 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\texpression_statement \t->\t ;");}
-#line 3725 "y.tab.c" /* yacc.c:1646  */
+#line 3742 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 144:
-#line 1567 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1584 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\texpression_statement \t->\t expression;");}
-#line 3731 "y.tab.c" /* yacc.c:1646  */
+#line 3748 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 145:
-#line 1570 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1587 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tselection_statement \t->\t if(expression) statement\n");}
-#line 3737 "y.tab.c" /* yacc.c:1646  */
+#line 3754 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 146:
-#line 1571 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1588 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tselection_statement \t->\t if(expression) statement else statement\n");}
-#line 3743 "y.tab.c" /* yacc.c:1646  */
+#line 3760 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 147:
-#line 1572 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1589 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tselection_statement \t->\t switch(expression) statement\n");}
-#line 3749 "y.tab.c" /* yacc.c:1646  */
+#line 3766 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 148:
-#line 1576 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1593 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\titeration_statement \t->\t while(expression) statement\n");}
-#line 3755 "y.tab.c" /* yacc.c:1646  */
+#line 3772 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 149:
-#line 1577 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1594 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\titeration_statement \t->\t do statement while (expression)\n");}
-#line 3761 "y.tab.c" /* yacc.c:1646  */
+#line 3778 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 150:
-#line 1578 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1595 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\titeration_statement \t->\t for(expression;expression;expression)\n");}
-#line 3767 "y.tab.c" /* yacc.c:1646  */
+#line 3784 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 151:
-#line 1579 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1596 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\titeration_statement \t->\t for(;expression;expression)\n");}
-#line 3773 "y.tab.c" /* yacc.c:1646  */
+#line 3790 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 152:
-#line 1580 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1597 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\titeration_statement \t->\t for(expression;;expression)\n");}
-#line 3779 "y.tab.c" /* yacc.c:1646  */
+#line 3796 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 153:
-#line 1581 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1598 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\titeration_statement \t->\t for(expression;expression;)\n");}
-#line 3785 "y.tab.c" /* yacc.c:1646  */
+#line 3802 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 154:
-#line 1582 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1599 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\titeration_statement \t->\t for(;;expression)\n");}
-#line 3791 "y.tab.c" /* yacc.c:1646  */
+#line 3808 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 155:
-#line 1583 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1600 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\titeration_statement \t->\t for(expression;;)\n");}
-#line 3797 "y.tab.c" /* yacc.c:1646  */
+#line 3814 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 156:
-#line 1584 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1601 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\titeration_statement \t->\t for(;expression;)\n");}
-#line 3803 "y.tab.c" /* yacc.c:1646  */
+#line 3820 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 157:
-#line 1585 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1602 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\titeration_statement \t->\t for(;;)\n");}
-#line 3809 "y.tab.c" /* yacc.c:1646  */
+#line 3826 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 158:
-#line 1586 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1603 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\titeration_statement \t->\t for(declaration expression; expression)\n");}
-#line 3815 "y.tab.c" /* yacc.c:1646  */
+#line 3832 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 159:
-#line 1587 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1604 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\titeration_statement \t->\t for(declaration;expression)\n");}
-#line 3821 "y.tab.c" /* yacc.c:1646  */
+#line 3838 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 160:
-#line 1588 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1605 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\titeration_statement \t->\t for(declaration expression;)\n");}
-#line 3827 "y.tab.c" /* yacc.c:1646  */
+#line 3844 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 161:
-#line 1589 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1606 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\titeration_statement \t->\t for(declaration ; )\n");}
-#line 3833 "y.tab.c" /* yacc.c:1646  */
+#line 3850 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 162:
-#line 1592 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1609 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tjump_statement \t->\t goto identifier;\n");}
-#line 3839 "y.tab.c" /* yacc.c:1646  */
+#line 3856 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 163:
-#line 1593 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1610 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tjump_statement \t->\t continue;\n");}
-#line 3845 "y.tab.c" /* yacc.c:1646  */
+#line 3862 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 164:
-#line 1594 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1611 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tjump_statement \t->\t break;\n");}
-#line 3851 "y.tab.c" /* yacc.c:1646  */
+#line 3868 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 165:
-#line 1595 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1612 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tjump_statement \t->\t return;\n");}
-#line 3857 "y.tab.c" /* yacc.c:1646  */
+#line 3874 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 166:
-#line 1596 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1613 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tjump_statement \t->\t return expression;\n");}
-#line 3863 "y.tab.c" /* yacc.c:1646  */
+#line 3880 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 167:
-#line 1600 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1617 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\ttranslation_unit \t->\t external_decalaration\n");}
-#line 3869 "y.tab.c" /* yacc.c:1646  */
+#line 3886 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 168:
-#line 1601 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1618 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\ttranslation_unit \t->\t translation_unit external_decalaration\n");}
-#line 3875 "y.tab.c" /* yacc.c:1646  */
+#line 3892 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 169:
-#line 1605 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1622 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\texternal_decalaration \t->\t function_definition\n");}
-#line 3881 "y.tab.c" /* yacc.c:1646  */
+#line 3898 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 170:
-#line 1606 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1623 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\texternal_decalaration \t->\t declaration\n");}
-#line 3887 "y.tab.c" /* yacc.c:1646  */
+#line 3904 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 171:
-#line 1610 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1627 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tfunction_definition \t->\t declaration_specifiers declarator compound_statement\n");}
-#line 3893 "y.tab.c" /* yacc.c:1646  */
+#line 3910 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 172:
-#line 1611 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1628 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tfunction_definition \t->\t declaration_specifiers declarator declaration_list compound_statement\n");}
-#line 3899 "y.tab.c" /* yacc.c:1646  */
+#line 3916 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 173:
-#line 1615 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1632 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tdeclaration_list \t->\t declaration\n");}
-#line 3905 "y.tab.c" /* yacc.c:1646  */
+#line 3922 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 174:
-#line 1616 "ass3_15CS10060.y" /* yacc.c:1646  */
+#line 1633 "ass3_15CS10060.y" /* yacc.c:1646  */
     {printf(" RULE:\tdeclaration_list \t->\t declaration_list declaration\n");}
-#line 3911 "y.tab.c" /* yacc.c:1646  */
+#line 3928 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 3915 "y.tab.c" /* yacc.c:1646  */
+#line 3932 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -4139,7 +4156,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 1619 "ass3_15CS10060.y" /* yacc.c:1906  */
+#line 1636 "ass3_15CS10060.y" /* yacc.c:1906  */
 
 void yyerror(const char* s)
 {

@@ -105,7 +105,6 @@ primary_expression
 																			symbol_table_entry *s = curr_symbol_table->lookup(t);
 																			$$->name= t;
 																			printf("RULE : primary_expression \t->\t\t identifier\n");
-																			cout <<$$->addr->name;
 																		}
 			|INTEGER_CONSTANT
 
@@ -122,19 +121,19 @@ primary_expression
 
 																			quad * q = Q_arr -> emit(tmp, to_string($1), OP_COPY);
 																			printf("RULE : primary_expression \t->\t\t constant\n");
-																			cout <<$$->addr->name;
 																		}
 			|FLOATING_CONSTANT
  													{cout <<"c"<<endl;
 																			$$ = new expr_attr;
 																			string tmp = curr_symbol_table -> gen_temp(DOUBLE_);
 																			init_value tmp_init;
-																			tmp_init.float = $1;
+																			tmp_init.init_double = $1;
 																			symbol_table_entry *ptr = curr_symbol_table->update(tmp, DOUBLE_, tmp_init, 0, NULL); // set offset
+																			$$->name = tmp;
+
 
 																			quad * q = Q_arr -> emit(tmp, to_string($1), OP_COPY);
 																			printf("RULE : primary_expression \t->\t\t constant\n");
-																			cout <<$$->addr->name;
 																			}
 			|CHARACTER_CONSTANT 													{cout <<"d"<<endl;
 																			$$ = new expr_attr;
@@ -142,10 +141,11 @@ primary_expression
 																			init_value tmp_init;
 																			tmp_init.init_char = $1;
 																			symbol_table_entry *ptr = curr_symbol_table->update(tmp, CHAR_,tmp_init, 0, NULL); // set offset
+																			$$->name = tmp;
 
 																			quad * q = Q_arr -> emit(tmp, to_string($1), OP_COPY);
 
-																			printf("RULE : primary_expression \t->\t\t constant\n");cout <<$$->addr->name;}
+																			printf("RULE : primary_expression \t->\t\t constant\n");}
 			|ZERO_CONSTANT 													{cout <<"a"<<endl;
 																			$$ = new expr_attr;
 																			string tmp = curr_symbol_table -> gen_temp(INT_);
@@ -155,11 +155,12 @@ primary_expression
 
 																			quad * q = Q_arr -> emit(tmp, to_string($1), OP_COPY);
 
-																			printf("RULE : primary_expression \t->\t\t constant\n");cout<<endl <<$$->addr->name<<endl;}
+																			printf("RULE : primary_expression \t->\t\t constant\n");}
 			|STRING_LITERAL												{
 																			
 																			$$ = new expr_attr;
 																			string tmp = curr_symbol_table -> gen_temp(PTR_);
+																			$$->name = tmp;
 																			$$->addr = curr_symbol_table->lookup(tmp); //  TO BE DONE set offset // TBD, STRING HANDLING!
 																			$$->addr->type = PTR_;
 
@@ -167,14 +168,15 @@ primary_expression
 
 
 																			printf("RULE : primary_expression \t->\t string_literal\n");}
-																			|'(' expression ')'	{printf("primary_expression -\t->\t (expression)\n");cout<<endl <<$$->addr->name<<endl;
+																			|'(' expression ')'	{printf("primary_expression -\t->\t (expression)\n");
 																			
 																			}
 			;
 
 postfix_expression	
-			: primary_expression 										{	
-																				$$ = $1; printf("RULE:\t postfix_expression \t->\tprimary_expression\n");cout<<endl <<$1->addr->name<<endl;}
+			: primary_expression 										{	cout <<"check"<<endl; cout << $1->name<<endl;
+
+																				$$ = $1; printf("RULE:\t postfix_expression \t->\tprimary_expression\n");}
 
 			| postfix_expression '[' expression ']' '[' expression ']' 	{// to be done
 
@@ -186,7 +188,7 @@ postfix_expression
 																				Q_arr->emit($$->addr, );
 																				*/
 
-																				/* to be done*/printf(" RULE:\tpostfix_expression \t->\t postfix_expression [ expression ]\n");cout<<endl <<$$->addr->name<<endl;
+																				/* to be done*/printf(" RULE:\tpostfix_expression \t->\t postfix_expression [ expression ]\n");
 																		}
 
 			| postfix_expression '(' argument_expression_list ')'		{	
@@ -207,9 +209,8 @@ postfix_expression
 
 cout <<"CHECK1"<<endl;		*/	
 																	        $$ = $1;
-																	        cout <<string($1 -> addr->name);
 																	        cout <<"CHECK1"<<endl;
-																	        symbol_table *f_symbol = GT->lookup( $1->addr->name)->nested_table;
+																	        symbol_table *f_symbol = GT->lookup( $1->name)->nested_table;
 
 																	        func_param_list *flist = ($3);
 																	        int i;
@@ -223,37 +224,34 @@ cout <<"CHECK1"<<endl;		*/
 																	        }
 																	        cout <<"CHECK1"<<endl;	
 																	        string s = to_string(c);																        cout <<"CHECK2"<<endl;	
-																	        cout <<$1-> addr->name<<endl;
 																	        cout<<"sf"<<endl;
-																	        	Q_arr->emit($1-> addr->name,s,"", OP_CALL);
+																	        	Q_arr->emit($1->name,s,"", OP_CALL);
 																	        		cout <<"CHECK3"<<endl;	
-																	        	printf(" RULE:\tpostfix_expression \t->\t postfix_expression ( argument_expression_list_opt )\n");cout<<endl <<$$->addr->name<<endl;
+																	        	printf(" RULE:\tpostfix_expression \t->\t postfix_expression ( argument_expression_list_opt )\n");
 																	      }
 
 
 			| postfix_expression '(' ')'								{
 																			$$ = $1;
-																			Q_arr->emit($1-> addr->name,0,"", OP_CALL);
+																			Q_arr->emit($1->name,0,"", OP_CALL);
 
-																		printf(" RULE:\tpostfix_expression \t->\t postfix_expression ( )\n");cout<<endl <<$$->addr->name<<endl;}
+																		printf(" RULE:\tpostfix_expression \t->\t postfix_expression ( )\n");}
 			| postfix_expression '.' IDENTIFIER							{$$ =$1;
 																			//not supported
-																			printf(" RULE:\tpostfix_expression \t->\t postfix_expression . identifier\n");cout<<endl <<$$->addr->name<<endl;}
-			| postfix_expression ARROW IDENTIFIER						{$$ = $1;printf(" RULE:\tpostfix_expression \t->\t postfix_expression -> identifier\n");cout<<endl <<$$->addr->name<<endl;}
+																			printf(" RULE:\tpostfix_expression \t->\t postfix_expression . identifier\n");}
+			| postfix_expression ARROW IDENTIFIER						{$$ = $1;printf(" RULE:\tpostfix_expression \t->\t postfix_expression -> identifier\n");}
 			| postfix_expression PLUS_PLUS									{
 																				 $$ = new expr_attr;
 
-																		        //string s = $1->addr;
-																		        symbol_table_entry * f = curr_symbol_table->lookup($1->addr->name);
-																		        $$->addr = curr_symbol_table-> lookup(curr_symbol_table->gen_temp(f->type));														      
+																		        symbol_table_entry * f = curr_symbol_table->lookup($1->name);
+																		        $$->name = curr_symbol_table->gen_temp(f->type);														      
 
-																		        printf(" RULE:\tpostfix_expression \t->\t postfix_expression ++\n");cout<<endl <<$$->addr->name<<endl;}
+																		        printf(" RULE:\tpostfix_expression \t->\t postfix_expression ++\n");}
 			| postfix_expression MINUS_MINUS									{
 																				 $$ = new expr_attr;
 
-																		        //string s = $1->addr;
-																		        symbol_table_entry * f = curr_symbol_table->lookup($1->addr->name);
-																		        $$->addr = curr_symbol_table-> lookup(curr_symbol_table->gen_temp(f->type));
+																		        symbol_table_entry * f = curr_symbol_table->lookup($1->name);
+																		        $$->name =curr_symbol_table->gen_temp(f->type);
 																		        /*
 																		        if(f->type.array_type.compare("array") == 0)
 																		        {
@@ -266,12 +264,12 @@ cout <<"CHECK1"<<endl;		*/
 																		        */
 																		        //else check once again
 																		        //{
-																		            Q_arr->emit( $$->addr->name, $1->addr->name, "", OP_COPY);
-																		            Q_arr->emit($1->addr->name, $1->addr->name, "1", OP_MINUS);
+																		            Q_arr->emit( $$->name, $1->name, "", OP_COPY);
+																		            Q_arr->emit($1->name, $1->name, "1", OP_MINUS);
 
 																		        //}   //corrected
-																		        printf(" RULE:\tpostfix_expression \t->\t postfix_expression --\n");cout<<endl <<$$->addr->name<<endl;}
-			| postfix_expression NEW									{$$ = $1; printf(" RULE:\tpostfix_expression \t->\t postfix_expression .'");cout<<endl <<$$->addr->name<<endl;}
+																		        printf(" RULE:\tpostfix_expression \t->\t postfix_expression --\n");}
+			| postfix_expression NEW									{$$ = $1; printf(" RULE:\tpostfix_expression \t->\t postfix_expression .'");}
 			;
 
 argument_expression_list
@@ -285,9 +283,8 @@ argument_expression_list
 																				$$ = new func_param_list;
 																				func_param f;
 																				cout <<"a"<<endl;
-																				cout <<$1->addr<<endl;
-																				f.name = ($1->addr) -> name;
-																				f.type  = ($1->addr) -> type;
+																				f.name = ($1) -> name;
+																				f.type  = curr_symbol_table->lookup(($1) -> name)->type;
 																				cout <<"b"<<endl;
 																				($$->vec).push_back(f);*/
 
@@ -298,8 +295,8 @@ argument_expression_list
 																					
 																			$$ = $1 ;
 																			func_param f;
-																			f.name = ($3->addr) -> name;
-																			f.type  = ($3->addr) -> type;
+																			f.name = ($3) -> name;
+																			f.type  = curr_symbol_table->lookup(($3) -> name)->type;
 																			($$->vec).push_back(f);
 																			
 																			printf(" RULE:\targument_expression_list \t->\t argument_expression_list , assignment_expression\n");
@@ -313,44 +310,45 @@ unary_expression
 																				string tmp = curr_symbol_table -> gen_temp($2->addr->type);
 																				init_value tmp_init;
 																			
-																				$$->addr = curr_symbol_table->update(tmp, $2->addr->type, tmp_init, 0, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
+																				$$->addr = curr_symbol_table->update(tmp, $2->addr->type, tmp_init, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
 																				quad *q = Q_arr -> emit(tmp, $2->addr->name, OP_UNARY_PLUS);
 
 
-																				printf(" RULE:\tunary_expression \t->\t ++ unary_expression\n");cout<<endl <<$$->addr->name<<endl;}
+																				printf(" RULE:\tunary_expression \t->\t ++ unary_expression\n");}
 
 		| MINUS_MINUS unary_expression 										{//done
 																				$$ = new expr_attr;
 																				string tmp = curr_symbol_table -> gen_temp($2->addr->type);
 																				init_value tmp_init;
 																			
-																				$$->addr = curr_symbol_table->update(tmp, $2->addr->type, tmp_init, 0, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
+																				$$->addr = curr_symbol_table->update(tmp, $2->addr->type, tmp_init, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
 																				quad *q = Q_arr -> emit(tmp, $2->addr->name, OP_UNARY_MINUS);
-																				printf(" RULE:\tunary_expression \t->\t -- unary_expression\n");cout<<endl <<$$->addr->name<<endl;}
+																				printf(" RULE:\tunary_expression \t->\t -- unary_expression\n");}
 
 		| unary_operator cast_expression								{//done
 																				$$ = new expr_attr;
 																				string tmp = curr_symbol_table -> gen_temp($2->addr->type);
-																				init_value tmp_init;							
+																				init_value tmp_init;
+																				$$->name = tmp;							
 
 																				switch($1)
 																				{
 																					case '&': 
 																					{
-																						$$->addr = curr_symbol_table->update(tmp, PTR_, tmp_init, 0, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
-																						Q_arr ->emit(tmp, $2->addr->name,OP_REFERENCE);
+																						$$->addr = curr_symbol_table->update(tmp, PTR_, tmp_init, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
+																						Q_arr ->emit(tmp, $2->name,OP_REFERENCE);
 																						break;
 																					}
 																					case '*': 
 																					{
-																						$$->addr = curr_symbol_table->update(tmp, UNKNOWN_, tmp_init, 0, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
-																						Q_arr ->emit(tmp, $2->addr->name,OP_DEREFERENCE);
+																						$$->addr = curr_symbol_table->update(tmp, UNKNOWN_, tmp_init, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
+																						Q_arr ->emit(tmp, $2->name,OP_DEREFERENCE);
 																						break;
 																					}
 																					case '-': 
 																					{
-																						$$->addr = curr_symbol_table->update(tmp, $2->addr-> type, tmp_init, 0, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
-																						Q_arr ->emit(tmp, $2->addr->name,OP_UNARY_MINUS);
+																						$$->addr = curr_symbol_table->update(tmp, $2->addr-> type, tmp_init, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
+																						Q_arr ->emit(tmp, $2->name,OP_UNARY_MINUS);
 																						break;
 																					}
 																					default :
@@ -358,7 +356,7 @@ unary_expression
 
 
 																				}
-																			printf(" RULE:\tunary_expression \t->\t unary_operator cast_expression\n");cout<<endl <<$$->addr->name<<endl;}
+																			printf(" RULE:\tunary_expression \t->\t unary_operator cast_expression\n");}
 		;
 
 unary_operator
@@ -371,7 +369,7 @@ unary_operator
 cast_expression
 		: unary_expression 												{
 																			$$ = $1;
-																			printf(" RULE:\tcast_expression \t->\t unary_expression\n");cout<<endl <<$$->addr->name<<endl;}
+																			printf(" RULE:\tcast_expression \t->\t unary_expression\n");}
 		;
 
 multiplicative_expression
@@ -379,11 +377,11 @@ multiplicative_expression
 
 																/*to be done, doubt  what are cast expression for ?*/
 																				$$ = $1;
-																				printf(" RULE:\tmultiplicative_expression \t->\t cast_expression\n");cout<<endl <<$$->addr->name<<endl;}
+																				printf(" RULE:\tmultiplicative_expression \t->\t cast_expression\n");}
 		| multiplicative_expression '*' cast_expression 					{																															   $$ = new expr_attr;
 												        data_type type1, type2, type;
-												        type1 = curr_symbol_table->lookup($1->addr->name)->type;
-												        type2 = curr_symbol_table->lookup($3->addr->name)->type;
+												        type1 = curr_symbol_table->lookup($1->name)->type;
+												        type2 = curr_symbol_table->lookup($3->name)->type;
 												        	//done
 												        int flag = 0;
 												        if(type1 == type2)
@@ -459,23 +457,24 @@ multiplicative_expression
 												            
 												        }
 												        
-												        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(type));
-												        Q_arr->emit($$->addr->name, $1->addr->name, $3->addr->name, OP_MULT);
+												        $$->name = curr_symbol_table->gen_temp(type);
 
-													printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression * cast_expression\n");cout<<endl <<$$->addr->name<<endl;}
+												        Q_arr->emit($$->name, $1->name, $3->name, OP_MULT);
+
+													printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression * cast_expression\n");}
 
 
 		| multiplicative_expression '/' cast_expression 					{
 																				 $$ = new expr_attr;
 												        data_type type1, type2, type;
-												        type1 = curr_symbol_table->lookup($1->addr->name)->type;
-												        type2 = curr_symbol_table->lookup($3->addr->name)->type;
+												        type1 = curr_symbol_table->lookup($1->name)->type;
+												        type2 = curr_symbol_table->lookup($3->name)->type;
 												   
 												   /* //array
 												   if(type2.array_type.compare("array") == 0)
 												        {
 												            string temp = curr_sym->gentemp(type2);
-												            Q_arr.emit(ARRAY_ACCESS, temp, $3->addr->name, *($3->inner));
+												            Q_arr.emit(ARRAY_ACCESS, temp, $3->name, *($3->inner));
 												            $3->addr->name = temp;
 												            $3->type.array_type = ""; //check
 												        }
@@ -563,19 +562,19 @@ multiplicative_expression
 												            
 												        }
 												        
-												        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(type));
-												        Q_arr->emit($$->addr->name, $1->addr->name, $3->addr->name, OP_DIVIDE);
+												        $$->name = curr_symbol_table->gen_temp(type);
+												        Q_arr->emit($$->name, $1->name, $3->name, OP_DIVIDE);
 
 
-printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression / cast_expression\n");cout<<endl <<$$->addr->name<<endl;}
+printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression / cast_expression\n");}
 
 
 		| multiplicative_expression '%' cast_expression 					{
 
 																				 $$ = new expr_attr;
 												        data_type type1, type2, type;
-												        type1 = curr_symbol_table->lookup($1->addr->name)->type;
-												        type2 = curr_symbol_table->lookup($3->addr->name)->type;							   
+												        type1 = curr_symbol_table->lookup($1->name)->type;
+												        type2 = curr_symbol_table->lookup($3->name)->type;							   
 												   
 												        	//done
 												        int flag = 0;
@@ -652,11 +651,11 @@ printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression / cas
 												            
 												        }
 												        
-												        $$->addr= curr_symbol_table->lookup(curr_symbol_table->gen_temp(type));
-												        Q_arr->emit($$->addr->name, $1->addr->name, $3->addr->name, OP_MODULO);
+												        $$->name= curr_symbol_table->gen_temp(type);
+												        Q_arr->emit($$->name, $1->name, $3->name, OP_MODULO);
 
 
-printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression %% cast_expression\n");cout<<endl <<$$->addr->name<<endl;}
+printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression %% cast_expression\n");}
 		;
 
 additive_expression
@@ -665,8 +664,8 @@ additive_expression
 		| additive_expression '+' multiplicative_expression 				{
 																			 $$ = new expr_attr;
 												        data_type type1, type2, type;
-												        type1 = curr_symbol_table->lookup($1->addr->name)->type;
-												        type2 = curr_symbol_table->lookup($3->addr->name)->type;
+												        type1 = curr_symbol_table->lookup($1->name)->type;
+												        type2 = curr_symbol_table->lookup($3->name)->type;
 												   
 												   /* //array
 												   if(type2.array_type.compare("array") == 0)
@@ -760,17 +759,17 @@ additive_expression
 												            
 												        }
 												        
-												        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(type));
-												        Q_arr->emit($$->addr->name, $1->addr->name, $3->addr->name, OP_PLUS);
+												        $$->name = (curr_symbol_table->gen_temp(type));
+												        Q_arr->emit($$->name, $1->name, $3->name, OP_PLUS);
 
-printf(" RULE:\tadditive_expression \t->\t additive_expression + multiplicative_expression\n");cout<<endl <<$$->addr->name<<endl;}
+printf(" RULE:\tadditive_expression \t->\t additive_expression + multiplicative_expression\n");}
 		| additive_expression '-' multiplicative_expression 				{
 																				printf(" RULE:\tadditive_expression \t->\t additive_expression - multiplicative_expression\n");
 
 																				 $$ = new expr_attr;
 												        data_type type1, type2, type;
-												        type1 = curr_symbol_table->lookup($1->addr->name)->type;
-												        type2 = curr_symbol_table->lookup($3->addr->name)->type;
+												        type1 = curr_symbol_table->lookup($1->name)->type;
+												        type2 = curr_symbol_table->lookup($3->name)->type;
 												   
 												   /* //array
 												   if(type2.array_type.compare("array") == 0)
@@ -864,9 +863,8 @@ printf(" RULE:\tadditive_expression \t->\t additive_expression + multiplicative_
 												            
 												        }
 												        
-												        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(type));
-												        Q_arr->emit($$->addr->name, $1->addr->name, $3->addr->name, OP_MINUS);
-cout<<endl <<"rulent written"<<$$->addr->name<<endl;
+												        $$->name = (curr_symbol_table->gen_temp(type));
+												        Q_arr->emit($$->name, $1->name, $3->name, OP_MINUS);
 														}
 		;
 
@@ -875,8 +873,8 @@ shift_expression
 		| shift_expression LEFT_SHIFT additive_expression 						{
 																					 $$ = new expr_attr;
 												        data_type type1, type2, type;
-												        type1 = curr_symbol_table->lookup($1->addr->name)->type;
-												        type2 = curr_symbol_table->lookup($3->addr->name)->type;
+												        type1 = curr_symbol_table->lookup($1->name)->type;
+												        type2 = curr_symbol_table->lookup($3->name)->type;
 												   
 												   /* //array
 												   if(type2.array_type.compare("array") == 0)
@@ -970,17 +968,17 @@ shift_expression
 												            
 												        }
 												        
-												        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(type));
-												        Q_arr->emit($$->addr->name, $1->addr->name, $3->addr->name, OP_SHIFT_LEFT);
+												        $$->name = (curr_symbol_table->gen_temp(type));
+												        Q_arr->emit($$->name, $1->name, $3->name, OP_SHIFT_LEFT);
 
 
 																					//not supported
-																					printf(" RULE:\tshift_expression \t->\t shift_expression << additive_expression\n");cout<<endl <<$$->addr->name<<endl;}
+																					printf(" RULE:\tshift_expression \t->\t shift_expression << additive_expression\n");}
 		| shift_expression RIGHTSH additive_expression 						{//done
 																					 $$ = new expr_attr;
 												        data_type type1, type2, type;
-												        type1 = curr_symbol_table->lookup($1->addr->name)->type;
-												        type2 = curr_symbol_table->lookup($3->addr->name)->type;
+												        type1 = curr_symbol_table->lookup($1->name)->type;
+												        type2 = curr_symbol_table->lookup($3->name)->type;
 												   
 												   /* //array
 												   if(type2.array_type.compare("array") == 0)
@@ -1074,51 +1072,66 @@ shift_expression
 												            
 												        }
 												        
-												        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(type));
-												        Q_arr->emit($$->addr->name, $1->addr->name, $3->addr->name, OP_SHIFT_RIGHT);
+												        $$->name = (curr_symbol_table->gen_temp(type));
+												        Q_arr->emit($$->name, $1->name, $3->name, OP_SHIFT_RIGHT);
 
-																				printf(" RULE:\tshift_expression \t->\t shift_expression >> additive_expression\n");cout<<endl <<$$->addr->name<<endl;}
+																				printf(" RULE:\tshift_expression \t->\t shift_expression >> additive_expression\n");}
 		;
 
 relational_expression
 		: shift_expression 													{$$ =$1;
 
-																				printf(" RULE:\trelational_expression \t->\t shift_expression\n");cout<<endl <<$$->addr->name<<endl;}
+																				printf(" RULE:\trelational_expression \t->\t shift_expression\n");}
 		| relational_expression '<' shift_expression 						{
 
 																				$$ = new expr_attr;
-																		        $$->addr->type = BOOL_;
 																		        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp($$->addr->type));
+																		        $$->name = $$->addr->name;
+																		        $$->addr->type = BOOL_;
 																		        $$->truelist = makelist(Q_arr->index);
 																		        $$->falselist = makelist(Q_arr->index + 1);
-																		        Q_arr -> emit("", $1->addr->name, $3->addr->name, OP_IF_LESS);
+																		        Q_arr -> emit("", $1->name, $3->name, OP_IF_LESS);
 																		        Q_arr-> emit("","","", OP_GOTO);
 
-																			printf(" RULE:\trelational_expression \t->\t relational_expression < shift_expression\n");cout<<endl <<$$->addr->name<<endl;}
+																			printf(" RULE:\trelational_expression \t->\t relational_expression < shift_expression\n");}
 		| relational_expression '>' shift_expression 						{
+
 																				$$ = new expr_attr;
-																		        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp($1->addr->type));
+																		        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(BOOL_));
+																		        $$->name = $$->addr->name;
+																		        $$->addr->type = BOOL_;
 																		        $$->truelist = makelist(Q_arr->index);
 																		        $$->falselist = makelist(Q_arr->index + 1);
-																		        Q_arr -> emit("", $1->addr->name, $3->addr->name, OP_IF_GREATER);
-																		        Q_arr->emit("","","",OP_GOTO);
-																		        printf(" RULE:\trelational_expression \t->\t relational_expression > shift_expression\n");cout<<endl <<$$->addr->name<<endl;}
+																		        Q_arr -> emit("", $1->name, $3->name, OP_IF_GREATER);
+																		        Q_arr-> emit("","","", OP_GOTO);
+
+
+																		        printf(" RULE:\trelational_expression \t->\t relational_expression > shift_expression\n");}
 		| relational_expression LE shift_expression 						{
 
 																				$$ = new expr_attr;
-																		        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp($1->addr->type));
+																		        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(BOOL_));
+																		        $$->name = $$->addr->name;
+																		        $$->addr->type = BOOL_;
 																		        $$->truelist = makelist(Q_arr->index);
 																		        $$->falselist = makelist(Q_arr->index + 1);
-																		        Q_arr -> emit("", $1->addr->name, $3->addr->name, OP_IF_LESS_EQUAL);
+																		        Q_arr -> emit("", $1->name, $3->name, OP_IF_LESS_EQUAL);
 																		        Q_arr-> emit("","","", OP_GOTO);
-																		        printf(" RULE:\trelational_expression \t->\t relational_expression <= shift_expression\n");cout<<endl <<$$->addr->name<<endl;}
-		| relational_expression GE shift_expression 						{	$$ = new expr_attr;
-																		        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp($1->addr->type));
+
+																				
+																		        printf(" RULE:\trelational_expression \t->\t relational_expression <= shift_expression\n");}
+		| relational_expression GE shift_expression 						{	
+
+																				$$ = new expr_attr;
+																		        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(BOOL_));
+																		        $$->name = $$->addr->name;
+																		        $$->addr->type = BOOL_;
 																		        $$->truelist = makelist(Q_arr->index);
 																		        $$->falselist = makelist(Q_arr->index + 1);
-																		        Q_arr -> emit("", $1->addr->name, $3->addr->name, OP_IF_GREATER_EQUAL);
+																		        Q_arr -> emit("", $1->name, $3->name, OP_IF_GREATER_EQUAL);
 																		        Q_arr-> emit("","","", OP_GOTO);
-																				printf(" RULE:\trelational_expression \t->\t relational_expression >= shift_expression\n");cout<<endl <<$$->addr->name<<endl;}
+
+																				printf(" RULE:\trelational_expression \t->\t relational_expression >= shift_expression\n");}
 		;
 
 equality_expression
@@ -1126,28 +1139,34 @@ equality_expression
 		| equality_expression ET relational_expression 						{
 																				$$ = new expr_attr;
 																		        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(BOOL_));
+																		        $$->name = $$->addr->name;
+																		        $$->addr->type = BOOL_;
 																		        $$->truelist = makelist(Q_arr->index);
 																		        $$->falselist = makelist(Q_arr->index + 1);
-																		        Q_arr -> emit("", $1->addr->name, $3->addr->name, OP_IF_IS_EQUAL);
+																		        Q_arr -> emit("", $1->name, $3->name, OP_IF_IS_EQUAL);
 																		        Q_arr-> emit("","","", OP_GOTO);
 
-																		       	printf(" RULE:\tequality_expression \t->\t equality_expression == relational_expression\n");cout<<endl <<$$->addr->name<<endl;}
+
+																		       	printf(" RULE:\tequality_expression \t->\t equality_expression == relational_expression\n");}
 
 		| equality_expression NE relational_expression 						{
 																				$$ = new expr_attr;
 																		        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(BOOL_));
+																		        $$->name = $$->addr->name;
+																		        $$->addr->type = BOOL_;
 																		        $$->truelist = makelist(Q_arr->index);
 																		        $$->falselist = makelist(Q_arr->index + 1);
-																		        Q_arr -> emit("", $1->addr->name, $3->addr->name, OP_IF_NOT_EQUAL);
+																		        Q_arr -> emit("", $1->name, $3->name, OP_IF_NOT_EQUAL);
 																		        Q_arr-> emit("","","", OP_GOTO);
-																		        
-																		        printf(" RULE:\tequality_expression \t->\t equality_expression != relational_expression\n");cout<<endl <<$$->addr->name<<endl;}
+
+
+																		        printf(" RULE:\tequality_expression \t->\t equality_expression != relational_expression\n");}
 		;
 
 and_expression
 		: equality_expression 												{$$=$1;
 
-        																		printf(" RULE:\tand_expression \t->\t equality_expression\n");cout<<endl <<$$->addr->name<<endl;}
+        																		printf(" RULE:\tand_expression \t->\t equality_expression\n");}
 		| and_expression '&' equality_expression 							{
 																																										/*
 																		       /*
@@ -1176,7 +1195,7 @@ and_expression
 																		        $$->addr = curr_symbol_table->lookup( curr_symbol_table->gen_temp(t));
 																		        Q_arr->emit($$->loc, $1->addr->name, $3->name, OP_LOGICAL_AND);printf(" RULE:\tand_expression \t->\t and_expression & equality_expression\n");
 																		        */
-cout<<endl <<$$->addr->name<<endl;
+
 																		        }
 		;
 
@@ -1193,7 +1212,7 @@ exclusive_or_expression
 																		        Q_arr.emit($$->loc, $1->addr->name, $3->name, OP_XOR);
 																		        */
 
-																		        printf(" RULE:\texclusive_or_expression \t->\t exclusive_or_expression ^ and_expression\n");cout<<endl <<$$->addr->name<<endl;
+																		        printf(" RULE:\texclusive_or_expression \t->\t exclusive_or_expression ^ and_expression\n");
 																		       }
 		;
 
@@ -1207,11 +1226,11 @@ inclusive_or_expression
 																		        $$->addr = curr_symbol_table -> lookup(curr_symbol_table->gen_temp(t));
 																		        Q_arr->emit($$->addr->name, $1->addr->name, $3->addr->name, OP_OR);
 
-																		        printf(" RULE:\tinclusive_or_expression \t->\t inclusive_or | exclusive_or_expression\n");cout<<endl <<$$->addr->name<<endl;}
+																		        printf(" RULE:\tinclusive_or_expression \t->\t inclusive_or | exclusive_or_expression\n");}
 		;
 
 logical_and_expression
-		: inclusive_or_expression 											{$$ =$1; cout << $$->addr->name<<endl;printf(" RULE:\tlogical_and_expression \t->\t inclusive_or_expression\n");cout<<endl <<$$->addr->name<<endl;}
+		: inclusive_or_expression 											{$$ =$1;printf(" RULE:\tlogical_and_expression \t->\t inclusive_or_expression\n");}
 		| logical_and_expression N DAND M inclusive_or_expression 	N			{//DONE
 																					data_type type;
 																			        type = BOOL_;
@@ -1228,17 +1247,18 @@ logical_and_expression
 																			        $$->truelist = merge($1->truelist, $5->truelist);
 																			        $$->falselist = $5->falselist;
 
-printf(" RULE:\tlogical_and_expression \t->\t logical_and_expression && inclusive_or_expression\n");cout<<endl <<$$->addr->name<<endl;
+printf(" RULE:\tlogical_and_expression \t->\t logical_and_expression && inclusive_or_expression\n");
 																			}
 		;
 
 logical_or_expression
-		:	logical_and_expression 											{$$ =$1;printf(" RULE:\tlogical_or_expression \t->\t logical_and_expression\n");cout<<endl <<$$->addr->name<<endl;}
+		:	logical_and_expression 											{$$ =$1;printf(" RULE:\tlogical_or_expression \t->\t logical_and_expression\n");}
 		| logical_or_expression N DOR M logical_and_expression N 					{//done
 																						data_type type;
 																			        type = BOOL_;
 																			        $$ = new expr_attr;
 																			        $$->addr = curr_symbol_table -> lookup( curr_symbol_table->gen_temp(type));
+																			        $$->name = $$->addr->name;
 																			        //check
 																			         Q_arr->backpatch($2->nextlist, Q_arr->index);
 																			        Q_arr->convInt2Bool($1);
@@ -1250,23 +1270,23 @@ logical_or_expression
 																			        $$->truelist = merge($1->truelist, $5->truelist);
 																			        $$->falselist = $5->falselist;
 
-        printf(" RULE:\tlogical_or_expression \t->\t logical_or_expression || logical_and_expression\n");cout<<endl <<$$->addr->name<<endl;}
+        printf(" RULE:\tlogical_or_expression \t->\t logical_or_expression || logical_and_expression\n");}
 		;
 
 conditional_expression
-		: logical_or_expression 											{$$=$1;printf(" RULE:\tconditional_expression \t->\t logical_or_expression\n");cout<<endl <<$$->addr->name<<endl;}
+		: logical_or_expression 											{$$=$1;printf(" RULE:\tconditional_expression \t->\t logical_or_expression\n");}
 		| logical_or_expression N QM M expression N COL M conditional_expression {
 
 																		        $$ = new expr_attr;
 																		        list<int> I;
 																		        data_type type;
 																		        type = $5->addr->type;
-																		        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(type));
+																		        $$->name = (curr_symbol_table->gen_temp(type));
 																		        Q_arr->emit($$->addr->name, $9->addr->name,"", OP_COPY);
 																		        I = makelist(Q_arr->index);
 																		        Q_arr->emit("","","",OP_GOTO);
 																		        Q_arr->backpatch($6->nextlist, Q_arr->index);
-																		        Q_arr->emit( $$->addr->name, $5->addr->name, "", OP_COPY);
+																		        Q_arr->emit( $$->name, $5->name, "", OP_COPY);
 																		        I = merge(I, makelist(Q_arr->index));
 																		        Q_arr->emit("", "", "", OP_GOTO);
 																		        Q_arr -> backpatch($2->nextlist, Q_arr -> index);
@@ -1275,18 +1295,18 @@ conditional_expression
 																		        Q_arr -> backpatch($1->falselist, $8->instr);
 																		        Q_arr -> backpatch(I, Q_arr -> index);
 
-        printf(" RULE:\tconditional_expression \t->\t logical_or_expression ? expression : conditional_expression\n");cout<<endl <<$$->addr->name<<endl;}
+        printf(" RULE:\tconditional_expression \t->\t logical_or_expression ? expression : conditional_expression\n");}
 		;
 
 assignment_expression
-		: conditional_expression 											{$$ = $1;printf(" RULE:\tassignment_expression \t->\t conditional_expression\n");cout<<endl <<$$->addr->name<<endl;}
+		: conditional_expression 											{$$ = $1;printf(" RULE:\tassignment_expression \t->\t conditional_expression\n");}
 		| unary_expression assignment_operator assignment_expression {
 
-																        Q_arr->emit($1->addr->name, $3->addr->name, "", OP_COPY);
+																        Q_arr->emit($1->name, $3->name, "", OP_COPY);
 																        $$ = $1;
 
 
-        printf(" RULE:\tassignment_expression \t->\t unary_expression assignment_operator assignment_expression\n");cout<<endl <<$$->addr->name<<endl;}
+        printf(" RULE:\tassignment_expression \t->\t unary_expression assignment_operator assignment_expression\n");}
 		;
 
 assignment_operator
@@ -1306,12 +1326,12 @@ assignment_operator
 expression
 		:  assignment_expression 											{ $$ = $1;
 
-		printf(" RULE:\texpression \t->\t assignment_expression\n");cout<<endl <<$$->addr->name<<endl;}
-		| expression ',' assignment_expression 								{$$ = $1;printf(" RULE:\texpression \t->\t expression, assignment_expression\n");cout<<endl <<$$->addr->name<<endl;}
+		printf(" RULE:\texpression \t->\t assignment_expression\n");}
+		| expression ',' assignment_expression 								{$$ = $1;printf(" RULE:\texpression \t->\t expression, assignment_expression\n");}
 		;
 
 constant_expression
-		: conditional_expression 											{$$ = $1;printf(" RULE:\tconstant_expression \t->\t conditional_expression\n");cout<<endl <<$$->addr->name<<endl;}
+		: conditional_expression 											{$$ = $1;printf(" RULE:\tconstant_expression \t->\t conditional_expression\n");}
 		;
 
 declaration
@@ -1358,30 +1378,27 @@ declaration_specifiers_opt
 
 init_declarator_list
 		: init_declarator 													{//done
-		cout << "currtable, GT "<<curr_symbol_table<<"\t"<<GT<<endl;
 		int i;
 
 		
 		 
 																				$$ = new declar_list;
-																				cout <<"$$ ="<< $$<<endl;
 																				($$->vec).push_back(*($1));
 cout <<"0th elem is " <<($$->vec).begin()->addr	<<endl;
 																				cout <<"Pushing "<<($$->vec)[($$->vec).size()-1].addr->name<<endl<<endl<<endl;
 
 																				printf(" RULE:\tinit_declarator_list \t->\t init_declarator\n");}
 		| init_declarator_list ',' init_declarator 							{//done
-		cout << "currtable, GT "<<curr_symbol_table<<"\t"<<GT<<endl;
 		//print symbol table
 		int i;
 		
-																				cout <<"$1 = "<<$1 <<endl;cout <<"0th elem is " <<($1->vec).begin()->addr	<<endl;
+																				//cout <<"$1 = "<<$1 <<endl;cout <<"0th elem is " <<($1->vec).begin()->addr	<<endl;
 
 																					$$ = $1;
-																					cout <<"0th elem is " <<($1->vec).begin()->addr	<<endl;
-																					cout <<"$$ = "<<$$<<endl;
+																					//cout <<"0th elem is " <<($1->vec).begin()->addr	<<endl;
+																					//cout <<"$$ = "<<$$<<endl;
 																					($$->vec).push_back(*($3));
-      																			  cout <<"Pushing "<<($$->vec)[($$->vec).size()-1].addr->name<<endl<<endl<<endl;
+      																			  //cout <<"Pushing "<<($$->vec)[($$->vec).size()-1].addr->name<<endl<<endl<<endl;
 
 																	              	
 																	              	
@@ -1397,7 +1414,7 @@ cout <<"0th elem is " <<($$->vec).begin()->addr	<<endl;
 init_declarator
 		:declarator 														{//done
 																				$$ = $1;
-																				cout <<"here loc ="<<$$<<endl;
+																				//cout <<"here loc ="<<$$<<endl;
 																				printf(" RULE:\tinit_declarator \t->\t declarator\n");}
 		| declarator ASSIGN initializer 									{//done
 																				 $$ = $1;
@@ -1434,7 +1451,7 @@ type_specifiers
 declarator
 		:direct_declarator 												{//done
 																		$$ = $1;
-																		cout <<"here loc ="<<$$<<endl;
+																		//cout <<"here loc ="<<$$<<endl;
 																			 printf(" RULE:\tdeclarator \t->\t direct_declarator\n");}
 		| pointer direct_declarator 									{//done	
 																			$$ = $2;
