@@ -20,9 +20,10 @@
 	float float_val;	
 	char char_val ;
 	expr_attr *expr;
-	func_param_list *f_param_list;
 	declar_list *dec_list;
 	declar declara;
+	func_param *f_par;
+	func_param_list *f_param_list;
 }
 
 %token <str_val> IDENTIFIER
@@ -51,6 +52,10 @@
 %type <declara>type_specifiers
 %type<dec_list> init_declarator_list
 %type<f_param_list> argument_expression_list
+
+%type<f_param_list>parameter_type_list
+%type<f_param_list>parameter_list
+%type<f_par>parameter_declaration
 
 %type<expr> primary_expression
 %type <expr> postfix_expression
@@ -770,7 +775,8 @@ printf(" RULE:\tadditive_expression \t->\t additive_expression + multiplicative_
 												        data_type type1, type2, type;
 												        type1 = curr_symbol_table->lookup($1->name)->type;
 												        type2 = curr_symbol_table->lookup($3->name)->type;
-												   
+												   		
+												   		
 												   /* //array
 												   if(type2.array_type.compare("array") == 0)
 												        {
@@ -1469,9 +1475,8 @@ direct_declarator
 																	$$ ->addr = curr_symbol_table->lookup((*$1));
 																	$$->name = (*$1);
 																	//cout <<$$->addr->name<<endl;
-																	cout << type_string( $$ -> addr -> type)<<endl;
-																	//$$->addr->type = UNKNOWN_; // default type
-																	cout <<"here loc ="<<$$<<endl;
+																	//cout << type_string( $$ -> addr -> type)<<endl;
+																	//cout <<"here loc ="<<$$<<endl;
 																	printf(" RULE:\tdirect_declarator \t->\t identifier\n");}
 		| '(' declarator ')' 									{printf(" RULE:\tdirect_declarator \t->\t (declarator)");}
 		| direct_declarator '[' ']' 							{printf(" RULE:\tdirect_declarator \t->\t direct_declarator[]");}
@@ -1479,9 +1484,39 @@ direct_declarator
 																	// to be done for matrix
 																	printf(" RULE:\tdirect_declarator \t->\t direct_declarator[assignment_expression]\n");}
 		| direct_declarator '(' parameter_type_list ')' 		{
-																	// to be done for function
-																	printf(" RULE:\tdirect_declarator \t->\t direct_declarator(parameter_type_list)\n");}
+																symbol_table_entry *tmp;
+																vector<func_param> l = $3->vec;
+														        
+														        symbol_table *new_sym = new symbol_table;
+														        $$ = $1;
+														        cout <<endl<<endl<<$$->name <<endl<<endl<<endl;
+														        GT->lookup($$->name)->type = FUNCTION_;
+														        $$->no_of_params = l.size();
+														        GT->lookup($$->name)-> nested_table = new_sym;
+														        curr_symbol_table = new_sym;
+
+														        vector<func_param>::iterator it;
+														        for(it = l.begin(); it != l.end(); it++)
+														        {
+														            tmp = new_sym -> lookup(it->name);
+														            tmp -> type = it->type;
+														          }
+
+														        Q_arr -> emit($1->name, "","",_FUNCTION_START);
+
+																// to be done for function
+																	printf(" RULE:\tdirect_declarator \t->\t direct_declarator(parameter_type_list)\n");
+																}
+
 		| direct_declarator '(' ')' 							{
+																        symbol_table *new_sym = new symbol_table;
+																        $$ = $1;
+																        cout <<endl<<endl<<$$->name <<endl<<endl<<endl;
+																        GT->lookup($$->name)->type = FUNCTION_;
+																        $$->no_of_params = 0;
+																        GT->lookup($$->name)-> nested_table = new_sym;
+																        curr_symbol_table = new_sym;
+																        Q_arr -> emit($1->name, "","",_FUNCTION_START);
 																		// to be done for function
 																		printf(" RULE:\tdirect_declarator \t->\t direct_declarator()\n");}
 		| direct_declarator '(' identifier_list ')' 			{
@@ -1497,20 +1532,38 @@ pointer
 		;
 
 parameter_type_list
-		:parameter_list 											{// to be done for function
+		:parameter_list 											{// done
+																		$$ = $1;
 																		printf(" RULE:\tparameter_type_list \t->\t parameter_list\n");
 																	}
 		;
 
 parameter_list
-		:parameter_declaration 										{// to be done for function;
+		:parameter_declaration 										{// done;
+																		$$ = new func_param_list;
+																		$$->vec.push_back(*($1));
+
+
 																		printf(" RULE:\tparameter_list \t->\t parameter_declaration\n");}
-		| parameter_list ',' parameter_declaration 				{/*to be done*/printf(" RULE:\tparameter_list \t->\t parameter_list, parameter_declaration\n");}
+		| parameter_list ',' parameter_declaration 				{/*done*/
+																		$$ = $1;
+																		($$ -> vec).push_back(*($3));
+																		printf(" RULE:\tparameter_list \t->\t parameter_list, parameter_declaration\n");}
 		;
 
 parameter_declaration
-		:declaration_specifiers declarator 							{/*to be done*/printf(" RULE:\tparameter_declaration \t->\t declaration_specifiers declarator\n");}
-		| declaration_specifiers  									{/*to be done*/printf(" RULE:\tparameter_declaration \t->\t declaration_specifiers\n");}
+		:declaration_specifiers declarator 							{/*done*/
+																		GT->lookup($2->name)->type = $1.type;
+																		$$ = new func_param;
+																		$$ -> name = $2->name;
+																		$$ ->type = $1.type;
+																		printf(" RULE:\tparameter_declaration \t->\t declaration_specifiers declarator\n");}
+		| declaration_specifiers  									{/*done*/
+																		$$ = new func_param;
+																		$$ -> name = "";
+																		$$ ->type = $1.type;
+																		printf(" RULE:\tparameter_declaration \t->\t declaration_specifiers\n");
+																	}
 		;
 
 identifier_list

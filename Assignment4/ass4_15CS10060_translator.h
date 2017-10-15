@@ -59,7 +59,6 @@ union init_value
 struct declar_list ;// used for init_declarator_list
 struct declar; // type_specifiers  declaration_specifiers
 struct expr_attr ;//direct_declarator initializer declarator
-
 struct func_param;
 struct func_param_list;
 
@@ -239,21 +238,25 @@ struct declar // type_specifiers  declaration_specifiers
 	int width;
 	data_type type; 
 };
-struct expr_attr //direct_declarator initializer declarator
+struct expr_attr //direct_declarator initializer declarator 
 {
 	symbol_table_entry *addr;
 	string name;
 	list<int> truelist, falselist, nextlist;
 	int instr;
+	int no_of_params;
 };
 
-struct func_param
+class func_param //parameter_declaration = func_param
 {
-	data_type type;
+public:
 	string name;
+	data_type type;
+
 };
-struct func_param_list
+class func_param_list // parameter_list = *func_param_list
 {
+public:
 	std::vector<func_param> vec;
 };
 

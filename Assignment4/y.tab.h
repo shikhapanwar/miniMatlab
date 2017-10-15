@@ -179,11 +179,12 @@ union YYSTYPE
 	float float_val;	
 	char char_val ;
 	expr_attr *expr;
-	func_param_list *f_param_list;
 	declar_list *dec_list;
 	declar declara;
+	func_param *f_par;
+	func_param_list *f_param_list;
 
-#line 187 "y.tab.h" /* yacc.c:1909  */
+#line 188 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
