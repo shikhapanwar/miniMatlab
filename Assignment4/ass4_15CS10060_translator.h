@@ -52,6 +52,7 @@ union init_value
 	//void init_void;
 	char init_char;
 	matrix init_matrix;
+	int *ptr;
 
 };
 //enum op_code;
@@ -70,6 +71,7 @@ class quad;
 class symbol_table
 {
 public:
+		string name;
 		int tmp_cnt = 0;
 		vector<symbol_table_entry> table;
 		int offset = 0;
@@ -184,6 +186,11 @@ class symbol_table_entry
 		int size;
 		int offset;
 		symbol_table *nested_table;
+		symbol_table_entry ()
+		{
+			initial_value.ptr = NULL;
+			nested_table = NULL;
+		}
 
 
 };
@@ -245,6 +252,7 @@ struct expr_attr //direct_declarator initializer declarator
 	list<int> truelist, falselist, nextlist;
 	int instr;
 	int no_of_params;
+	bool isPointer = false;
 };
 
 class func_param //parameter_declaration = func_param

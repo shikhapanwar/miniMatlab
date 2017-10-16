@@ -101,6 +101,7 @@ string type_string(data_type t)
 
 void symbol_table :: print()
 {
+	cout <<"\t\t\tPrinting table "<<name<<endl;
 	int i;
 	cout <<"name\ttype\tinitial_val\tsize\toffset\tnestedTable"<<endl;
 	for (i = 0; i < table.size(); ++i)
@@ -137,6 +138,11 @@ void symbol_table :: print()
 
 		}
 		cout << "\t" << table[i].size<<"\t"<<table[i].offset<<"\t"<<table[i].nested_table<<endl;
+	}
+
+	for(i = 0; i < table.size(); ++i )
+	{
+		if(table[i].nested_table != NULL) table[i].nested_table -> print();
 	}
 	return;
 }
@@ -346,6 +352,7 @@ quad* quad_array::emit(string res, string a1, string a2, op_code operat)
 	tmp.arg2 = a2;
 	tmp.op = operat;
 	(this->array).push_back(tmp);
+	this->index ++;
 	return &(this->array [(this->array).size() - 1] ) ;
 }
 quad* quad_array::emit(string res, string a1, op_code operat)
@@ -356,6 +363,8 @@ quad* quad_array::emit(string res, string a1, op_code operat)
 	//tmp.arg2 = arg2;
 	tmp.op = operat;
 	(this->array).push_back(tmp);
+	this->index ++;
+
 	return &(this->array [(this->array).size() - 1] ) ;
 }
 quad* quad_array::emit(string res, string a1)
@@ -364,6 +373,7 @@ quad* quad_array::emit(string res, string a1)
 	tmp.result = res;
 	tmp.arg1 = a1;
 	(this->array).push_back(tmp);
+	this->index ++;
 	return &(this->array [(this->array).size() - 1] ) ;
 }
 void quad_array::print() /*to be done, the unary ioperators should not print arg2 and copy should not print op too , right now printing all*/

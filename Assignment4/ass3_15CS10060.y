@@ -10,6 +10,7 @@
 	quad_array *Q_arr = new quad_array;
 	symbol_table *GT = new symbol_table;
 	symbol_table *curr_symbol_table = GT;
+	//GT->name = "Global Table";
 
 %}
 
@@ -51,6 +52,8 @@
 %type  <declara> declaration_specifiers
 %type <declara>type_specifiers
 %type<dec_list> init_declarator_list
+%type<expr> function_definition
+
 %type<f_param_list> argument_expression_list
 
 %type<f_param_list>parameter_type_list
@@ -109,6 +112,7 @@ primary_expression
 																			string t = *($1);
 																			symbol_table_entry *s = curr_symbol_table->lookup(t);
 																			$$->name= t;
+																			cout <<$$->name <<endl<<endl;
 																			printf("RULE : primary_expression \t->\t\t identifier\n");
 																		}
 			|INTEGER_CONSTANT
@@ -212,7 +216,7 @@ postfix_expression
         string s = to_string(c);
         	Q_arr.emit(CALL,f,s,"");
 
-cout <<"CHECK1"<<endl;		*/	
+cout <<"CHECK1"<<endl;		*/	cout << "we are here"<<endl;
 																	        $$ = $1;
 																	        cout <<"CHECK1"<<endl;
 																	        symbol_table *f_symbol = GT->lookup( $1->name)->nested_table;
@@ -225,12 +229,12 @@ cout <<"CHECK1"<<endl;		*/
 																	        for(i=0;i < (flist->vec).size() ;i++)
 																	        {
 																	            c++;
-																	            Q_arr->emit((flist->vec)[i].name,"","",OP_PARAM);
+																	            Q_arr->emit("",(flist->vec)[i].name, "",OP_PARAM);
 																	        }
 																	        cout <<"CHECK1"<<endl;	
 																	        string s = to_string(c);																        cout <<"CHECK2"<<endl;	
 																	        cout<<"sf"<<endl;
-																	        	Q_arr->emit($1->name,s,"", OP_CALL);
+																	        	Q_arr->emit("", $1->name,s, OP_CALL);
 																	        		cout <<"CHECK3"<<endl;	
 																	        	printf(" RULE:\tpostfix_expression \t->\t postfix_expression ( argument_expression_list_opt )\n");
 																	      }
@@ -238,7 +242,8 @@ cout <<"CHECK1"<<endl;		*/
 
 			| postfix_expression '(' ')'								{
 																			$$ = $1;
-																			Q_arr->emit($1->name,0,"", OP_CALL);
+																			cout <<"mckam"<<endl<<$1->name<<endl;
+																			Q_arr->emit("",$1->name, "0", OP_CALL);
 
 																		printf(" RULE:\tpostfix_expression \t->\t postfix_expression ( )\n");}
 			| postfix_expression '.' IDENTIFIER							{$$ =$1;
@@ -284,14 +289,13 @@ argument_expression_list
         $$ = new func_param_list;
         f->type = (curr_symbol_table->lookup(f->param_name)->type);
         $$->vec.push_back(f);*/
-																				/*
+																				
 																				$$ = new func_param_list;
 																				func_param f;
 																				cout <<"a"<<endl;
 																				f.name = ($1) -> name;
-																				f.type  = curr_symbol_table->lookup(($1) -> name)->type;
 																				cout <<"b"<<endl;
-																				($$->vec).push_back(f);*/
+																				($$->vec).push_back(f);
 
 																				printf(" RULE:\targument_expression_list \t->\t assignment_expression\n");
 																		}
@@ -301,7 +305,6 @@ argument_expression_list
 																			$$ = $1 ;
 																			func_param f;
 																			f.name = ($3) -> name;
-																			f.type  = curr_symbol_table->lookup(($3) -> name)->type;
 																			($$->vec).push_back(f);
 																			
 																			printf(" RULE:\targument_expression_list \t->\t argument_expression_list , assignment_expression\n");
@@ -1088,52 +1091,52 @@ relational_expression
 		: shift_expression 													{$$ =$1;
 
 																				printf(" RULE:\trelational_expression \t->\t shift_expression\n");}
-		| relational_expression '<' shift_expression 						{
+		| relational_expression '<' shift_expression 						{//done
 
 																				$$ = new expr_attr;
-																		        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp($$->addr->type));
-																		        $$->name = $$->addr->name;
+																				$$ -> name = curr_symbol_table->gen_temp( curr_symbol_table->lookup($$->name)-> type);
+																		        $$->addr = curr_symbol_table->lookup($$->name);
 																		        $$->addr->type = BOOL_;
 																		        $$->truelist = makelist(Q_arr->index);
-																		        $$->falselist = makelist(Q_arr->index + 1);
+																		        $$->falselist = makelist(Q_arr->index + 1); // check
 																		        Q_arr -> emit("", $1->name, $3->name, OP_IF_LESS);
 																		        Q_arr-> emit("","","", OP_GOTO);
 
 																			printf(" RULE:\trelational_expression \t->\t relational_expression < shift_expression\n");}
-		| relational_expression '>' shift_expression 						{
+		| relational_expression '>' shift_expression 						{//done
 
 																				$$ = new expr_attr;
-																		        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(BOOL_));
-																		        $$->name = $$->addr->name;
+																				$$ -> name = curr_symbol_table->gen_temp( curr_symbol_table->lookup($$->name)-> type);
+																		        $$->addr = curr_symbol_table->lookup($$->name);
 																		        $$->addr->type = BOOL_;
 																		        $$->truelist = makelist(Q_arr->index);
-																		        $$->falselist = makelist(Q_arr->index + 1);
+																		        $$->falselist = makelist(Q_arr->index + 1); // check
 																		        Q_arr -> emit("", $1->name, $3->name, OP_IF_GREATER);
 																		        Q_arr-> emit("","","", OP_GOTO);
 
 
 																		        printf(" RULE:\trelational_expression \t->\t relational_expression > shift_expression\n");}
-		| relational_expression LE shift_expression 						{
+		| relational_expression LE shift_expression 						{//done
 
 																				$$ = new expr_attr;
-																		        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(BOOL_));
-																		        $$->name = $$->addr->name;
+																				$$ -> name = curr_symbol_table->gen_temp( curr_symbol_table->lookup($$->name)-> type);
+																		        $$->addr = curr_symbol_table->lookup($$->name);
 																		        $$->addr->type = BOOL_;
 																		        $$->truelist = makelist(Q_arr->index);
-																		        $$->falselist = makelist(Q_arr->index + 1);
+																		        $$->falselist = makelist(Q_arr->index + 1); // check
 																		        Q_arr -> emit("", $1->name, $3->name, OP_IF_LESS_EQUAL);
 																		        Q_arr-> emit("","","", OP_GOTO);
 
 																				
 																		        printf(" RULE:\trelational_expression \t->\t relational_expression <= shift_expression\n");}
-		| relational_expression GE shift_expression 						{	
+		| relational_expression GE shift_expression 						{	//done
 
 																				$$ = new expr_attr;
-																		        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(BOOL_));
-																		        $$->name = $$->addr->name;
+																				$$ -> name = curr_symbol_table->gen_temp( curr_symbol_table->lookup($$->name)-> type);
+																		        $$->addr = curr_symbol_table->lookup($$->name);
 																		        $$->addr->type = BOOL_;
 																		        $$->truelist = makelist(Q_arr->index);
-																		        $$->falselist = makelist(Q_arr->index + 1);
+																		        $$->falselist = makelist(Q_arr->index + 1); // check
 																		        Q_arr -> emit("", $1->name, $3->name, OP_IF_GREATER_EQUAL);
 																		        Q_arr-> emit("","","", OP_GOTO);
 
@@ -1142,26 +1145,26 @@ relational_expression
 
 equality_expression
 		:  relational_expression 											{	$$=$1;printf(" RULE:\tequality_expression \t->\t relational_expression\n");}
-		| equality_expression ET relational_expression 						{
+		| equality_expression ET relational_expression 						{//done
 																				$$ = new expr_attr;
-																		        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(BOOL_));
-																		        $$->name = $$->addr->name;
+																				$$ -> name = curr_symbol_table->gen_temp( curr_symbol_table->lookup($$->name)-> type);
+																		        $$->addr = curr_symbol_table->lookup($$->name);
 																		        $$->addr->type = BOOL_;
 																		        $$->truelist = makelist(Q_arr->index);
-																		        $$->falselist = makelist(Q_arr->index + 1);
+																		        $$->falselist = makelist(Q_arr->index + 1); // check
 																		        Q_arr -> emit("", $1->name, $3->name, OP_IF_IS_EQUAL);
 																		        Q_arr-> emit("","","", OP_GOTO);
 
 
 																		       	printf(" RULE:\tequality_expression \t->\t equality_expression == relational_expression\n");}
 
-		| equality_expression NE relational_expression 						{
+		| equality_expression NE relational_expression 						{//done
 																				$$ = new expr_attr;
-																		        $$->addr = curr_symbol_table->lookup(curr_symbol_table->gen_temp(BOOL_));
-																		        $$->name = $$->addr->name;
+																				$$ -> name = curr_symbol_table->gen_temp( curr_symbol_table->lookup($$->name)-> type);
+																		        $$->addr = curr_symbol_table->lookup($$->name);
 																		        $$->addr->type = BOOL_;
 																		        $$->truelist = makelist(Q_arr->index);
-																		        $$->falselist = makelist(Q_arr->index + 1);
+																		        $$->falselist = makelist(Q_arr->index + 1); // check
 																		        Q_arr -> emit("", $1->name, $3->name, OP_IF_NOT_EQUAL);
 																		        Q_arr-> emit("","","", OP_GOTO);
 
@@ -1173,8 +1176,9 @@ and_expression
 		: equality_expression 												{$$=$1;
 
         																		printf(" RULE:\tand_expression \t->\t equality_expression\n");}
-		| and_expression '&' equality_expression 							{
-																																										/*
+		| and_expression '&' equality_expression 							{//done
+																					/*
+																					*/																					/*
 																		       /*
 																		        if(type2.array_type.compare("array") == 0)
 																		        {
@@ -1193,30 +1197,32 @@ and_expression
 																		        }
 																		        */
 
-																		        /*
+																		        
 																		        $$ = new expr_attr;
-																		        symbol_table_entry *f = curr_symbol_table->lookup($1->addr -> name);//check
+																		        symbol_table_entry *f = curr_symbol_table->lookup($1->name);//check
 																		        data_type t;
 																		        t = f->type;
 																		        $$->addr = curr_symbol_table->lookup( curr_symbol_table->gen_temp(t));
-																		        Q_arr->emit($$->loc, $1->addr->name, $3->name, OP_LOGICAL_AND);printf(" RULE:\tand_expression \t->\t and_expression & equality_expression\n");
-																		        */
+																		        $$->name =  $$->addr->name;
+																		        Q_arr->emit($$->name, $1->name, $3->name, OP_LOGICAL_AND);printf(" RULE:\tand_expression \t->\t and_expression & equality_expression\n");
+																		        
 
 																		        }
 		;
 
 exclusive_or_expression
 		:and_expression 													{$$ =$1;printf(" RULE:\texclusive_or_expression \t->\t and_expression\n");}
-		| exclusive_or_expression POW and_expression 						{
-																				/*
+		| exclusive_or_expression POW and_expression 						{//done
+																				
 																				$$ = new expr_attr;
-																		        symtab *f = curr_symbol_table->lookup($1->addr);//check
+																		        symbol_table_entry *f = curr_symbol_table->lookup($1->name);//check
 																		        data_type t;
-																		        t = f->addr->type;
+																		        t = f->type;
 																		        $$->addr = curr_symbol_table->lookup( curr_symbol_table->gen_temp(t));
+																		        $$->name =  $$->addr->name;
 
-																		        Q_arr.emit($$->loc, $1->addr->name, $3->name, OP_XOR);
-																		        */
+																		        Q_arr->emit($$->name, $1->name, $3->name, OP_XOR);
+																		        
 
 																		        printf(" RULE:\texclusive_or_expression \t->\t exclusive_or_expression ^ and_expression\n");
 																		       }
@@ -1224,13 +1230,15 @@ exclusive_or_expression
 
 inclusive_or_expression
 		:exclusive_or_expression 											{$$ = $1;printf(" RULE:\tinclusive_or_expression \t->\t exclusive_or_expression\n");}
-		| inclusive_or_expression OR exclusive_or_expression 				{
-																				 $$ = new expr_attr;
-																		        symbol_table_entry *f = curr_symbol_table->lookup($1->addr->name);//check
+		| inclusive_or_expression OR exclusive_or_expression 				{//done
+$$ = new expr_attr;
+																		        symbol_table_entry *f = curr_symbol_table->lookup($1->name);//check
 																		        data_type t;
 																		        t = f->type;
-																		        $$->addr = curr_symbol_table -> lookup(curr_symbol_table->gen_temp(t));
-																		        Q_arr->emit($$->addr->name, $1->addr->name, $3->addr->name, OP_OR);
+																		        $$->addr = curr_symbol_table->lookup( curr_symbol_table->gen_temp(t));
+																		        $$->name =  $$->addr->name;
+
+																		        Q_arr->emit($$->name, $1->name, $3->name, OP_OR);
 
 																		        printf(" RULE:\tinclusive_or_expression \t->\t inclusive_or | exclusive_or_expression\n");}
 		;
@@ -1357,12 +1365,19 @@ declaration
 																	              		ptr = curr_symbol_table->lookup(it->name);
 
 
-																						if (ptr->type == UNKNOWN_)
+																						if (it->isPointer == true)
+																						{
+																							ptr->type = PTR_;
+																							ptr->offset = curr_symbol_table -> offset;
+																							curr_symbol_table -> offset += size_of_type($1.type);
+																						}
+																						else if (ptr->type == UNKNOWN_)
 																						{
 																							ptr->type = $1.type;
 																							ptr->offset = curr_symbol_table -> offset;
 																							curr_symbol_table -> offset += size_of_type($1.type);
 																						}
+
 																						
 																	              	}
 																	              	delete $2;
@@ -1391,7 +1406,7 @@ init_declarator_list
 																				$$ = new declar_list;
 																				($$->vec).push_back(*($1));
 cout <<"0th elem is " <<($$->vec).begin()->addr	<<endl;
-																				cout <<"Pushing "<<($$->vec)[($$->vec).size()-1].addr->name<<endl<<endl<<endl;
+																				//cout <<"Pushing "<<($$->vec)[($$->vec).size()-1].addr->name<<endl<<endl<<endl;
 
 																				printf(" RULE:\tinit_declarator_list \t->\t init_declarator\n");}
 		| init_declarator_list ',' init_declarator 							{//done
@@ -1461,8 +1476,8 @@ declarator
 																			 printf(" RULE:\tdeclarator \t->\t direct_declarator\n");}
 		| pointer direct_declarator 									{//done	
 																			$$ = $2;
-																			symbol_table_entry *ptr = curr_symbol_table->lookup($2->name);
-																			if(ptr != NULL)ptr->type = PTR_;							
+																			$$ -> isPointer =true;
+
 																			printf(" RULE:\tdeclarator \t->\t pointer_opt direct_declarator\n");
 																		}
 		;
@@ -1472,7 +1487,7 @@ direct_declarator
 
 																	
 																	$$ = new expr_attr;
-																	$$ ->addr = curr_symbol_table->lookup((*$1));
+																	//$$ ->addr = curr_symbol_table->lookup((*$1));
 																	$$->name = (*$1);
 																	//cout <<$$->addr->name<<endl;
 																	//cout << type_string( $$ -> addr -> type)<<endl;
@@ -1488,6 +1503,7 @@ direct_declarator
 																vector<func_param> l = $3->vec;
 														        
 														        symbol_table *new_sym = new symbol_table;
+														        new_sym -> name = string("Table for ")+$1->name;
 														        $$ = $1;
 														        cout <<endl<<endl<<$$->name <<endl<<endl<<endl;
 														        GT->lookup($$->name)->type = FUNCTION_;
@@ -1553,7 +1569,8 @@ parameter_list
 
 parameter_declaration
 		:declaration_specifiers declarator 							{/*done*/
-																		GT->lookup($2->name)->type = $1.type;
+																		//GT->lookup($2->name)->type = $1.type;
+
 																		$$ = new func_param;
 																		$$ -> name = $2->name;
 																		$$ ->type = $1.type;
@@ -1667,7 +1684,7 @@ jump_statement
 		;
 
 translation_unit
-		:external_decalaration 										{printf(" RULE:\ttranslation_unit \t->\t external_decalaration\n");}
+		:external_decalaration 										{GT->name = string("Global Table");printf(" RULE:\ttranslation_unit \t->\t external_decalaration\n");}
 		| translation_unit external_decalaration 					{printf(" RULE:\ttranslation_unit \t->\t translation_unit external_decalaration\n");}
 		;
 
@@ -1677,7 +1694,31 @@ external_decalaration
 		;
 
 function_definition
-		:declaration_specifiers declarator compound_statement 			{printf(" RULE:\tfunction_definition \t->\t declaration_specifiers declarator compound_statement\n");}
+		:declaration_specifiers declarator compound_statement 			{//incomplete
+																	        symbol_table_entry *ret;
+																	        
+																	        expr_attr *new_dec = $2;
+																	        data_type type = $1.type;
+
+																	        Q_arr -> emit( $2->name ,"","", _FUNCTION_END);
+																	        symbol_table_entry *func = GT->lookup($2->name);
+
+																	        if(func->nested_table != NULL)
+																	        {
+																	            if(func -> type == PTR_)
+																	            {
+																	            	type = PTR_;
+																	            }
+																	            ret = func->nested_table->lookup("retVal");
+																	            ret->type = type;
+																	            ret->offset = curr_symbol_table->offset;
+																	            ret->size = size_of_type(type);
+																	        }
+																	        curr_symbol_table = GT;
+																	        $$ = $2;
+
+      																		  printf(" RULE:\tfunction_definition \t->\t declaration_specifiers declarator compound_statement\n");
+      																		}
 		| declaration_specifiers declarator declaration_list compound_statement  {printf(" RULE:\tfunction_definition \t->\t declaration_specifiers declarator declaration_list compound_statement\n");}
 		;
 
