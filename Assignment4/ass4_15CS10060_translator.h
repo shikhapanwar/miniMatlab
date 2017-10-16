@@ -272,6 +272,7 @@ public:
 string type_string(data_type t);
 int size_of_type(data_type t);
 string op_code_string(op_code operat);
+list<int> my_merge(list<int> a, list<int> b);
 
 bool typeCheck(expr_attr * e1, expr_attr * e2, bool isAssignment);
 bool convert_type(expr_attr *e, data_type t1, data_type t2);

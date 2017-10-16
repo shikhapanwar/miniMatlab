@@ -80,6 +80,15 @@
 %type<expr>expression
 %type<expr>constant_expression
 
+%type<expr>expression_statement
+%type<expr>selection_statement
+%type<expr> statement
+%type<expr>iteration_statement
+%type<expr>labeled_statement
+%type<expr>compound_statement
+%type<expr>jump_statement
+%type<expr> block_item_list
+%type<expr> block_item
 %type<expr> M
 %type<expr> N
 
@@ -177,7 +186,8 @@ primary_expression
 
 
 																			printf("RULE : primary_expression \t->\t string_literal\n");}
-																			|'(' expression ')'	{printf("primary_expression -\t->\t (expression)\n");
+			|'(' expression ')'												{$$ = $2;
+																			printf("primary_expression -\t->\t (expression)\n");
 																			
 																			}
 			;
@@ -315,27 +325,30 @@ unary_expression
 		:postfix_expression												{$$ = $1; printf(" RULE:\tunary_expression \t->\t postfix_expression\n");}
 		| PLUS_PLUS unary_expression 										{//Done
 																				$$ = new expr_attr;
-																				string tmp = curr_symbol_table -> gen_temp($2->addr->type);
+																				string tmp = curr_symbol_table -> gen_temp(curr_symbol_table->lookup($2->name)->type);
 																				init_value tmp_init;
 																			
 																				$$->addr = curr_symbol_table->update(tmp, $2->addr->type, tmp_init, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
 																				quad *q = Q_arr -> emit(tmp, $2->addr->name, OP_UNARY_PLUS);
+																				$$->name = $$->addr->name;
 
 
 																				printf(" RULE:\tunary_expression \t->\t ++ unary_expression\n");}
 
 		| MINUS_MINUS unary_expression 										{//done
 																				$$ = new expr_attr;
-																				string tmp = curr_symbol_table -> gen_temp($2->addr->type);
+																				string tmp = curr_symbol_table -> gen_temp(curr_symbol_table->lookup($2->name)->type);
 																				init_value tmp_init;
 																			
 																				$$->addr = curr_symbol_table->update(tmp, $2->addr->type, tmp_init, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
 																				quad *q = Q_arr -> emit(tmp, $2->addr->name, OP_UNARY_MINUS);
+																				$$->name = $$->addr->name;
 																				printf(" RULE:\tunary_expression \t->\t -- unary_expression\n");}
 
 		| unary_operator cast_expression								{//done
+		cout <<"GHARWH"<<endl;
 																				$$ = new expr_attr;
-																				string tmp = curr_symbol_table -> gen_temp($2->addr->type);
+																				string tmp = curr_symbol_table -> gen_temp(curr_symbol_table->lookup($2->name)->type);
 																				init_value tmp_init;
 																				$$->name = tmp;							
 
@@ -376,17 +389,17 @@ unary_operator
 
 cast_expression
 		: unary_expression 												{
-																			$$ = $1;
+																			$$ = $1;cout <<$$->name<<" gs "<<endl;
 																			printf(" RULE:\tcast_expression \t->\t unary_expression\n");}
 		;
 
 multiplicative_expression
-		: cast_expression 									{	
+		: cast_expression 									{	cout <<"im gher1"<<endl;
 
 																/*to be done, doubt  what are cast expression for ?*/
 																				$$ = $1;
 																				printf(" RULE:\tmultiplicative_expression \t->\t cast_expression\n");}
-		| multiplicative_expression '*' cast_expression 					{																															   $$ = new expr_attr;
+		| multiplicative_expression '*' cast_expression 					{	cout <<"im gher2"<<endl;																														   $$ = new expr_attr;
 												        data_type type1, type2, type;
 												        type1 = curr_symbol_table->lookup($1->name)->type;
 												        type2 = curr_symbol_table->lookup($3->name)->type;
@@ -472,7 +485,7 @@ multiplicative_expression
 													printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression * cast_expression\n");}
 
 
-		| multiplicative_expression '/' cast_expression 					{
+		| multiplicative_expression '/' cast_expression 					{cout <<"im gher3"<<endl;
 																				 $$ = new expr_attr;
 												        data_type type1, type2, type;
 												        type1 = curr_symbol_table->lookup($1->name)->type;
@@ -577,7 +590,7 @@ multiplicative_expression
 printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression / cast_expression\n");}
 
 
-		| multiplicative_expression '%' cast_expression 					{
+		| multiplicative_expression '%' cast_expression 					{cout <<"im gher4"<<endl;
 
 																				 $$ = new expr_attr;
 												        data_type type1, type2, type;
@@ -1245,21 +1258,20 @@ $$ = new expr_attr;
 
 logical_and_expression
 		: inclusive_or_expression 											{$$ =$1;printf(" RULE:\tlogical_and_expression \t->\t inclusive_or_expression\n");}
-		| logical_and_expression N DAND M inclusive_or_expression 	N			{//DONE
-																					data_type type;
-																			        type = BOOL_;
+		| logical_and_expression N DAND M inclusive_or_expression 	N			{//done
+																			        //type.type_name = "bool";
 																			        $$ = new expr_attr;
-																			        $$->addr = curr_symbol_table -> lookup( curr_symbol_table->gen_temp(type));
-																			        //check
-																			         Q_arr->backpatch($2->nextlist, Q_arr->index);
-																			        Q_arr->convInt2Bool($1);
+																			        //$$->type = type; // check once, no temporary variable generated
+																			        Q_arr->backpatch($2->nextlist, Q_arr -> index);
+																			        //Q_arr->convInt2Bool($1);
 
-																			        Q_arr->backpatch($6->nextlist, Q_arr->index);
+																			        Q_arr->backpatch($6->nextlist, Q_arr -> index);
 																			        Q_arr->convInt2Bool($5);
-																			        Q_arr-> emit($$->addr->name, $$->addr->name, $$->addr->name, OP_LOGICAL_AND);
-																					Q_arr->backpatch($1->falselist, $4->instr);
-																			        $$->truelist = merge($1->truelist, $5->truelist);
-																			        $$->falselist = $5->falselist;
+
+																			        Q_arr->backpatch($1->truelist, $4->instr);
+																			        $$->truelist = $5->truelist;
+																			        $$->falselist = my_merge($1->falselist, $5->falselist);
+
 
 printf(" RULE:\tlogical_and_expression \t->\t logical_and_expression && inclusive_or_expression\n");
 																			}
@@ -1268,20 +1280,31 @@ printf(" RULE:\tlogical_and_expression \t->\t logical_and_expression && inclusiv
 logical_or_expression
 		:	logical_and_expression 											{$$ =$1;printf(" RULE:\tlogical_or_expression \t->\t logical_and_expression\n");}
 		| logical_or_expression N DOR M logical_and_expression N 					{//done
-																						data_type type;
-																			        type = BOOL_;
+		/*
+		type_inf type;
+        type.type_name = "bool";
+        $$ = new exp_attr;
+        $$->type = type;
+         Q_arr.backpatch($2->nextlist, Q_arr.index);
+        Q_arr.convInt2Bool($1);
+
+        Q_arr.backpatch($6->nextlist, Q_arr.index);
+        Q_arr.convInt2Bool($5);
+Q_arr.backpatch($1->falselist, $4->instr);
+        $$->truelist = my_merge($1->truelist, $5->truelist);
+        $$->falselist = $5->falselist;
+        */
+																						
 																			        $$ = new expr_attr;
-																			        $$->addr = curr_symbol_table -> lookup( curr_symbol_table->gen_temp(type));
-																			        $$->name = $$->addr->name;
-																			        //check
+
 																			         Q_arr->backpatch($2->nextlist, Q_arr->index);
-																			        Q_arr->convInt2Bool($1);
+																			        //Q_arr->convInt2Bool($1);
 
 																			        Q_arr->backpatch($6->nextlist, Q_arr->index);
 																			        Q_arr->convInt2Bool($5);
-																			        Q_arr-> emit($$->addr->name, $$->addr->name, $$->addr->name, OP_LOGICAL_OR);
+																			        //Q_arr-> emit($$->addr->name, $$->addr->name, $$->addr->name, OP_LOGICAL_OR);
 																					Q_arr->backpatch($1->falselist, $4->instr);
-																			        $$->truelist = merge($1->truelist, $5->truelist);
+																			        $$->truelist = my_merge($1->truelist, $5->truelist);
 																			        $$->falselist = $5->falselist;
 
         printf(" RULE:\tlogical_or_expression \t->\t logical_or_expression || logical_and_expression\n");}
@@ -1289,22 +1312,22 @@ logical_or_expression
 
 conditional_expression
 		: logical_or_expression 											{$$=$1;printf(" RULE:\tconditional_expression \t->\t logical_or_expression\n");}
-		| logical_or_expression N QM M expression N COL M conditional_expression {
+		| logical_or_expression N QM M expression N COL M conditional_expression {//done
 
 																		        $$ = new expr_attr;
 																		        list<int> I;
 																		        data_type type;
-																		        type = $5->addr->type;
-																		        $$->name = (curr_symbol_table->gen_temp(type));
-																		        Q_arr->emit($$->addr->name, $9->addr->name,"", OP_COPY);
+																		        type = curr_symbol_table->lookup($5->name)->type;
+																		        $$->name = curr_symbol_table->gen_temp(type);
+																		        Q_arr->emit($$->name, $9->name,"", OP_COPY);
 																		        I = makelist(Q_arr->index);
 																		        Q_arr->emit("","","",OP_GOTO);
 																		        Q_arr->backpatch($6->nextlist, Q_arr->index);
 																		        Q_arr->emit( $$->name, $5->name, "", OP_COPY);
-																		        I = merge(I, makelist(Q_arr->index));
+																		        I = my_merge(I, makelist(Q_arr->index));
 																		        Q_arr->emit("", "", "", OP_GOTO);
 																		        Q_arr -> backpatch($2->nextlist, Q_arr -> index);
-																		        Q_arr -> convInt2Bool($1);
+																		        //Q_arr -> convInt2Bool($1);
 																		        Q_arr -> backpatch($1->truelist, $4->instr);
 																		        Q_arr -> backpatch($1->falselist, $8->instr);
 																		        Q_arr -> backpatch(I, Q_arr -> index);
@@ -1314,7 +1337,7 @@ conditional_expression
 
 assignment_expression
 		: conditional_expression 											{$$ = $1;printf(" RULE:\tassignment_expression \t->\t conditional_expression\n");}
-		| unary_expression assignment_operator assignment_expression {
+		| unary_expression assignment_operator assignment_expression {//done exceppt for arrays
 
 																        Q_arr->emit($1->name, $3->name, "", OP_COPY);
 																        $$ = $1;
@@ -1441,7 +1464,7 @@ init_declarator
 																				 $$ = $1;
 																				// to be done typecheck														
 																				Q_arr->emit($1->name, $3->name, OP_COPY);
-																				$1-> addr -> initial_value = $1 -> addr -> initial_value;
+																				//$1-> name) -> initial_value = $1 -> addr -> initial_value;
 																				printf(" RULE:\tinit_declarator \t->\t declarator = initializer\n");
 
 																				}
@@ -1620,12 +1643,12 @@ designator
 		;
 
 statement
-		:labeled_statement 													{printf(" RULE:\tstatement \t->\t labeled_statement\n");}
-		| compound_statement 												{printf(" RULE:\tstatement \t->\t compound_statement\n");}
-		| expression_statement 												{printf(" RULE:\tstatement \t->\t expression_statement\n");}
-		| selection_statement 												{printf(" RULE:\tstatement \t->\t selection_statement\n");}
-		| iteration_statement 												{printf(" RULE:\tstatement \t->\t iteration_statement\n");}
-		| jump_statement 													{printf(" RULE:\tstatement \t->\t jump_statement\n");}
+		:labeled_statement 													{$$ = $1;printf(" RULE:\tstatement \t->\t labeled_statement\n");}
+		| compound_statement 												{$$ = $1;printf(" RULE:\tstatement \t->\t compound_statement\n");}
+		| expression_statement 												{$$ = $1;printf(" RULE:\tstatement \t->\t expression_statement\n");}
+		| selection_statement 												{$$ = $1;printf(" RULE:\tstatement \t->\t selection_statement\n");}
+		| iteration_statement 												{$$ = $1;printf(" RULE:\tstatement \t->\t iteration_statement\n");}
+		| jump_statement 													{$$ = $1;printf(" RULE:\tstatement \t->\t jump_statement\n");}
 		;
 
 labeled_statement
@@ -1636,33 +1659,118 @@ labeled_statement
 
 compound_statement 
 		:LEFT_CURL RCB 												{printf(" RULE:\tcompound_statement \t->\t {}\n");}
-		| LEFT_CURL block_item_list RCB 								{printf(" RULE:\tcompound_statement \t->\t { block_item_list } \n");}
+		| LEFT_CURL block_item_list RCB 								{//done
+																			$$ = $2;printf(" RULE:\tcompound_statement \t->\t { block_item_list } \n");}
 		;
 
 block_item_list
-		:block_item 													{printf(" RULE:\tblock_item_list \t->\t block_item\n");}
-		| block_item_list block_item 								{printf(" RULE:\tblock_item_list \t->\t block_item_list block_item\n");}
+		:block_item 													{//done
+																			cout <<"XSD"<<endl;
+																			$$ = $1;
+        																	Q_arr -> backpatch($1->nextlist, Q_arr->index);
+        																}
+		| block_item_list M block_item 								{//done
+																			cout <<"gdf"<<endl;
+																			Q_arr -> backpatch($1->nextlist, $2->instr);
+																	        $$ = new expr_attr;
+																	        $$->nextlist = $3->nextlist;
+																	        printf(" RULE:\tblock_item_list \t->\t block_item_list block_item\n");
+																	     }
 		;
 
 block_item
-		:declaration 													{printf(" RULE:\tblock_item \t->\t declaration\n");}
-		| statement 													{printf(" RULE:\tblock_item \t->\t statement\n");}
+		:declaration 													{
+																			$$ = new expr_attr;
+																			printf(" RULE:\tblock_item \t->\t declaration\n");}
+		| statement 													{$$ =$1;printf(" RULE:\tblock_item \t->\t statement\n");}
 		;
 
 expression_statement
-		:SCOL 													{printf(" RULE:\texpression_statement \t->\t ;");}
-		| expression SCOL 										{printf(" RULE:\texpression_statement \t->\t expression;");}
+		:SCOL 													{//done
+																	$$ = new expr_attr;
+																	printf(" RULE:\texpression_statement \t->\t ;");}
+		| expression SCOL 										{$$ = new expr_attr;printf(" RULE:\texpression_statement \t->\t expression;");}
 		;
 selection_statement
-		:IF '(' expression ')' statement 						{printf(" RULE:\tselection_statement \t->\t if(expression) statement\n");}
-		| IF '(' expression ')' statement ELSE statement    {printf(" RULE:\tselection_statement \t->\t if(expression) statement else statement\n");}
+		:IF '(' expression N')' M statement N						{//done
+		//cout <<"aaa"<<endl;
+																		        $$ = new expr_attr;
+																		        Q_arr -> backpatch($4->nextlist, Q_arr->index);
+																		        //cout<<"ccc"<<endl;
+																		        Q_arr -> convInt2Bool($3);
+																		        //cout<<"bbbb"<<endl;
+																		        Q_arr->backpatch($3->truelist, $6->instr);
+																		        //$$->nextlist
+																		        
+																		        //cout<<"$7 = "<<($$->nextlist).size()<<endl;
+																		        //cout<<"$8 = "<<($8->nextlist).size()<<endl;
+
+																		        $$->nextlist.merge($8->nextlist);
+																		        $$->nextlist.merge($7->nextlist);
+																		        //$$->nextlist = my_merge($8->nextlist, $7->nextlist);
+																		        cout <<"after my_merge"<<endl;
+																		        $$->nextlist = my_merge($$->nextlist, $3->falselist);
+																		        cout <<"xxxx"<<endl;
+
+        																		printf(" RULE:\tselection_statement \t->\t if(expression) statement\n");
+        															}
+
+		| IF '(' expression N')'M statement N ELSE M statement N   {
+																		        $$ = new expr_attr;
+
+																		        Q_arr->backpatch($4->nextlist , Q_arr -> index);
+
+																		        Q_arr->convInt2Bool($3);
+
+																		        $$->nextlist = my_merge($7->nextlist, $8->nextlist);
+
+																		        Q_arr->backpatch($3->truelist, $6->instr);
+																		        Q_arr->backpatch($3->falselist, $10->instr);
+
+																		        $$->nextlist = my_merge($$->nextlist, $12->nextlist);
+																		        $$->nextlist = my_merge($$->nextlist, $11->nextlist);
+
+        printf(" RULE:\tselection_statement \t->\t if(expression) statement else statement\n");}
 		| SWITCH '(' expression ')' statement 				{printf(" RULE:\tselection_statement \t->\t switch(expression) statement\n");}
 		;
 
 iteration_statement
-		:WHILE '(' expression ')' statement 					{printf(" RULE:\titeration_statement \t->\t while(expression) statement\n");}
-		| DO statement WHILE '(' expression ')' 			{printf(" RULE:\titeration_statement \t->\t do statement while (expression)\n");}
-		| FOR '(' expression SCOL expression SCOL expression ')' statement {printf(" RULE:\titeration_statement \t->\t for(expression;expression;expression)\n");}
+		:WHILE M'(' expression N')' M statement 					{//done test
+																	Q_arr->emit("","","", OP_GOTO);
+															        Q_arr->backpatch(makelist(Q_arr->index-1),$2->instr);    
+
+															        Q_arr->backpatch($5->nextlist,Q_arr->index);
+															        Q_arr->convInt2Bool($4);
+
+															        $$ = new expr_attr;
+															        Q_arr->backpatch($8->nextlist, $2->instr);
+															        Q_arr -> backpatch($4->truelist, $7->instr);
+															        $$->nextlist = $4->falselist;
+
+															        printf(" RULE:\titeration_statement \t->\t while(expression) statement\n");}
+		| DO M statement M WHILE '(' expression ')' 			{//done test
+																	$$ = new expr_attr;
+															        Q_arr->convInt2Bool($7);
+															        Q_arr->backpatch($3->nextlist, $4->instr);
+															        Q_arr->backpatch($7->truelist, $2->instr);
+															        $$->nextlist = $7->falselist;
+
+        printf(" RULE:\titeration_statement \t->\t do statement while (expression)\n");}
+		| FOR '(' expression SCOL M expression N SCOL M expression N ')' M statement {//done test
+																				$$ = new expr_attr;
+    
+																		        Q_arr->emit("","","", OP_GOTO);
+																		        Q_arr->backpatch(makelist(Q_arr->index-1),$9->instr);    
+																		        Q_arr->backpatch($7->nextlist, Q_arr->index);
+																		        Q_arr->convInt2Bool($6);
+
+																		        Q_arr->backpatch($11->nextlist,$5->instr);
+																		        Q_arr->backpatch($6->truelist,$13->instr);
+																		        Q_arr->backpatch($14->nextlist,$9->instr);
+																		    
+																		        $$->nextlist = $6->falselist;
+
+	printf(" RULE:\titeration_statement \t->\t for(expression;expression;expression)\n");}
 		| FOR '(' SCOL expression SCOL expression ')' statement {printf(" RULE:\titeration_statement \t->\t for(;expression;expression)\n");}
 		| FOR '(' expression SCOL SCOL expression ')' statement {printf(" RULE:\titeration_statement \t->\t for(expression;;expression)\n");}
 		| FOR '(' expression SCOL expression SCOL ')' statement {printf(" RULE:\titeration_statement \t->\t for(expression;expression;)\n");}
@@ -1679,8 +1787,38 @@ jump_statement
 		:GOTO IDENTIFIER SCOL 										{printf(" RULE:\tjump_statement \t->\t goto identifier;\n");}
 		| CONTINUE SCOL 											{printf(" RULE:\tjump_statement \t->\t continue;\n");}
 		| BREAK SCOL 												{printf(" RULE:\tjump_statement \t->\t break;\n");}
-		| RETURN SCOL 												{printf(" RULE:\tjump_statement \t->\t return;\n");}
-		| RETURN expression SCOL 									{printf(" RULE:\tjump_statement \t->\t return expression;\n");}
+		| RETURN SCOL 												{//done
+																	$$ = new expr_attr;
+
+															        if(curr_symbol_table->lookup("retVal")->type== VOID_)
+															        {
+															            Q_arr->emit("","","",OP_RETURN_VOID);
+															        }
+															        
+															        printf(" RULE:\tjump_statement \t->\t return;\n");}
+		| RETURN expression SCOL 									{
+																		 $$ = new expr_attr;
+																        data_type type1, type2, type3;
+																        type1 = curr_symbol_table->lookup("retVal")->type;
+																        type2 = curr_symbol_table->lookup($2->name)->type;
+																        type3 = curr_symbol_table->lookup($2->name)->type;
+																        /*for(int i=0; i<sym->no_of_entries;i++)
+																		{
+																			if(sym->sym_table[i].id.compare($2->name)==0)
+																				type3 = sym->sym_table[i].type;
+																		}*/
+																	if(type3 == FUNCTION_)
+																	{	
+																		string t = curr_symbol_table->gen_temp(type1);
+																		Q_arr ->emit(t, $2->name, "", OP_COPY);
+																		Q_arr->emit(t,"","", OP_RETURN);
+																	}
+																	else if(type1 == type2)
+																        {
+																            Q_arr->emit( $2->name, "", "", OP_RETURN);
+																        }
+																	
+																	printf(" RULE:\tjump_statement \t->\t return expression;\n");}
 		;
 
 translation_unit

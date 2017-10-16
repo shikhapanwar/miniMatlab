@@ -1,5 +1,5 @@
 #include "ass4_15CS10060_translator.h"
-
+extern symbol_table *curr_symbol_table;
 symbol_table_entry * symbol_table::lookup(string identifier_name)
 {
 	int i ;
@@ -316,19 +316,19 @@ void quad_array :: convInt2Bool(expr_attr *exp)
 {
 	data_type bool_type;
 	bool_type = BOOL_;
-	if(exp->addr->type== BOOL_)
+	if( curr_symbol_table -> lookup(exp->name)->type== BOOL_)
 		return;
 	else
 	{
 		backpatch(exp->truelist, index);
 		backpatch(exp->falselist,index);
 		exp->falselist = makelist(index);
-		emit("",exp->addr->name,"", OP_IF_NOT_EXPRESSION);
+		emit("",exp->name,"", OP_IF_NOT_EXPRESSION);
 		//emit(COPY, exp->loc, "~1","");
 		exp->truelist = makelist(index);
 		emit("","","", OP_GOTO);
 	}
-	exp->addr->type = BOOL_;
+	curr_symbol_table -> lookup(exp->name)->type = BOOL_;
 
 }
 
@@ -490,10 +490,14 @@ list<int> makelist(int index)
     return temp;
 }
 
-list<int> merge(list<int> a, list<int> b)
+list<int> my_merge(list<int> a, list<int> b)
 {
+	cout << "fghtyjt"<<endl;
     list<int> temp;
+    cout <<"check1"<<endl;
     temp.merge(a);
+    cout <<"check2"<<endl;
     temp.merge(b);
+    cout <<"check1"<<endl;
     return temp;
 }
