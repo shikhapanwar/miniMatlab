@@ -30,20 +30,25 @@ enum data_type
 
 struct matrix
 {
-	int dim1;
-	int dim2;
+	string *dim1;
+	string *dim2;
 	data_type type;
 	int *arr_int;
 	double *arr_double;
 	char *arr_char;
+/*
+	int arr_int[200][200];
+	double arr_double[200][200];
+	char arr_char[200][200];
 
-	/*
-	matrix(int dimension1, int dimension2)
+	matrix()
 	{
-		dim1 = dimension1;
-		dim2 = dimension2;
+
+		arr_char = new char[200];
+		arr_double = new double [200];
+		arr_int = new int[200];
 	}
-	*/ /*a suitable matrix constructor*/
+*/	
 };
 union init_value
 {
@@ -62,7 +67,8 @@ struct declar; // type_specifiers  declaration_specifiers
 struct expr_attr ;//direct_declarator initializer declarator
 struct func_param;
 struct func_param_list;
-
+struct expr_row_list;
+struct expr_row;
 
 class symbol_table_entry ;
 class quad_array;
@@ -183,8 +189,8 @@ class symbol_table_entry
 		string name;
 		data_type type;
 		init_value initial_value;
-		int size;
-		int offset;
+		int size = 0;
+		int offset = 0;
 		symbol_table *nested_table;
 		symbol_table_entry ()
 		{
@@ -234,11 +240,22 @@ public:
 
 };
 
+struct expr_row_list
+{
+	std::vector<expr_row> vec;
+	data_type type;
+};
+struct expr_row
+{
+	std::vector<expr_attr> vec;
+	data_type type ;
+};
 struct declar_list // used for init_declarator_list
 {
 	std::vector<expr_attr> vec;
 	int type;
 	int width;
+
 };
 struct declar // type_specifiers  declaration_specifiers
 {
@@ -253,6 +270,9 @@ struct expr_attr //direct_declarator initializer declarator
 	int instr;
 	int no_of_params;
 	bool isPointer = false;
+	bool is_function = false;
+	bool is_matrix = false;
+	expr_row_list *row_list = NULL; // to deal with initializer->{initializer row list}
 };
 
 class func_param //parameter_declaration = func_param
@@ -260,6 +280,7 @@ class func_param //parameter_declaration = func_param
 public:
 	string name;
 	data_type type;
+	bool isPointer =false;
 
 };
 class func_param_list // parameter_list = *func_param_list
@@ -267,7 +288,6 @@ class func_param_list // parameter_list = *func_param_list
 public:
 	std::vector<func_param> vec;
 };
-
 
 string type_string(data_type t);
 int size_of_type(data_type t);

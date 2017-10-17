@@ -183,8 +183,10 @@ union YYSTYPE
 	declar declara;
 	func_param *f_par;
 	func_param_list *f_param_list;
+	expr_row_list *expr_row_list_pt;
+	expr_row *expr_row_pt;
 
-#line 188 "y.tab.h" /* yacc.c:1909  */
+#line 190 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

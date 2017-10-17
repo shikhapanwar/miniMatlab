@@ -1,35 +1,18 @@
-int printi(int num);
-int prints(char * c);
-int readi(int *eP);
-
-int gcd(int m, int n)
+int fib_rec(int n)
 {
-    if (n!=0)
-    {
-		int a, b;
-		a = m % n;
-		b = gcd(n, a);
-	        return b;
-    }
-    else 
-       return m;
+	  if (n == 0) {
+        return 0;
+     } 
+     if (n == 1) {
+           return 1;
+     }
+     int a = fib_rec(n - 1) ;
+     int b = fib_rec(n - 2);
+     return a+b;
+
 }
 
-int main()
-{
-	int a, b, c, p;
-	prints("********GCD*********\n");
-	prints("a :");
-	a = readi(&p);
-	prints("b :");
-	b = readi(&p);	
-	prints("gcd(");
-	printi(a);
-	prints(",");
-	printi(b);
-	prints(") : ");
-	c = gcd(a, b);
-	printi(c);
-	prints("\n");	
-	return 0;
+int main () {
+     int t = fib_rec(5);
+     return t;
 }

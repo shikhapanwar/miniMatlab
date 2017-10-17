@@ -7,7 +7,11 @@ symbol_table_entry * symbol_table::lookup(string identifier_name)
 	symbol_table_entry tmp;
 	for(i = 0 ; i < n ; i ++)
 	{
-		if(table[i].name == identifier_name) return &table[i];
+		if(table[i].name == identifier_name) 
+			{
+				cout <<identifier_name<<" found at "<<i<<endl<<this<<endl;
+				return &table[i];
+			}
 
 	}
 	tmp.name = identifier_name;
@@ -19,6 +23,7 @@ symbol_table_entry * symbol_table::lookup(string identifier_name)
 	tmp.nested_table = NULL;
 	 // to be done
 	table.push_back(tmp);
+	cout <<endl<<"adding id "<<identifier_name<<endl<<endl;
 	return &table[i] ;
 }
 
@@ -41,6 +46,7 @@ int size_of_type(data_type t)
 
 symbol_table_entry * symbol_table::update(string name_of_identifier, data_type t, init_value i, int sz, symbol_table *nes)
 {
+	cout <<"\n\nUpdating "<<name_of_identifier<<"'s data_type' to "<<type_string(t)<<endl<<endl;
 	symbol_table_entry *tmp =this -> lookup(name_of_identifier);
 	tmp -> type = t;
 	tmp -> initial_value = i;
@@ -100,38 +106,50 @@ string type_string(data_type t)
 }
 
 void symbol_table :: print()
-{
+{//incomplete
 	cout <<"\t\t\tPrinting table "<<name<<endl;
 	int i;
-	cout <<"name\ttype\tinitial_val\tsize\toffset\tnestedTable"<<endl;
+	cout <<"Index\tname\ttype\tinitial_val\tsize\toffset\tnestedTable"<<endl;
 	for (i = 0; i < table.size(); ++i)
 	{
-		cout << table[i].name <<"\t"<<type_string(table[i].type)<<"\t";
+		cout << i<<"\t"<<table[i].name <<"\t"<<type_string(table[i].type)<<"\t";
 		//table[i].initial_value<<"\t"<<
 		switch(table[i].type)
 		{
 			case CHAR_ : cout << table[i].initial_value.init_char; break;
 			case INT_ 	: cout <<table[i].initial_value.init_int; break;
 			case DOUBLE_ 	: cout <<table[i].initial_value.init_double ; break;
-			case MATRIX_ 	: {
-											int i, j;
-											int n = table[i].initial_value.init_matrix.dim1;
-											int m = table[i].initial_value.init_matrix.dim2;
-											for(i = 0; i < n; i ++)
+			case MATRIX_ 	: {		cout <<	"val0 = "<<(table[i].initial_value.init_matrix.arr_double)[0]<<endl;//" "<<table[i].initial_value.init_matrix.arr_int<<endl;
+									if(!(table[i].initial_value.init_matrix.arr_double == NULL && table[i].initial_value.init_matrix.arr_char == NULL && table[i].initial_value.init_matrix.arr_double == NULL))
 											{
-												for (j = 0 ; j <m ; j ++)
+												int j, k;
+												int n = curr_symbol_table->lookup( * (table[i].initial_value.init_matrix.dim1))->initial_value.init_int;
+												int m = curr_symbol_table->lookup( * (table[i].initial_value.init_matrix.dim2))->initial_value.init_int;
+												cout <<n<<" "<<m<<endl;
+												cout << type_string(curr_symbol_table->lookup( * (table[i].initial_value.init_matrix.dim1)) -> type)<<" "<<* (table[i].initial_value.init_matrix.dim1)<<endl;
+												cout << type_string(curr_symbol_table->lookup( * (table[i].initial_value.init_matrix.dim2)) -> type)<<" "<<* (table[i].initial_value.init_matrix.dim2)<<endl;
+												for(k = 0; k < n; k ++)
 												{
-													switch( table[i].initial_value.init_matrix.type )
+													for (j = 0 ; j <m ; j ++)
 													{
-														case INT_ 	: cout << table[i].initial_value.init_matrix.arr_int[i*table[i].initial_value.init_matrix.dim2  + j] <<", ";
-														case DOUBLE_	:	cout << table[i].initial_value.init_matrix.arr_double[i*table[i].initial_value.init_matrix.dim2  + j] <<", ";
-														case CHAR_				:	cout << table[i].initial_value.init_matrix.arr_char[i*table[i].initial_value.init_matrix.dim2  + j] <<", ";
+														switch( table[i].initial_value.init_matrix.type )
+														{
+															case INT_ 	: cout << table[i].initial_value.init_matrix.arr_int[k*m + j] <<", ";
+															case DOUBLE_	:	cout << table[i].initial_value.init_matrix.arr_double[k*m  + j] <<", ";
+															case CHAR_		:	cout << table[i].initial_value.init_matrix.arr_char[k*m + j] <<", ";
+														}
+														
 													}
-													
+													cout <<";" ;
 												}
-												cout <<";" ;
 											}
-											break;
+											else
+											{
+												cout <<"-";
+
+											}
+												break;
+											
 										}
 			default: cout << 0;
 
@@ -381,11 +399,11 @@ void quad_array::print() /*to be done, the unary ioperators should not print arg
 	int i ;
 	int n = this->array.size();
 
-	cout << "op" <<"\t"<<"\targ1" <<"\targ2"<<"\tresult"<<endl;
+	cout << "Index\top" <<"\t"<<"\targ1" <<"\targ2"<<"\tresult"<<endl;
 
 	for(i = 0 ; i < n ; i++)
 	{
-		cout << op_code_string(array[i].op)<<"\t"<<array[i].result <<"\t"<<array[i].arg1 <<"\t"<<array[i].arg2<<endl;
+		cout << i<<"\t"<<op_code_string(array[i].op)<<"\t"<<array[i].result <<"\t"<<array[i].arg1 <<"\t"<<array[i].arg2<<endl;
 	}
 	return;
 }

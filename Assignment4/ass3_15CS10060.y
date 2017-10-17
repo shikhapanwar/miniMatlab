@@ -25,6 +25,8 @@
 	declar declara;
 	func_param *f_par;
 	func_param_list *f_param_list;
+	expr_row_list *expr_row_list_pt;
+	expr_row *expr_row_pt;
 }
 
 %token <str_val> IDENTIFIER
@@ -93,6 +95,8 @@
 %type<expr> N
 
 
+%type <expr_row_list_pt>initializer_row_list
+%type <expr_row_pt>initializer_row
 %%
 
 
@@ -199,13 +203,14 @@ postfix_expression
 
 			| postfix_expression '[' expression ']' '[' expression ']' 	{// to be done
 
-																				/* 
+																				
 																				//$$ = new expr_attr;
-																				$$->addr = curr_symbol_table->gen_temp();//$1 id matrix type, only double type matrix value
+																				$$->is_matrix = true;
+																				/*$$-> = curr_symbol_table->gen_temp();//$1 id matrix type, only double type matrix value
 
 																				$$->addr -> type = DOUBLE_;
 																				Q_arr->emit($$->addr, );
-																				*/
+																				*///to be done
 
 																				/* to be done*/printf(" RULE:\tpostfix_expression \t->\t postfix_expression [ expression ]\n");
 																		}
@@ -362,7 +367,7 @@ unary_expression
 																					}
 																					case '*': 
 																					{
-																						$$->addr = curr_symbol_table->update(tmp, UNKNOWN_, tmp_init, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
+																						$$->addr = curr_symbol_table->update(tmp, PTR_, tmp_init, 0, NULL); /*//  TO BE DONE set offset and initial val and size set size in update ac to type*/
 																						Q_arr ->emit(tmp, $2->name,OP_DEREFERENCE);
 																						break;
 																					}
@@ -394,12 +399,13 @@ cast_expression
 		;
 
 multiplicative_expression
-		: cast_expression 									{	cout <<"im gher1"<<endl;
+		: cast_expression 									{	//cout <<"im gher1"<<endl;
 
 																/*to be done, doubt  what are cast expression for ?*/
 																				$$ = $1;
 																				printf(" RULE:\tmultiplicative_expression \t->\t cast_expression\n");}
-		| multiplicative_expression '*' cast_expression 					{	cout <<"im gher2"<<endl;																														   $$ = new expr_attr;
+		| multiplicative_expression '*' cast_expression 					{	cout <<"im gher2"<<endl;
+																				   $$ = new expr_attr;
 												        data_type type1, type2, type;
 												        type1 = curr_symbol_table->lookup($1->name)->type;
 												        type2 = curr_symbol_table->lookup($3->name)->type;
@@ -485,7 +491,7 @@ multiplicative_expression
 													printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression * cast_expression\n");}
 
 
-		| multiplicative_expression '/' cast_expression 					{cout <<"im gher3"<<endl;
+		| multiplicative_expression '/' cast_expression 					{//cout <<"im gher3"<<endl;
 																				 $$ = new expr_attr;
 												        data_type type1, type2, type;
 												        type1 = curr_symbol_table->lookup($1->name)->type;
@@ -590,7 +596,7 @@ multiplicative_expression
 printf(" RULE:\tmultiplicative_expression \t->\t multiplicative_expression / cast_expression\n");}
 
 
-		| multiplicative_expression '%' cast_expression 					{cout <<"im gher4"<<endl;
+		| multiplicative_expression '%' cast_expression 					{//cout <<"im gher4"<<endl;
 
 																				 $$ = new expr_attr;
 												        data_type type1, type2, type;
@@ -1385,23 +1391,47 @@ declaration
 																	              	
 																	              	for(it = ($2->vec).begin() ; it != ($2->vec).end(); ++it )
 																	              	{
-																	              		ptr = curr_symbol_table->lookup(it->name);
+																	              		if(it->is_function == false)
+																	              		{
+																		              		ptr = curr_symbol_table->lookup(it->name);
+																							if (it->isPointer == true)
+																							{
+																								ptr->type = PTR_;
+																								ptr->offset = curr_symbol_table -> offset;
+																								curr_symbol_table -> offset += size_of_type($1.type);
+																							}
+																							else if(it->is_matrix == true)
+																							{cout <<"x"<<endl;
+																								int n, m;
+																								symbol_table_entry *ptr_x = curr_symbol_table->lookup(it->name);
+																								cout <<"y"<<endl;
 
+																								n = curr_symbol_table-> lookup (*(ptr_x->initial_value).init_matrix.dim1)-> initial_value.init_int ;
+																								cout <<"z"<<endl;
+																								cout <<"n = "<<n<<endl;
 
-																						if (it->isPointer == true)
-																						{
-																							ptr->type = PTR_;
-																							ptr->offset = curr_symbol_table -> offset;
-																							curr_symbol_table -> offset += size_of_type($1.type);
+																								m = curr_symbol_table-> lookup (*(ptr_x->initial_value).init_matrix.dim2)-> initial_value.init_int ;
+																								cout <<"aa"<<endl;
+
+																								data_type ty = (ptr_x->initial_value).init_matrix.type;
+
+																								ptr_x->offset = curr_symbol_table -> offset;
+																								curr_symbol_table -> offset += curr_symbol_table -> offset + 2 * SIZE_OF_INT + n * m * size_of_type(ty) ;
+																								
+
+																							}
+																							else if (ptr->type == UNKNOWN_)
+																							{
+																								ptr->type = $1.type;
+																								ptr->offset = curr_symbol_table -> offset;
+																								curr_symbol_table -> offset += size_of_type($1.type);
+																							}
+
 																						}
-																						else if (ptr->type == UNKNOWN_)
+																						else
 																						{
-																							ptr->type = $1.type;
-																							ptr->offset = curr_symbol_table -> offset;
-																							curr_symbol_table -> offset += size_of_type($1.type);
+																							curr_symbol_table->lookup("retVal")->type = $1.type;
 																						}
-
-																						
 																	              	}
 																	              	delete $2;
 																					printf(" RULE:\tdeclaration \t->\t declaration_specifiers init_declarator_list ; \n");
@@ -1461,10 +1491,64 @@ init_declarator
 																				//cout <<"here loc ="<<$$<<endl;
 																				printf(" RULE:\tinit_declarator \t->\t declarator\n");}
 		| declarator ASSIGN initializer 									{//done
+		cout<<"check here "<<endl;
 																				 $$ = $1;
 																				// to be done typecheck														
-																				Q_arr->emit($1->name, $3->name, OP_COPY);
-																				//$1-> name) -> initial_value = $1 -> addr -> initial_value;
+																				if($3->is_matrix == false)
+																				{cout <<"isnt matrix"<<endl;
+																					Q_arr->emit($1->name, $3->name, OP_COPY);
+																				}
+																				else
+																				{
+																					string nm;
+																					symbol_table_entry *ptr = curr_symbol_table -> lookup($$ -> name);
+																					ptr -> type = MATRIX_;
+																					expr_row_list *r_list = $3 -> row_list;
+																					int n = (r_list -> vec).size();
+
+																					int m = (r_list ->vec)[0].vec.size();
+																					cout <<"size here is "<<n<<" "<<m<<endl;
+																					int i, j;
+																					vector <expr_row> mat = r_list->vec;
+
+																					data_type  t = curr_symbol_table->lookup(mat[0].vec[0].name)->type;
+																					(ptr -> initial_value).init_matrix.type = t;
+																					
+																					for(i = 0 ; i < n ; i ++)
+																					{
+																						for(j = 0 ; j < m ; j ++ )
+																						{
+																							if(t == CHAR_)
+																							{
+																							(ptr -> initial_value).init_matrix.arr_char = new char [500];
+																							nm = mat[i].vec[j].name;
+
+																							 (ptr -> initial_value).init_matrix.arr_char [i*m + j] = curr_symbol_table->lookup(nm)->initial_value.init_char;
+																							 }
+																							 if(t == INT_)
+																							{
+																							(ptr -> initial_value).init_matrix.arr_int = new int [500];
+																							nm = mat[i].vec[j].name;
+
+																							 (ptr -> initial_value).init_matrix.arr_int [i*m + j] = curr_symbol_table->lookup(nm)->initial_value.init_int;
+																							 }
+																							 if(t == DOUBLE_)
+																							{
+																							(ptr -> initial_value).init_matrix.arr_double = new double [500];
+																							nm = mat[i].vec[j].name;
+
+																							 (ptr -> initial_value).init_matrix.arr_double [i*m + j] = curr_symbol_table->lookup(nm)->initial_value.init_double;
+																							 }
+
+																						}
+																					}
+
+																					curr_symbol_table->lookup($1->name) ->offset=curr_symbol_table-> offset;
+																				curr_symbol_table-> offset += (2*SIZE_OF_INT + n * m *size_of_type(t));
+																				curr_symbol_table->lookup($1->name) ->size = 2*SIZE_OF_INT + n * m *size_of_type(t);
+
+
+																				}
 																				printf(" RULE:\tinit_declarator \t->\t declarator = initializer\n");
 
 																				}
@@ -1501,7 +1585,7 @@ declarator
 																			$$ = $2;
 																			$$ -> isPointer =true;
 
-																			printf(" RULE:\tdeclarator \t->\t pointer_opt direct_declarator\n");
+																			printf(" RULE:\tdeclarator \t->\t pointer direct_declarator\n");
 																		}
 		;
 
@@ -1518,9 +1602,16 @@ direct_declarator
 																	printf(" RULE:\tdirect_declarator \t->\t identifier\n");}
 		| '(' declarator ')' 									{printf(" RULE:\tdirect_declarator \t->\t (declarator)");}
 		| direct_declarator '[' ']' 							{printf(" RULE:\tdirect_declarator \t->\t direct_declarator[]");}
-		| direct_declarator '[' assignment_expression ']' 		{
+		| direct_declarator '[' assignment_expression ']' '[' assignment_expression ']' {
+																	$$ = $1;
+																	$$ -> is_matrix = true;
+																	curr_symbol_table->lookup($1->name)->type =  MATRIX_;
+																	(curr_symbol_table->lookup($1->name)->initial_value).init_matrix.dim1 = new string($3->name);
+																	(curr_symbol_table->lookup($1->name)->initial_value).init_matrix.dim2 = new string($6 ->name);
+
+
 																	// to be done for matrix
-																	printf(" RULE:\tdirect_declarator \t->\t direct_declarator[assignment_expression]\n");}
+																	printf(" RULE:\tdirect_declarator \t->\t direct_declarator[assignment_expression][' assignment_expression ']' \n");}
 		| direct_declarator '(' parameter_type_list ')' 		{
 																symbol_table_entry *tmp;
 																vector<func_param> l = $3->vec;
@@ -1528,7 +1619,7 @@ direct_declarator
 														        symbol_table *new_sym = new symbol_table;
 														        new_sym -> name = string("Table for ")+$1->name;
 														        $$ = $1;
-														        cout <<endl<<endl<<$$->name <<endl<<endl<<endl;
+														        //cout <<endl<<endl<<$$->name <<endl<<endl<<endl;
 														        GT->lookup($$->name)->type = FUNCTION_;
 														        $$->no_of_params = l.size();
 														        GT->lookup($$->name)-> nested_table = new_sym;
@@ -1538,10 +1629,12 @@ direct_declarator
 														        for(it = l.begin(); it != l.end(); it++)
 														        {
 														            tmp = new_sym -> lookup(it->name);
-														            tmp -> type = it->type;
+														            if(it->isPointer == false)tmp -> type = it->type;
+														            else tmp -> type =PTR_;
 														          }
 
 														        Q_arr -> emit($1->name, "","",_FUNCTION_START);
+														        $$->is_function = true;
 
 																// to be done for function
 																	printf(" RULE:\tdirect_declarator \t->\t direct_declarator(parameter_type_list)\n");
@@ -1597,6 +1690,7 @@ parameter_declaration
 																		$$ = new func_param;
 																		$$ -> name = $2->name;
 																		$$ ->type = $1.type;
+																		$$->isPointer = $2->isPointer;
 																		printf(" RULE:\tparameter_declaration \t->\t declaration_specifiers declarator\n");}
 		| declaration_specifiers  									{/*done*/
 																		$$ = new func_param;
@@ -1613,19 +1707,39 @@ identifier_list
 
 initializer
 		:assignment_expression 											{$$ = $1; printf(" RULE:\tinitializer \t->\t assignment_expression \n");}
-		| LEFT_CURL initializer_row_list RCB  								{printf(" RULE:\tinitializer \t->\t { initializer_row_list } \n");}
+		| LEFT_CURL initializer_row_list RCB  								{
+																				$$ = new expr_attr;
+																				$$ -> is_matrix = true;
+																				$$ -> row_list = $2;
+
+																				printf(" RULE:\tinitializer \t->\t { initializer_row_list } \n");
+																			}
 		;
 
 initializer_row_list
-		:initializer_row 										{printf(" RULE:\tinitializer_row_list \t->\t initializer_row\n");}
-		| initializer_row_list SCOL initializer_row 			{printf(" RULE:\tinitializer_row_list \t->\t initializer_row_list ; initializer_row \n");}
+		:initializer_row 										{
+																	$$ = new expr_row_list;
+																	$$->vec.push_back(*($1));
+																	printf(" RULE:\tinitializer_row_list \t->\t initializer_row\n");}
+		| initializer_row_list SCOL initializer_row 			{
+																	$$ = $1;
+																	$$ -> vec.push_back(*($3));
+																	printf(" RULE:\tinitializer_row_list \t->\t initializer_row_list ; initializer_row \n");}
 		;
 
 initializer_row
-		:initializer 												{printf(" RULE:\tinitializer_row \t->\t initializer\n");}
-		| designation initializer 									{printf(" RULE:\tinitializer_row \t->\t designation initializer\n");}
-		| initializer_row ',' initializer 							{printf(" RULE:\tinitializer_row \t->\t initializer_row, initializer\n");}
-		| initializer_row ',' designation initializer 				{printf(" RULE:\tinitializer_row \t->\t initializer_row, designation initializer\n");}
+		:initializer 												{
+																		$$ = new expr_row;
+																		$$->vec.push_back(*($1));
+																		printf(" RULE:\tinitializer_row \t->\t initializer\n");}
+		| designation initializer 									{	//not supported
+																		printf(" RULE:\tinitializer_row \t->\t designation initializer\n");}
+		| initializer_row ',' initializer 							{
+																		$$ = $1;
+																		$$->vec.push_back(*($3));
+																		printf(" RULE:\tinitializer_row \t->\t initializer_row, initializer\n");}
+		| initializer_row ',' designation initializer 				{// not supported
+																		printf(" RULE:\tinitializer_row \t->\t initializer_row, designation initializer\n");}
 		;
 
 designation
@@ -1670,7 +1784,7 @@ block_item_list
         																	Q_arr -> backpatch($1->nextlist, Q_arr->index);
         																}
 		| block_item_list M block_item 								{//done
-																			cout <<"gdf"<<endl;
+																			//cout <<"gdf"<<endl;
 																			Q_arr -> backpatch($1->nextlist, $2->instr);
 																	        $$ = new expr_attr;
 																	        $$->nextlist = $3->nextlist;
@@ -1710,7 +1824,7 @@ selection_statement
 																		        //$$->nextlist = my_merge($8->nextlist, $7->nextlist);
 																		        cout <<"after my_merge"<<endl;
 																		        $$->nextlist = my_merge($$->nextlist, $3->falselist);
-																		        cout <<"xxxx"<<endl;
+																		        //cout <<"xxxx"<<endl;
 
         																		printf(" RULE:\tselection_statement \t->\t if(expression) statement\n");
         															}
