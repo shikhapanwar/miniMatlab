@@ -1878,6 +1878,7 @@ block_item_list
 		:block_item 													{//done
 																			//cout <<"XSD"<<endl;
 																			$$ = $1;
+																			Q_arr -> backpatch($1->nextlist, Q_arr -> index);
 																			//cout <<"\nbackpatching\n\n";
         																	Q_arr -> backpatch($1->nextlist, Q_arr->index);
         																}
@@ -1910,42 +1911,43 @@ expression_statement
 		}
 		;
 selection_statement
-		:IF '(' expression N')' M statement N						{//done
+		:IF '(' expression ')' M statement 						{//done
 		//cout <<"aaa"<<endl;
 																		        $$ = new expr_attr;
 																		        //cout <<"\nbackpatching\n\n";
-																		        Q_arr -> backpatch($4->nextlist, Q_arr->index);
+																		        //Q_arr -> backpatch($4->nextlist, Q_arr->index);
 																		        //cout<<"ccc"<<endl;
 																		        Q_arr -> convInt2Bool($3);
 																		        //cout<<"bbbb"<<endl;
-																		        Q_arr->backpatch($3->truelist, $6->instr);
+																		        Q_arr->backpatch($3->truelist, $5->instr);
 																		        //$$->nextlist
 																		        
 																		        //cout<<"$7 = "<<($$->nextlist).size()<<endl;
 																		        //cout<<"$8 = "<<($8->nextlist).size()<<endl;
 
-																		$$->nextlist = my_merge($8->nextlist, $7->nextlist);
-																        $$->nextlist = my_merge($$->nextlist, $3->falselist);
+																		$$->nextlist = my_merge($3->falselist, $6->nextlist);
+																       // $$->nextlist = my_merge($$->nextlist, );
 																		        //cout <<"xxxx"<<endl;
 
         																		//printf(" RULE:\tselection_statement \t->\t if(expression) statement\n")
         																		;
         															}
 
-		| IF '(' expression N')'M statement N ELSE M statement N   {
+		| IF '(' expression ')'M statement N ELSE M statement    {
 																		        $$ = new expr_attr;//cout <<"\nbackpatching\n\n";
 
-																		        Q_arr->backpatch($4->nextlist , Q_arr -> index);
+																		        //Q_arr->backpatch($4->nextlist , Q_arr -> index);
 
 																		        Q_arr->convInt2Bool($3);
 
-																		        $$->nextlist = my_merge($7->nextlist, $8->nextlist);
+																		        
 
-																		        Q_arr->backpatch($3->truelist, $6->instr);
-																		        Q_arr->backpatch($3->falselist, $10->instr);
+																		        Q_arr->backpatch($3->truelist, $5->instr);
+																		        Q_arr->backpatch($3->falselist, $9->instr);
 
-																		        $$->nextlist = my_merge($$->nextlist, $12->nextlist);
-																		        $$->nextlist = my_merge($$->nextlist, $11->nextlist);
+																		        $$->nextlist = my_merge($6->nextlist, $10->nextlist);
+																		        $$->nextlist = my_merge($$->nextlist, $7->nextlist);
+																		       // $$->nextlist = my_merge($$->nextlist, $11->nextlist);
 
         //printf(" RULE:\tselection_statement \t->\t if(expression) statement else statement\n");
         }
@@ -1954,17 +1956,17 @@ selection_statement
 		;
 
 iteration_statement
-		:WHILE M'(' expression N')' M statement 					{//done test
+		:WHILE M'(' expression ')' M statement 					{//done test
 																	Q_arr->emit("","","", OP_GOTO);
 																	//cout <<"\nbackpatching\n\n";
 															        Q_arr->backpatch(makelist(Q_arr->index-1),$2->instr);    
 
-															        Q_arr->backpatch($5->nextlist,Q_arr->index);
+															        //Q_arr->backpatch($5->nextlist,Q_arr->index);
 															        Q_arr->convInt2Bool($4);
 
 															        $$ = new expr_attr;
-															        Q_arr->backpatch($8->nextlist, $2->instr);
-															        Q_arr -> backpatch($4->truelist, $7->instr);
+															        Q_arr->backpatch($7 ->nextlist, $2->instr);
+															        Q_arr -> backpatch($4->truelist, $6->instr);
 															        $$->nextlist = $4->falselist;
 
 															        //printf(" RULE:\titeration_statement \t->\t while(expression) statement\n");

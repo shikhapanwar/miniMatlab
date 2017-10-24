@@ -36,6 +36,7 @@ struct matrix
 	int *arr_int;
 	double *arr_double;
 	char *arr_char;
+
 /*
 	int arr_int[200][200];
 	double arr_double[200][200];
