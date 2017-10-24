@@ -1,0 +1,77 @@
+  
+
+	      
+         
+      
+         
+            
+     
+           
+          
+      
+
+
+
+   
+        
+      
+ Printing GT
+			Printing table Global Table
+0	fib_rec	FUNCTION	0		0	0	0x92af70
+1	main	FUNCTION	0		0	0	0x92c8b0
+			Printing table Table for fib_rec
+0	n	INT	0		4	0	0
+1	t0	DOUBLE_	0		8	4	0
+2		UNKNOWN	0		0	12	0
+3	t1	BOOL	0		1	12	0
+4	t2	DOUBLE_	0		8	13	0
+5	retVal	INT	0		4	21	0
+6	t3	INT	1		4	25	0
+7	t4	BOOL	0		1	29	0
+8	t5	INT	1		4	30	0
+9	fib_rec	UNKNOWN	0		0	34	0
+10	t6	INT	1		4	34	0
+11	t7	INT	0		4	38	0
+12	a	INT	0		4	42	0
+13	t8	INT	2		4	46	0
+14	t9	INT	0		4	50	0
+15	b	INT	0		4	54	0
+16	t10	INT	0		4	58	0
+			Printing table 
+0	fib_rec	UNKNOWN	0		0	0	0
+1	t0	INT	5		4	0	0
+2	t	INT	0		4	4	0
+3	retVal	INT	0		4	8	0
+Printing Q_arr
+Index	op	Result	arg1	arg2
+0	FUNCTION_START	fib_rec		
+1	COPY	t0	0.000000	
+2	JUMP_IF_IS_EQUAL	5	n	t0
+3	GOTO	7		
+4	GOTO	7		
+5	COPY	t2	0.000000	
+6	GOTO	7		
+7	COPY	t3	1	
+8	JUMP_IF_IS_EQUAL	11	n	t3
+9	GOTO	13		
+10	GOTO	13		
+11	COPY	t5	1	
+12	GOTO	13		
+13	COPY	t6	1	
+14	MUNUS	t7	n	t6
+15	PARAM		t7	
+16	CALL		fib_rec	1
+17	COPY	a	fib_rec	
+18	COPY	t8	2	
+19	MUNUS	t9	n	t8
+20	PARAM		t9	
+21	CALL		fib_rec	1
+22	COPY	b	fib_rec	
+23	PLUS	t10	a	b
+24	FUNCTION_END	fib_rec		
+25	FUNCTION_START	main		
+26	COPY	t0	5	
+27	PARAM		t0	
+28	CALL		fib_rec	1
+29	COPY	t	fib_rec	
+30	FUNCTION_END	main		

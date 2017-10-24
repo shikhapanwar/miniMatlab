@@ -602,8 +602,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "ass3_15CS10060.l"
-#line 3 "ass3_15CS10060.l"
+#line 1 "ass4_15CS10060.l"
+#line 3 "ass4_15CS10060.l"
 	#include "ass4_15CS10060_translator.h"
 	#include "y.tab.h"
 	#include <stdio.h>
@@ -831,7 +831,7 @@ YY_DECL
 		}
 
 	{
-#line 46 "ass3_15CS10060.l"
+#line 46 "ass4_15CS10060.l"
 
 
 
@@ -894,272 +894,272 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 49 "ass3_15CS10060.l"
+#line 49 "ass4_15CS10060.l"
 {return PLUS_PLUS;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 50 "ass3_15CS10060.l"
+#line 50 "ass4_15CS10060.l"
 {return MINUS_MINUS;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 51 "ass3_15CS10060.l"
+#line 51 "ass4_15CS10060.l"
 {return ARROW;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 52 "ass3_15CS10060.l"
+#line 52 "ass4_15CS10060.l"
 {return NEW;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 53 "ass3_15CS10060.l"
+#line 53 "ass4_15CS10060.l"
 {return LEFT_CURL;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 54 "ass3_15CS10060.l"
+#line 54 "ass4_15CS10060.l"
 {return RCB;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 55 "ass3_15CS10060.l"
+#line 55 "ass4_15CS10060.l"
 {return LEFT_SHIFT;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 56 "ass3_15CS10060.l"
+#line 56 "ass4_15CS10060.l"
 {return RIGHTSH;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 57 "ass3_15CS10060.l"
+#line 57 "ass4_15CS10060.l"
 {return LE;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 58 "ass3_15CS10060.l"
+#line 58 "ass4_15CS10060.l"
 {return GE;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 59 "ass3_15CS10060.l"
+#line 59 "ass4_15CS10060.l"
 {return ET;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 60 "ass3_15CS10060.l"
+#line 60 "ass4_15CS10060.l"
 {return NE;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 61 "ass3_15CS10060.l"
+#line 61 "ass4_15CS10060.l"
 {return DAND;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 62 "ass3_15CS10060.l"
+#line 62 "ass4_15CS10060.l"
 {return DOR;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 63 "ass3_15CS10060.l"
+#line 63 "ass4_15CS10060.l"
 {return QM;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 64 "ass3_15CS10060.l"
+#line 64 "ass4_15CS10060.l"
 {return COL;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 65 "ass3_15CS10060.l"
+#line 65 "ass4_15CS10060.l"
 {return POW;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 66 "ass3_15CS10060.l"
+#line 66 "ass4_15CS10060.l"
 {return SCOL;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 67 "ass3_15CS10060.l"
+#line 67 "ass4_15CS10060.l"
 {return OR;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 68 "ass3_15CS10060.l"
+#line 68 "ass4_15CS10060.l"
 {return ASSIGN;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 69 "ass3_15CS10060.l"
+#line 69 "ass4_15CS10060.l"
 {return MULTA;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 70 "ass3_15CS10060.l"
+#line 70 "ass4_15CS10060.l"
 {return DIVA;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 71 "ass3_15CS10060.l"
+#line 71 "ass4_15CS10060.l"
 {return PLUSA;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 72 "ass3_15CS10060.l"
+#line 72 "ass4_15CS10060.l"
 {return MINUSA;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 73 "ass3_15CS10060.l"
+#line 73 "ass4_15CS10060.l"
 {return REMA;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 74 "ass3_15CS10060.l"
+#line 74 "ass4_15CS10060.l"
 {return POWA;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 75 "ass3_15CS10060.l"
+#line 75 "ass4_15CS10060.l"
 {return LSA;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 76 "ass3_15CS10060.l"
+#line 76 "ass4_15CS10060.l"
 {return RSA;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 77 "ass3_15CS10060.l"
+#line 77 "ass4_15CS10060.l"
 {return ANDA;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 78 "ass3_15CS10060.l"
+#line 78 "ass4_15CS10060.l"
 {return ORA;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 80 "ass3_15CS10060.l"
+#line 80 "ass4_15CS10060.l"
 {return UNSIGNED;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 81 "ass3_15CS10060.l"
+#line 81 "ass4_15CS10060.l"
 {return BREAK;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 82 "ass3_15CS10060.l"
+#line 82 "ass4_15CS10060.l"
 {return RETURN;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 83 "ass3_15CS10060.l"
+#line 83 "ass4_15CS10060.l"
 {return VOID;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 84 "ass3_15CS10060.l"
+#line 84 "ass4_15CS10060.l"
 {return CASE;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 85 "ass3_15CS10060.l"
+#line 85 "ass4_15CS10060.l"
 {return FLOAT;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 86 "ass3_15CS10060.l"
+#line 86 "ass4_15CS10060.l"
 {return SHORT;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 87 "ass3_15CS10060.l"
+#line 87 "ass4_15CS10060.l"
 {return CHAR;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 88 "ass3_15CS10060.l"
+#line 88 "ass4_15CS10060.l"
 {return FOR;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 89 "ass3_15CS10060.l"
+#line 89 "ass4_15CS10060.l"
 {return SIGNED;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 90 "ass3_15CS10060.l"
+#line 90 "ass4_15CS10060.l"
 {return WHILE;}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 91 "ass3_15CS10060.l"
+#line 91 "ass4_15CS10060.l"
 {return GOTO;}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 92 "ass3_15CS10060.l"
+#line 92 "ass4_15CS10060.l"
 {return BOOL;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 93 "ass3_15CS10060.l"
+#line 93 "ass4_15CS10060.l"
 {return CONTINUE;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 94 "ass3_15CS10060.l"
+#line 94 "ass4_15CS10060.l"
 {return IF;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 95 "ass3_15CS10060.l"
+#line 95 "ass4_15CS10060.l"
 {return DEFAULT;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 96 "ass3_15CS10060.l"
+#line 96 "ass4_15CS10060.l"
 {return DO;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 97 "ass3_15CS10060.l"
+#line 97 "ass4_15CS10060.l"
 {return INT;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 98 "ass3_15CS10060.l"
+#line 98 "ass4_15CS10060.l"
 {return SWITCH;}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 99 "ass3_15CS10060.l"
+#line 99 "ass4_15CS10060.l"
 {return DOUBLE;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 100 "ass3_15CS10060.l"
+#line 100 "ass4_15CS10060.l"
 {return LONG;}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 101 "ass3_15CS10060.l"
+#line 101 "ass4_15CS10060.l"
 {return ELSE;}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 102 "ass3_15CS10060.l"
+#line 102 "ass4_15CS10060.l"
 {return MATRIX;}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 104 "ass3_15CS10060.l"
+#line 104 "ass4_15CS10060.l"
 {
 								yylval.str_val = new string(yytext);
 								return STRING_LITERAL;
@@ -1167,7 +1167,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 109 "ass3_15CS10060.l"
+#line 109 "ass4_15CS10060.l"
 {
 								yylval.int_val = atoi(yytext);
 								return INTEGER_CONSTANT;
@@ -1176,7 +1176,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 115 "ass3_15CS10060.l"
+#line 115 "ass4_15CS10060.l"
 {
 								yylval.float_val = atof(yytext);
 								 return FLOATING_CONSTANT ;
@@ -1184,7 +1184,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 119 "ass3_15CS10060.l"
+#line 119 "ass4_15CS10060.l"
 { 
 								yylval.char_val = yytext[1];
 								return CHARACTER_CONSTANT ;
@@ -1192,7 +1192,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 123 "ass3_15CS10060.l"
+#line 123 "ass4_15CS10060.l"
 { 
 									yylval.int_val = 0;
 								 return ZERO_CONSTANT ;
@@ -1201,19 +1201,19 @@ YY_RULE_SETUP
 case 59:
 /* rule 59 can match eol */
 YY_RULE_SETUP
-#line 128 "ass3_15CS10060.l"
+#line 128 "ass4_15CS10060.l"
 {;}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 129 "ass3_15CS10060.l"
+#line 129 "ass4_15CS10060.l"
 {
 							return yytext[0];
 						}
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 132 "ass3_15CS10060.l"
+#line 132 "ass4_15CS10060.l"
 { 
 							yylval.str_val = new string(yytext);
 							return IDENTIFIER;
@@ -1221,7 +1221,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 139 "ass3_15CS10060.l"
+#line 139 "ass4_15CS10060.l"
 ECHO;
 	YY_BREAK
 #line 1228 "lex.yy.c"
@@ -2225,7 +2225,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 139 "ass3_15CS10060.l"
+#line 139 "ass4_15CS10060.l"
 
 
 

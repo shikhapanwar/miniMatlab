@@ -1,0 +1,48 @@
+  
+
+ 
+
+	 
+	
+	
+	
+		
+		
+	
+	 
+
+Printing GT
+			Printing table Global Table
+0	a	FUNCTION	0		0	0	0x1864f70
+1	main	FUNCTION	0		0	0	0x1865280
+			Printing table Table for a
+0	n	INT	0		4	0	0
+1	retVal	INT	0		4	4	0
+			Printing table 
+0	t0	DOUBLE_	0		8	0	0
+1	i	INT	0		4	8	0
+2	t1	DOUBLE_	0		8	12	0
+3	t2	INT	10		4	20	0
+4		UNKNOWN	0		0	24	0
+5	t3	BOOL	0		1	24	0
+6	a	UNKNOWN	0		0	25	0
+7	t4	INT	0		4	25	0
+8	t5	DOUBLE_	0		8	29	0
+9	retVal	INT	0		4	37	0
+Printing Q_arr
+Index	op	Result	arg1	arg2
+0	FUNCTION_START	a		
+1	FUNCTION_START	main		
+2	COPY	t0	0.000000	
+3	COPY	i	t0	
+4	COPY	t1	0.000000	
+5	COPY	i	t1	
+6	COPY	t2	10	
+7	JUMP_IF_LESS	10	i	t2
+8	GOTO	13		
+9	GOTO	13		
+10	PARAM		i	
+11	CALL		a	1
+12	GOTO	6		
+13	COPY	t5	0.000000	
+14	FUNCTION_END	main		

@@ -9,7 +9,7 @@ symbol_table_entry * symbol_table::lookup(string identifier_name)
 	{
 		if(table[i].name == identifier_name) 
 			{
-				cout <<identifier_name<<" found at "<<i<<endl<<this<<endl;
+				//cout <<identifier_name<<" found at "<<i<<endl<<this<<endl;
 				return &table[i];
 			}
 
@@ -19,11 +19,11 @@ symbol_table_entry * symbol_table::lookup(string identifier_name)
 	init_value x;
 	x.init_int = 0;
 	tmp.initial_value = x;
-	tmp.offset = this->offset; ;
+	tmp.offset = this->offset;
 	tmp.nested_table = NULL;
 	 // to be done
 	table.push_back(tmp);
-	cout <<endl<<"adding id "<<identifier_name<<endl<<endl;
+	//cout <<endl<<"adding id "<<identifier_name<<endl<<endl;
 	return &table[i] ;
 }
 
@@ -46,7 +46,7 @@ int size_of_type(data_type t)
 
 symbol_table_entry * symbol_table::update(string name_of_identifier, data_type t, init_value i, int sz, symbol_table *nes)
 {
-	cout <<"\n\nUpdating "<<name_of_identifier<<"'s data_type' to "<<type_string(t)<<endl<<endl;
+	//cout <<"\n\nUpdating "<<name_of_identifier<<"'s data_type' to "<<type_string(t)<<endl<<endl;
 	symbol_table_entry *tmp =this -> lookup(name_of_identifier);
 	tmp -> type = t;
 	tmp -> initial_value = i;
@@ -81,6 +81,7 @@ string  symbol_table::gen_temp(data_type t)
 	}
 
 	offset = offset  + tmp.size;
+	cout <<"offset changed to "<<offset<<endl;
 	table.push_back(tmp);
 
 	return s;
@@ -101,7 +102,7 @@ string type_string(data_type t)
 		case FUNCTION_: return "FUNCTION";
 		case BOOL_: return "BOOL";
 		case UNKNOWN_ : return "UNKNOWN";
-		default : cout <<"t = " <<t ;return "NONE";
+		default :return "NONE";
 	}
 }
 
@@ -109,9 +110,11 @@ void symbol_table :: print()
 {//incomplete
 	cout <<"\t\t\tPrinting table "<<name<<endl;
 	int i;
+	this->offset = 0;
 	cout <<"Index\tname\ttype\tinitial_val\tsize\toffset\tnestedTable"<<endl;
 	for (i = 0; i < table.size(); ++i)
 	{
+		table[i].size = size_of_type(table[i].type);
 		cout << i<<"\t"<<table[i].name <<"\t"<<type_string(table[i].type)<<"\t";
 		//table[i].initial_value<<"\t"<<
 		switch(table[i].type)
@@ -119,15 +122,15 @@ void symbol_table :: print()
 			case CHAR_ : cout << table[i].initial_value.init_char; break;
 			case INT_ 	: cout <<table[i].initial_value.init_int; break;
 			case DOUBLE_ 	: cout <<table[i].initial_value.init_double ; break;
-			case MATRIX_ 	: {		cout <<	"val0 = "<<(table[i].initial_value.init_matrix.arr_double)[0]<<endl;//" "<<table[i].initial_value.init_matrix.arr_int<<endl;
+			case MATRIX_ 	: {		//cout <<	"val0 = "<<(table[i].initial_value.init_matrix.arr_double)[0]<<endl;//" "<<table[i].initial_value.init_matrix.arr_int<<endl;
 									if(!(table[i].initial_value.init_matrix.arr_double == NULL && table[i].initial_value.init_matrix.arr_char == NULL && table[i].initial_value.init_matrix.arr_double == NULL))
 											{
 												int j, k;
 												int n = curr_symbol_table->lookup( * (table[i].initial_value.init_matrix.dim1))->initial_value.init_int;
 												int m = curr_symbol_table->lookup( * (table[i].initial_value.init_matrix.dim2))->initial_value.init_int;
-												cout <<n<<" "<<m<<endl;
-												cout << type_string(curr_symbol_table->lookup( * (table[i].initial_value.init_matrix.dim1)) -> type)<<" "<<* (table[i].initial_value.init_matrix.dim1)<<endl;
-												cout << type_string(curr_symbol_table->lookup( * (table[i].initial_value.init_matrix.dim2)) -> type)<<" "<<* (table[i].initial_value.init_matrix.dim2)<<endl;
+												//cout <<n<<" "<<m<<endl;
+												//cout << type_string(curr_symbol_table->lookup( * (table[i].initial_value.init_matrix.dim1)) -> type)<<" "<<* (table[i].initial_value.init_matrix.dim1)<<endl;
+												//cout << type_string(curr_symbol_table->lookup( * (table[i].initial_value.init_matrix.dim2)) -> type)<<" "<<* (table[i].initial_value.init_matrix.dim2)<<endl;
 												for(k = 0; k < n; k ++)
 												{
 													for (j = 0 ; j <m ; j ++)
@@ -155,7 +158,8 @@ void symbol_table :: print()
 
 
 		}
-		cout << "\t" << table[i].size<<"\t"<<table[i].offset<<"\t"<<table[i].nested_table<<endl;
+		cout << "\t\t" << table[i].size <<"\t"<<table[i].offset<<"\t"<<table[i].nested_table<<endl;
+		//this->offset += size_of_type(table[i].type);
 	}
 
 	for(i = 0; i < table.size(); ++i )
@@ -363,7 +367,8 @@ void quad_array :: backpatch(list<int> bp_list, int i)
 
 
 quad* quad_array::emit(string res, string a1, string a2, op_code operat)
-{
+{	
+	//if(operat == OP_GOTO) cout<< "\n\n\n\n\n"<<"goto here"<<endl;
 	quad tmp;
 	tmp.result = res;
 	tmp.arg1 = a1;
@@ -399,7 +404,7 @@ void quad_array::print() /*to be done, the unary ioperators should not print arg
 	int i ;
 	int n = this->array.size();
 
-	cout << "Index\top" <<"\t"<<"\targ1" <<"\targ2"<<"\tresult"<<endl;
+	cout << "Index\top" <<"\t"<<"Result" <<"\targ1"<<"\targ2"<<endl;
 
 	for(i = 0 ; i < n ; i++)
 	{
@@ -464,37 +469,6 @@ bool convert_type(expr_attr *e, data_type t1, data_type t2)
 								}
 								break;
 							}
-				case INT_:	{
-								switch(t2)
-								{
-									case CHAR_:	{
-
-												}
-									case INT_:	{
-
-												}
-									case DOUBLE_:{
-
-												}
-
-								}
-							}
-				case DOUBLE_:{
-								switch(t2)
-											{
-												case CHAR_:	{
-
-															}
-												case INT_:	{
-
-															}
-												case DOUBLE_:{
-
-															}
-
-											}
-							}
-
 				default : return false;
 
 			}
@@ -510,12 +484,12 @@ list<int> makelist(int index)
 
 list<int> my_merge(list<int> a, list<int> b)
 {
-	cout << "fghtyjt"<<endl;
+	//cout << "fghtyjt"<<endl;
     list<int> temp;
-    cout <<"check1"<<endl;
+    //cout <<"check1"<<endl;
     temp.merge(a);
-    cout <<"check2"<<endl;
+    //cout <<"check2"<<endl;
     temp.merge(b);
-    cout <<"check1"<<endl;
+    //cout <<"check1"<<endl;
     return temp;
 }

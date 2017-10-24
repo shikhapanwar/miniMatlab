@@ -1,0 +1,54 @@
+  
+   
+  
+    
+
+  
+   
+	
+
+	
+
+
+Printing GT
+			Printing table Global Table
+0	printi	FUNCTION	0		0	0	0x20b2f70
+1	prints	FUNCTION	0		0	0	0x20b3420
+2	readi	FUNCTION	0		0	0	0x20b3940
+3	funct	FUNCTION	0		0	0	0x20b3f90
+4	main	FUNCTION	0		0	0	0x20b4070
+			Printing table Table for printi
+0	num	INT	0		4	0	0
+1	retVal	INT	0		4	4	0
+			Printing table Table for prints
+0	c	Pointer	0		4	0	0
+1	retVal	INT	0		4	4	0
+			Printing table Table for readi
+0	eP	Pointer	0		4	0	0
+1	retVal	INT	0		4	4	0
+			Printing table Table for funct
+0	x	INT	0		4	0	0
+1	y	INT	0		4	4	0
+2	retVal	INT	0		4	8	0
+			Printing table 
+0	t0	INT	10		4	0	0
+1	i	INT	0		4	4	0
+2	printi	UNKNOWN	0		0	8	0
+3	t1	INT	7		4	8	0
+4	retVal	VOID	0		0	12	0
+Printing Q_arr
+Index	op	Result	arg1	arg2
+0	FUNCTION_START	printi		
+1	FUNCTION_START	prints		
+2	FUNCTION_START	readi		
+3	FUNCTION_START	funct		
+4	FUNCTION_START	main		
+5	COPY	t0	10	
+6	COPY	i	t0	
+7	PARAM		i	
+8	CALL		printi	1
+9	COPY	t1	7	
+10	COPY	i	t1	
+11	PARAM		i	
+12	CALL		printi	1
+13	FUNCTION_END	main		

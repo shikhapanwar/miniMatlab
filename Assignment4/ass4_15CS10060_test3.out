@@ -1,0 +1,34 @@
+ 
+
+	 
+
+ 
+
+	 
+	
+Printing GT
+			Printing table Global Table
+0	a	FUNCTION	0		0	0	0x16c0e00
+1	main	FUNCTION	0		0	0	0x16c1430
+			Printing table 
+0	t0	INT	1		4	0	0
+1	retVal	VOID	0		0	4	0
+			Printing table 
+0	t0	INT	3		4	0	0
+1	t1	INT	2		4	4	0
+2	m	MATRIX			0	8	0
+3	a	UNKNOWN	0		0	8	0
+4	t2	INT	5		4	8	0
+5	retVal	INT	0		4	12	0
+Printing Q_arr
+Index	op	Result	arg1	arg2
+0	FUNCTION_START	a		
+1	COPY	t0	1	
+2	FUNCTION_END	a		
+3	FUNCTION_START	main		
+4	COPY	t0	3	
+5	COPY	t1	2	
+6	COPY	t2	5	
+7	PARAM		t2	
+8	CALL		a	1
+9	FUNCTION_END	main		

@@ -5,12 +5,10 @@
 	extern int yylex();
 	extern int yyparse();
 	void yyerror(const char* s);
-
 	#include "ass4_15CS10060_translator.h"
 	quad_array *Q_arr = new quad_array;
 	symbol_table *GT = new symbol_table;
 	symbol_table *curr_symbol_table = GT;
-
 %}
 
 %union
@@ -43,15 +41,13 @@
 
 %type <char_val> unary_operator 
 
+%type <dec_list> declaration
 %type<expr> init_declarator
 %type<expr> direct_declarator
-%type<data_type_> specifier_qualifier_list
 %type<expr> declarator
 %type  <declara> declaration_specifiers
 %type <declara>type_specifiers
-
 %type<dec_list> init_declarator_list
-
 %type<f_param_list> argument_expression_list
 
 %type<expr> primary_expression
@@ -1319,34 +1315,32 @@ constant_expression
 
 declaration
 		: declaration_specifiers SCOL										{
+																					// not supported
 																					// consider only 1 declaration specifier
 																					// TO BE DONE PERHAPS FOR function
 																				printf(" RULE:\tdeclaration \t->\t declaration_specifiers ;\n");}
-		| declaration_specifiers init_declarator_list SCOL					{		
-
-
-	       
-           
-                
-            
-
-            
-       
-    		
-																					
-																					
+		| declaration_specifiers init_declarator_list SCOL					{         															
 																	              	//done
-																	              	/*
-																	              	int i;
-																	              	for(i = 0 ; i < ($2->vec).size(); i++ )
-																	              	{
-																						($2->vec)[i].addr->type = $1.type;
-																	              	}
-																	              	*/
+																	              	$$ = $2;
+																	              	vector<expr_attr>::iterator it;
+																	              	symbol_table_entry *ptr;
 																	              	
+																	              	for(it = ($2->vec).begin() ; it != ($2->vec).end(); ++it )
+																	              	{
+																	              		ptr = curr_symbol_table->lookup(it->name);
 
 
-																					printf(" RULE:\tdeclaration \t->\t declaration_specifiers init_declarator_list ; \n");}
+																						if (ptr->type == UNKNOWN_)
+																						{
+																							ptr->type = $1.type;
+																							ptr->offset = curr_symbol_table -> offset;
+																							curr_symbol_table -> offset += size_of_type($1.type);
+																						}
+																						
+																	              	}
+																	              	delete $2;
+																					printf(" RULE:\tdeclaration \t->\t declaration_specifiers init_declarator_list ; \n");
+																			}
 		;
 
 declaration_specifiers
@@ -1363,30 +1357,55 @@ declaration_specifiers_opt
 
 init_declarator_list
 		: init_declarator 													{//done
-		 
+		cout << "currtable, GT "<<curr_symbol_table<<"\t"<<GT<<endl;
+		int i;
 
 		
+		 
 																				$$ = new declar_list;
+																				cout <<"$$ ="<< $$<<endl;
 																				($$->vec).push_back(*($1));
+cout <<"0th elem is " <<($$->vec).begin()->addr	<<endl;
+																				cout <<"Pushing "<<($$->vec)[($$->vec).size()-1].addr->name<<endl<<endl<<endl;
+
 																				printf(" RULE:\tinit_declarator_list \t->\t init_declarator\n");}
 		| init_declarator_list ',' init_declarator 							{//done
-																				 /* ($1->vec).push_back($3);
-      																			  $$ = $1;
-*/
+		cout << "currtable, GT "<<curr_symbol_table<<"\t"<<GT<<endl;
+		//print symbol table
+		int i;
+		
+																				cout <<"$1 = "<<$1 <<endl;cout <<"0th elem is " <<($1->vec).begin()->addr	<<endl;
+
+																					$$ = $1;
+																					cout <<"0th elem is " <<($1->vec).begin()->addr	<<endl;
+																					cout <<"$$ = "<<$$<<endl;
+																					($$->vec).push_back(*($3));
+      																			  cout <<"Pushing "<<($$->vec)[($$->vec).size()-1].addr->name<<endl<<endl<<endl;
+
+																	              	
+																	              	
+																	              	
+
+
+
+																				  
+
 																				printf(" RULE:\tinit_declarator_list \t->\t init_declarator_list, init_declarator\n");}
 		;
 
 init_declarator
 		:declarator 														{//done
 																				$$ = $1;
-																				        $$ = $1;
+																				cout <<"here loc ="<<$$<<endl;
 																				printf(" RULE:\tinit_declarator \t->\t declarator\n");}
 		| declarator ASSIGN initializer 									{//done
 																				 $$ = $1;
-																				// to be done typecheck
+																				// to be done typecheck														
 																				Q_arr->emit($1->addr->name, $3->addr->name, OP_COPY);
 																				$1-> addr -> initial_value = $1 -> addr -> initial_value;
-																				printf(" RULE:\tinit_declarator \t->\t declarator = initializer\n");}
+																				printf(" RULE:\tinit_declarator \t->\t declarator = initializer\n");
+
+																				}
 		;
 
 type_specifiers
@@ -1405,26 +1424,33 @@ type_specifiers
 		| LONG 						{printf(" RULE:\ttype_specifiers \t->\t LONG \n");}
 		| FLOAT 						{printf(" RULE:\ttype_specifiers \t->\t FLOAT \n");}
 		| DOUBLE 					{ $$.type = DOUBLE_; $$.width = SIZE_OF_DOUBLE;  printf(" RULE:\ttype_specifiers \t->\t DOUBLE \n");}
-		| MATRIX 					{/*to be done*/ $$.type = MATRIX_;   printf(" RULE:\ttype_specifiers \t->\t MATRIX \n");}
+		| MATRIX 					{$$.type = MATRIX_;/*to be done*/ $$.type = MATRIX_;   printf(" RULE:\ttype_specifiers \t->\t MATRIX \n");}
 		| SIGNED 						{ printf(" RULE:\ttype_specifiers \t->\t SIGNED  \n");}
 		| UNSIGNED 						{printf(" RULE:\ttype_specifiers \t->\t UNSIGNED \n");}
 		| BOOL 						{$$.type = BOOL_; $$.width = SIZE_OF_BOOL; printf(" RULE:\ttype_specifiers \t->\t BOOL  \n");}
 		;
 
 declarator
-		:direct_declarator 												{$$ = $1; printf(" RULE:\tdeclarator \t->\t direct_declarator\n");}
-		| pointer direct_declarator 									{/*to be done pointer */printf(" RULE:\tdeclarator \t->\t pointer_opt direct_declarator\n");}
+		:direct_declarator 												{//done
+																		$$ = $1;
+																		cout <<"here loc ="<<$$<<endl;
+																			 printf(" RULE:\tdeclarator \t->\t direct_declarator\n");}
+		| pointer direct_declarator 									{//done																													$$ = $2; $$ -> addr ->type = PTR_;							
+																			printf(" RULE:\tdeclarator \t->\t pointer_opt direct_declarator\n");
+																		}
 		;
 
 direct_declarator
-		: IDENTIFIER 											{
+		: IDENTIFIER 											{//done
+
+																	
 																	$$ = new expr_attr;
 																	$$ ->addr = curr_symbol_table->lookup((*$1));
-																	$$->addr->type = INT_; // default type
-																	init_value tmp_init;
-																	tmp_init.init_int = 0;
-																	$$ ->addr->initial_value = tmp_init;
-
+																	$$->name = (*$1);
+																	cout <<$$->addr->name<<endl;
+																	cout << type_string( $$ -> addr -> type)<<endl;
+																	//$$->addr->type = UNKNOWN_; // default type
+																	cout <<"here loc ="<<$$<<endl;
 																	printf(" RULE:\tdirect_declarator \t->\t identifier\n");}
 		| '(' declarator ')' 									{printf(" RULE:\tdirect_declarator \t->\t (declarator)");}
 		| direct_declarator '[' ']' 							{printf(" RULE:\tdirect_declarator \t->\t direct_declarator[]");}
